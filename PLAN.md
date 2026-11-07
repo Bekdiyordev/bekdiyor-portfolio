@@ -8,6 +8,7 @@
 >
 > 🚀 **Jonli prototip v0.2 (ishlaydigan sayt):** https://claude.ai/artifact/CG8145aeySNxLKbQZyT5sB — versiya v2.0 · manba: `site/index.html` (barcha kontent faylning boshidagi `CONTENT` obyektida)
 > Prototipda vaqtincha olingan standartlar: ranglar **Neon Aurora (yashil→binafsha)**, ism **"bekdiyor."** ✅, til **English**, default **Dark** (S1–S4 javob berilganda o'zgaradi).
+> 💾 **GitHub:** https://github.com/Bekdiyordev/bekdiyor-portfolio (public, `main`) — har bir tasdiqlangan o'zgarish shu yerga push qilinadi.
 > **Qoida:** v1 artboardlariga tegilmaydi. Har bir yangi variant **yangi artboard** bo'lib qo'shiladi (masalan `Hero-v2.dc.html`), shunda v1 doim solishtirish uchun turadi.
 
 ---
@@ -359,7 +360,7 @@ content/
 - [ ] **S10.** Resume PDF yuklab olish kerakmi?
 - [x] **S11.** O'z rasmi (foni olib tashlangan cutout) — avatar va About portret sifatida ishlatildi
 - [ ] **S12.** Flutter / React Native / KMP tajribangiz bormi yoki faqat native?
-- [ ] **S13.** Kod sizga qanday topshirilsin: GitHub repo / zip / men deploy qilib link beraymi?
+- [x] **S13.** Kod: GitHub repo `Bekdiyordev/bekdiyor-portfolio` (public)
 
 ---
 
@@ -396,6 +397,7 @@ content/
 | 2026-11-07 | Release notes: App Store tuzilmasi qoldi, telefon o'rniga Release paneli; aylana chiziqda qoladi; kartalar expand bo'ladi + project chiplari (v1.8) | Mijoz |
 | 2026-11-07 | Portret foni: **Arch** (v1.9) | Mijoz |
 | 2026-11-07 | Release notes chap paneli yoqmadi → Year wheel / Career ring / Big type review uchun (v2.0) | Mijoz |
+| 2026-11-07 | Kod GitHub'ga yuklandi: Bekdiyordev/bekdiyor-portfolio (`main`, 08b4d88) — index.html, assets, README, PLAN.md | Mijoz |
 | 2026-11-07 | Phone lift-off moslashtirildi: Hero va Projects orasida 3 bo'lim bor (tasdiqlangan tartib), shuning uchun telefon Hero'dan ko'tarilib ketadi va Projects'da aylanib "qo'nadi". To'liq uchish uchun Projects'ni Hero'dan keyinga ko'chirish kerak bo'ladi — mijoz qarori kutilmoqda | Claude |
 
 ---
