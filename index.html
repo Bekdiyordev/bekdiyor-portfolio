@@ -93,15 +93,6 @@ body::after{content:"";position:fixed;inset:-50%;z-index:90;pointer-events:none;
 @keyframes grain{0%{transform:translate(0,0)}20%{transform:translate(-3%,2%)}40%{transform:translate(2%,-3%)}60%{transform:translate(-2%,-1%)}80%{transform:translate(3%,3%)}100%{transform:translate(0,0)}}
 
 /* buttons */
-.btn{display:inline-flex;align-items:center;gap:10px;padding:18px 28px;border-radius:999px;font-weight:600;font-size:16px;transition:translate .5s var(--ease),scale .25s var(--spring),background .3s,color .3s,border-color .3s;will-change:translate}
-.btn:active{scale:.95}
-.btn-primary{background:var(--text);color:var(--bg);box-shadow:0 12px 30px var(--shadow)}
-.btn-ghost{border:1px solid var(--line-strong)}
-.btn-ghost:hover{border-color:var(--text)}
-.btn-accent:hover,.isl-cta:hover{background:var(--accent-hover)}
-.btn-accent{background:var(--accent);box-shadow:var(--accent-glow);color:var(--on-accent)}
-.btn svg{transition:transform .4s var(--ease)}
-.btn:hover svg{transform:translate(2px,-2px)}
 
 /* ---------- loader ---------- */
 #loader{display:none}
@@ -420,12 +411,8 @@ html.js .manifesto em .mw.on{color:var(--accent-text)}
 .rnv.on{display:block;animation:skIn .7s var(--ease)}
 /* A (chosen): release panel + expandable cards */
 .rn-grid{display:grid;grid-template-columns:minmax(0,360px) minmax(0,1fr);gap:56px;align-items:start}
-/* release side (review: wheel / ring / big type) */
+/* release side: year wheel */
 .rn-side{position:sticky;top:110px;display:flex;flex-direction:column;gap:20px}
-.rn-pick{display:flex;gap:6px;flex-wrap:wrap}
-.rn-pick button{padding:7px 11px;border-radius:999px;font-size:12px;border:1px solid var(--line-strong);transition:background .25s,color .25s,scale .25s var(--spring)}
-.rn-pick button:active{scale:.94}
-.rn-pick button[aria-pressed="true"]{background:var(--accent);border-color:transparent;color:#fff}
 .rs-v{display:none}
 .rs-v.on{display:block;animation:skIn .6s var(--ease)}
 /* 1 wheel: iOS picker */
@@ -437,32 +424,6 @@ html.js .manifesto em .mw.on{color:var(--accent-text)}
 .wh-i span{font-family:var(--f-mono);font-size:11px;color:var(--dim);margin-top:4px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .wh-i.on b{color:var(--accent-text)}
 .wh-i.on span{color:var(--text)}
-/* 2 ring */
-.ring-wrap{position:relative;width:100%;max-width:360px;aspect-ratio:1}
-.ring-wrap svg{width:100%;height:100%;overflow:visible}
-.ring-wrap path{fill:none;stroke-linecap:round;transition:stroke .5s,stroke-width .5s var(--spring)}
-.ring-wrap text{font-family:var(--f-mono);font-size:10px;fill:var(--dim)}
-.ring-c{position:absolute;inset:22%;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;transition:opacity .3s,transform .4s var(--ease)}
-.ring-c.sw{opacity:0;transform:scale(.94)}
-.ring-c b{font-family:var(--f-display);font-weight:800;font-size:56px;letter-spacing:-.06em;line-height:1}
-.ring-c b i{font-style:normal;font-family:var(--f-mono);font-size:16px;color:var(--accent-text);font-weight:400;vertical-align:top;margin-right:3px}
-.ring-c strong{font-size:14px;margin-top:8px;font-weight:600}
-.ring-c span{font-family:var(--f-mono);font-size:11px;color:var(--dim);margin-top:4px}
-.ring-leg{display:flex;gap:16px;font-size:12px;color:var(--dim);margin-top:4px}
-.ring-leg i{display:inline-block;width:10px;height:10px;border-radius:3px;margin-right:6px;vertical-align:-1px}
-/* 3 big type */
-.bt{transition:opacity .3s,transform .45s var(--ease)}
-.bt.sw{opacity:0;transform:translateY(12px)}
-.bt-when{font-family:var(--f-mono);font-size:12px;color:var(--accent-text);text-transform:uppercase;letter-spacing:.08em}
-.bt-co{font-family:var(--f-display);font-weight:800;font-size:clamp(48px,5vw,76px);letter-spacing:-.055em;line-height:.92;margin:10px 0 12px;text-wrap:balance}
-.bt-role{font-size:16px;color:var(--dim)}
-.bt-met{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px;margin-top:26px}
-.bt-met b{display:block;font-family:var(--f-display);font-size:40px;letter-spacing:-.05em;line-height:1;color:var(--accent-text)}
-.bt-met span{font-size:12px;color:var(--dim)}
-.bt-list{list-style:none;margin:30px 0 0;padding:0;display:flex;flex-direction:column;border-top:1px solid var(--line)}
-.bt-list li{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid var(--line);font-family:var(--f-mono);font-size:12px;color:var(--dim);transition:color .3s,padding .4s var(--ease)}
-.bt-list li.on{color:var(--text);padding-left:10px}
-.bt-list li.on::before{content:"→";color:var(--accent-text);margin-right:8px}
 @media (max-width:1000px){ .rn-side{display:none} }
 /* timeline cards */
 .co-tile{display:inline-flex;align-items:center;justify-content:center;width:22px;height:22px;border-radius:7px;font-size:11px;font-weight:700;color:#fff;margin-right:8px;vertical-align:-5px;flex:none}
@@ -995,10 +956,7 @@ html.reduce body::after{display:none}
     <div id="rn-store">
       <div class="rn-grid">
         <div class="rn-side">
-          <div class="rn-pick" id="rnPick" role="group" aria-label="Side visual (review)"><button type="button" data-s="wheel" aria-pressed="true">Year wheel</button><button type="button" data-s="ring" aria-pressed="false">Career ring</button><button type="button" data-s="type" aria-pressed="false">Big type</button></div>
-          <div class="rs-v on" data-s="wheel"><div class="wheel" aria-hidden="true"><div class="wheel-band"></div><div class="wheel-list" id="wheelList"></div></div></div>
-          <div class="rs-v" data-s="ring"><div class="ring-wrap"><svg id="ringSvg" aria-hidden="true"></svg><div class="ring-c" id="ringC" aria-live="polite"></div></div><div class="ring-leg"><span><i style="background:var(--accent-text)"></i>Selected role</span><span>Outer ring: Android · inner: iOS</span></div></div>
-          <div class="rs-v" data-s="type"><div class="bt" id="bigType" aria-live="polite"></div></div>
+          <div class="rs-v on"><div class="wheel" aria-hidden="true"><div class="wheel-band"></div><div class="wheel-list" id="wheelList"></div></div></div>
         </div>
         <div class="timeline" id="timeline"><span class="tl-line"></span><span class="tl-fill" id="tlFill"></span></div>
       </div>
@@ -1166,7 +1124,7 @@ html.reduce body::after{display:none}
       </div>
     </div>
     <div class="f-word" id="fWord" aria-hidden="true"><span>b</span><span>e</span><span>k</span><span>d</span><span>i</span><span>y</span><span>o</span><span>r</span><span>.</span></div>
-    <div class="f-bot"><span>© 2026 · Designed and built by Bekdiyor</span><span>Prototype v2.0 · sample data</span></div>
+    <div class="f-bot"><span>© 2026 · Designed and built by Bekdiyor</span><span>Prototype v2.1 · sample data</span></div>
   </div>
 </footer>
 
@@ -1695,7 +1653,7 @@ function pickProj(){
   setTimeout(function(){ readColors(); size(); requestAnimationFrame(loop); }, 50);
 })();
 
-/* ================= release notes: side visual (review) + expandable cards ================= */
+/* ================= release notes: year wheel + expandable cards ================= */
 (function(){
   var EX = CONTENT.experience, rels = $$('#timeline .rel'), curI = -1, Y0 = 2022, NOW = 2026.85, TOT = NOW - Y0;
   function yrs(w){ var m = w.match(/(\d{4})\D+(\d{4}|now)/); return [+m[1], m[2] === 'now' ? NOW : +m[2]]; }
@@ -1708,34 +1666,7 @@ function pickProj(){
     wl.style.transform = 'translateY(' + (175 - i * 90) + 'px)';
     whs.forEach(function(el, k){ var d = k - i; el.style.transform = 'rotateX(' + (-d * 24) + 'deg)'; el.style.opacity = Math.max(.12, 1 - Math.abs(d) * .38); el.classList.toggle('on', d === 0); });
   }
-  /* 2 ring: outer = Android career, inner = iOS */
-  var svg = $('#ringSvg'), C = 180;
-  function pt(r, a){ var t = (a - 90) * Math.PI / 180; return [C + r * Math.cos(t), C + r * Math.sin(t)]; }
-  function arc(r, a0, a1){ var p0 = pt(r, a0), p1 = pt(r, a1); return 'M' + p0[0].toFixed(1) + ' ' + p0[1].toFixed(1) + ' A' + r + ' ' + r + ' 0 ' + (a1 - a0 > 180 ? 1 : 0) + ' 1 ' + p1[0].toFixed(1) + ' ' + p1[1].toFixed(1); }
-  var ringHTML = '<circle cx="180" cy="180" r="150" fill="none" stroke="var(--line)" stroke-width="8"/><circle cx="180" cy="180" r="122" fill="none" stroke="var(--line)" stroke-width="6" stroke-dasharray="2 6"/>';
-  EX.forEach(function(e, k){
-    var y = yrs(e.when), ios = e.v.indexOf('beta') > -1, r = ios ? 122 : 150;
-    var a0 = (y[0] - Y0) / TOT * 360 + 2, a1 = (Math.min(y[1], NOW) - Y0) / TOT * 360 - 2;
-    ringHTML += '<path data-k="' + k + '" d="' + arc(r, a0, a1) + '"/>';
-  });
-  for (var yy = 2022; yy <= 2026; yy++){ var p = pt(176, (yy - Y0) / TOT * 360); ringHTML += '<text x="' + p[0].toFixed(1) + '" y="' + p[1].toFixed(1) + '" text-anchor="middle" dominant-baseline="middle">' + yy + '</text>'; }
-  svg.setAttribute('viewBox', '-20 -20 400 400'); svg.innerHTML = ringHTML;
-  var ringC = $('#ringC');
-  function ring(i, first){
-    $$('path', svg).forEach(function(p){ var on = +p.dataset.k === i; p.style.stroke = on ? 'var(--accent-text)' : 'var(--line-strong)'; p.style.strokeWidth = on ? 16 : 8; });
-    var put = function(){ var e = EX[i]; ringC.innerHTML = '<b><i>v</i>' + esc(short(e).replace('v', '')) + '</b><strong>' + esc(e.role) + '</strong><span>' + esc(e.co) + ' · ' + esc(e.when) + '</span>'; };
-    if (first) put(); else { ringC.classList.add('sw'); setTimeout(function(){ put(); ringC.classList.remove('sw'); }, 220); }
-  }
-  /* 3 big type */
-  var bt = $('#bigType');
-  function big(i, first){
-    var put = function(){ var e = EX[i];
-      bt.innerHTML = '<div class="bt-when">' + esc(e.when) + ' · ' + esc(short(e)) + '</div><div class="bt-co">' + esc(e.co) + '</div><div class="bt-role">' + esc(e.role) + '</div>' +
-        '<div class="bt-met">' + (e.metrics || []).map(function(m){ return '<div><b>' + esc(m[0]) + '</b><span>' + esc(m[1]) + '</span></div>'; }).join('') + '</div>' +
-        '<ol class="bt-list">' + EX.map(function(x, k){ return '<li class="' + (k === i ? 'on' : '') + '"><span>' + esc(short(x)) + ' · ' + esc(x.role) + '</span><span>' + yrs(x.when)[0] + '</span></li>'; }).join('') + '</ol>'; };
-    if (first) put(); else { bt.classList.add('sw'); setTimeout(function(){ put(); bt.classList.remove('sw'); }, 220); }
-  }
-  function setCur(i){ if (i === curI) return; var first = curI < 0; curI = i; rels.forEach(function(r, k){ r.classList.toggle('cur', k === i); }); wheel(i); ring(i, first); big(i, first); }
+  function setCur(i){ if (i === curI) return; var first = curI < 0; curI = i; rels.forEach(function(r, k){ r.classList.toggle('cur', k === i); }); wheel(i); }
   setCur(0);
   var ticking = false;
   function check(){
@@ -1744,11 +1675,6 @@ function pickProj(){
     setCur(best);
   }
   addEventListener('scroll', function(){ if (!ticking){ ticking = true; requestAnimationFrame(check); } }, { passive: true });
-  /* side switcher (review) */
-  var pick = $('#rnPick');
-  function setS(v){ $$('button', pick).forEach(function(b){ b.setAttribute('aria-pressed', String(b.dataset.s === v)); }); $$('.rs-v').forEach(function(el){ el.classList.toggle('on', el.dataset.s === v); }); try{ localStorage.setItem('pf-rside', v); }catch(e){} }
-  $$('button', pick).forEach(function(b){ b.addEventListener('click', function(){ setS(b.dataset.s); }); });
-  var sv = 'wheel'; try{ sv = localStorage.getItem('pf-rside') || 'wheel'; }catch(e){} setS(sv);
   /* expand / collapse */
   rels.forEach(function(r){
     var t = $('.rel-tog', r);

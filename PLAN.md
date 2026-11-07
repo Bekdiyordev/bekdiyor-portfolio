@@ -6,7 +6,7 @@
 > 🎨 **Design v1 (saqlangan):** https://claude.ai/artifact/XZJkBytxeBdFQUzvr2YzMf — versiya `1793986414-9ea4`
 > Artboardlar: `Main.dc.html` (desktop bosh sahifa), `NavStates.dc.html` (navbar holatlari), `Mobile.dc.html` (mobil hero).
 >
-> 🚀 **Jonli prototip v0.2 (ishlaydigan sayt):** https://claude.ai/artifact/CG8145aeySNxLKbQZyT5sB — versiya v2.0 · manba: `site/index.html` (barcha kontent faylning boshidagi `CONTENT` obyektida)
+> 🚀 **Jonli prototip v0.2 (ishlaydigan sayt):** https://claude.ai/artifact/CG8145aeySNxLKbQZyT5sB — versiya v2.1 · manba: `site/index.html` (barcha kontent faylning boshidagi `CONTENT` obyektida)
 > Prototipda vaqtincha olingan standartlar: ranglar **Neon Aurora (yashil→binafsha)**, ism **"bekdiyor."** ✅, til **English**, default **Dark** (S1–S4 javob berilganda o'zgaradi).
 > 💾 **GitHub:** https://github.com/Bekdiyordev/bekdiyor-portfolio (public, `main`) — har bir tasdiqlangan o'zgarish shu yerga push qilinadi.
 > **Qoida:** v1 artboardlariga tegilmaydi. Har bir yangi variant **yangi artboard** bo'lib qo'shiladi (masalan `Hero-v2.dc.html`), shunda v1 doim solishtirish uchun turadi.
@@ -204,7 +204,8 @@ Bu "mavzu" sayt bo'ylab izchil — shuning uchun shablon emas, **muallif qo'li**
 
 ### 05 · Experience — "Release Notes"
 - ✅ **v1.8 — tanlandi: 1-variant tuzilmasi, lekin telefonsiz** ("hamma yer qurilma bo'lib ketdi"):
-  - **v2.0:** Release paneli (karta) yoqmadi → chap tomonga kartasiz 3 variant (tanlash kutilmoqda): **Year wheel** (iOS picker g'ildiragi, yillar aylanadi), **Career ring** (karyera halqasi: tashqi — Android rollari, ichki — iOS, faol segment qalin yashil, markazda versiya), **Big type** (katta kompaniya nomi, rol, 2 metrika, versiyalar ro'yxati).
+  - ✅ **v2.1: Year wheel tanlandi** (iOS picker g'ildiragi); Career ring, Big type va tugmalar olib tashlandi.
+  - *Tarix (v2.0):* Release paneli (karta) yoqmadi → chap tomonga kartasiz 3 variant: **Year wheel** (iOS picker g'ildiragi, yillar aylanadi), **Career ring** (karyera halqasi: tashqi — Android rollari, ichki — iOS, faol segment qalin yashil, markazda versiya), **Big type** (katta kompaniya nomi, rol, 2 metrika, versiyalar ro'yxati).
   - *(eski)* Chapda sticky **Release paneli**: katta versiya raqami (almashganda pastdan sirpanib chiqadi), rol + kompaniya, 2022→now yillar chizig'ida faol davr segmenti, 2 metrika, fonda kompaniya harfi konturi.
   - Timeline aylanasi tanlanganda chiziq ustida qoladi, biroz kattalashadi va yonadi (karta endi siljimaydi).
   - Kartalar: qisqa ko'rinish (rol, kompaniya, 1 qatorli xulosa, **Projects chiplari**) + **Details** tugmasi → ochiladi: release notes, What I did, Impact, Team, Stack. Halol Wallet / Pulse / Navo chiplari Work bo'limiga olib boradi.
@@ -398,6 +399,7 @@ content/
 | 2026-11-07 | Portret foni: **Arch** (v1.9) | Mijoz |
 | 2026-11-07 | Release notes chap paneli yoqmadi → Year wheel / Career ring / Big type review uchun (v2.0) | Mijoz |
 | 2026-11-07 | Kod GitHub'ga yuklandi: Bekdiyordev/bekdiyor-portfolio (`main`, 08b4d88) — index.html, assets, README, PLAN.md | Mijoz |
+| 2026-11-07 | Release notes chap tomoni: **Year wheel** (v2.1) | Mijoz |
 | 2026-11-07 | Phone lift-off moslashtirildi: Hero va Projects orasida 3 bo'lim bor (tasdiqlangan tartib), shuning uchun telefon Hero'dan ko'tarilib ketadi va Projects'da aylanib "qo'nadi". To'liq uchish uchun Projects'ni Hero'dan keyinga ko'chirish kerak bo'ladi — mijoz qarori kutilmoqda | Claude |
 
 ---
