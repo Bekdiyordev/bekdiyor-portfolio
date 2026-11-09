@@ -1,7 +1,7 @@
 # 📱 Portfolio Sayt — Master Reja (PLAN.md)
 
 > Bu fayl — loyihaning yagona "manba hujjati". Har bir qaror, talab va o'zgarish shu yerga yoziladi va ish shu asosda olib boriladi.
-> Oxirgi yangilanish: 2026-11-06 22:40 · Holat: **Faza 1 — Umumiy dizayn v1 tasdiqlandi ("deyarli yoqdi"), parallax qo'shilmoqda**
+> Oxirgi yangilanish: 2026-11-09 · Holat: **v2.2 — uz/ru/en, forma → Telegram, haqiqiy kontaktlar, tashriflar soni. Keyingi qadam: Vercel deploy + bot token, domen oxirida**
 >
 > 🎨 **Design v1 (saqlangan):** https://claude.ai/artifact/XZJkBytxeBdFQUzvr2YzMf — versiya `1793986414-9ea4`
 > Artboardlar: `Main.dc.html` (desktop bosh sahifa), `NavStates.dc.html` (navbar holatlari), `Mobile.dc.html` (mobil hero).
