@@ -408,3 +408,30 @@ content/
 | 2026-11-09 | Ortiqchalar olib tashlandi: footer Theme lab (3 rang), Mint/Acid variantlari, "Book a call", "Prototype · sample data" yozuvi; bo'limlar qayta raqamlandi (Process 06, Fikrlar 07, Aloqa 08) | Mijoz |
 | 2026-11-09 | Footer'da **tashriflar soni** (CounterAPI, har brauzer sessiyasida 1 marta sanaladi — noyob odamlar emas, tashriflar) | Mijoz |
 | 2026-11-09 | Domen — oxirida | Mijoz |
+
+---
+
+## 11. "Shablon bo'lmasligi" uchun qoidalar (o'zim uchun)
+1. Hech qanday tayyor template/UI kit'ni to'g'ridan-to'g'ri ishlatmayman.
+2. Har bir bo'limda **bitta "signature" interaksiya** bo'lsin — lekin ortiqcha emas.
+3. Animatsiyalar mazmunga xizmat qiladi; har biri 60fps, easing'lar qo'lda sozlangan (`cubic-bezier`), bir xil "fade-up" hamma joyda takrorlanmaydi.
+4. Mikro-detallar: hover holatlari, focus ring, loading/empty/error holatlari, toast'lar, tanlangan matn rangi (`::selection`), scrollbar, favicon, OG rasm.
+5. Dark va Light — alohida dizayn qilinadi, shunchaki invert emas.
+6. Klishelar yo'q: progress-bar skilllar, stock rasmlar, "Hi, I'm…👋" banal hero.
+
+---
+
+## 12. Qo'shimcha "wow" g'oyalar (mijoz tanlashi kutilmoqda)
+
+| # | G'oya | Nima beradi | Murakkablik |
+|---|-------|-------------|-------------|
+| G1 | ⭐ **Phone lift-off** — bitta telefon Hero'dan Projects'gacha scroll bilan uchib boradi (3.4'da) | Saytning "signature" momenti | Yuqori |
+| G2 | **⌘K Command palette** — klaviatura bilan navigatsiya, email nusxalash, theme, til almashtirish | Dasturchi ekanligingizni ko'rsatadi | O'rta |
+| G3 | **App Store uslubidagi case study** — "Get" tugmasi, reyting, screenshot karusel, "What's new" | Mijoz loyihani haqiqiy ilova kabi his qiladi | O'rta |
+| G4 | **Jonli mini-prototip** — case study'dagi telefon ichida ilovani bosib ko'rish mumkin | Juda kuchli taassurot | Yuqori |
+| G5 | **Spotlight cursor** — dark fonda cursor atrofida yashirin grid/naqsh ko'rinadi | Premium his | Past |
+| G6 | **Text scramble** — til/theme almashganda harflar "dekodlanib" o'zgaradi | Texnik kayfiyat | Past |
+| G7 | **Kreativ 404** — Android'ning "App isn't responding" dialogi: `Wait` / `Close app` | Esda qoladi, kulgili | Past |
+| G8 | **Jonli status** — navbarda "Hozir: kod yozyapman · oxirgi commit 2 soat oldin" (GitHub API) | Saytni "tirik" qiladi | O'rta |
+| G9 | **Haptic-style mikro-animatsiyalar** — tugmalar bosilganda iOS'dagidek "spring" siqilish | Mobil his | Past |
+| G10 | **Sound design (ixtiyoriy)** — juda past ovozli click/whoosh, standart o'chiq | Immersiv | Past |
