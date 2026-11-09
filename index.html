@@ -776,7 +776,7 @@ html.reduce body::after{display:none}
 
 <!-- loader -->
 <div id="loader" aria-hidden="true">
-  <div class="ld-top"><span data-t="ld.top">Mobile Engineer — Portfolio</span><span data-t="ld.city">Samarkand, UZ</span></div>
+  <div class="ld-top"><span data-t="ld.top">Mobile Engineer — Portfolio</span><span>Android · iOS</span></div>
   <div class="ld-name"><span style="animation-delay:0.00s">b</span><span style="animation-delay:0.04s">e</span><span style="animation-delay:0.09s">k</span><span style="animation-delay:0.14s">d</span><span style="animation-delay:0.18s">i</span><span style="animation-delay:0.22s">y</span><span style="animation-delay:0.27s">o</span><span style="animation-delay:0.32s">r</span><span style="animation-delay:0.36s">.</span></div>
   <div class="ld-bottom"><span class="mono" style="color:#8E8E98" data-t="ld.bot">Compiling the good stuff</span><span class="ld-count" id="ldCount">000</span></div>
   <div class="ld-bar" id="ldBar"></div>
@@ -828,7 +828,7 @@ html.reduce body::after{display:none}
   <canvas id="heroBg" aria-hidden="true"></canvas>
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <div class="eyebrow"><span data-t="hero.role">Mobile Engineer</span><i>/</i><span>Android · iOS</span><i>/</i><span data-t="ld.city">Samarkand, UZ</span></div>
+      <div class="eyebrow"><span data-t="hero.role">Mobile Engineer</span><i>/</i><span>Android · iOS</span></div>
       <h1 class="hero-h" id="heroH" data-t="hero.h" data-split>I build apps<br>people <em>love</em><br>to open daily.</h1>
       <p class="lead" data-t="hero.lead">Three years shipping native Android apps with Kotlin and Jetpack Compose. Now bringing the same craft to iOS with SwiftUI. Fast, polished, and built to last well past v1.0.</p>
       <div class="hero-cta">
@@ -867,7 +867,7 @@ html.reduce body::after{display:none}
         <div class="portrait-frame"><div class="portrait-bg" data-speed="0.78"></div></div>
         <div class="portrait-cut"><img class="portrait-img" data-speed="1.07" src="assets/bekdiyor-cutout.webp" alt="Bekdiyor, mobile engineer" data-ta="alt:about.alt" width="760" height="883"></div>
         <div class="portrait-tag"><span class="dot"></span><span data-t="about.open">Open to projects</span></div>
-        <small data-t="about.sm">Bekdiyor · Samarkand</small>
+        <small>Bekdiyor</small>
       </div>
       <div style="font-size:14px;color:var(--dim)" data-t="about.now"><b style="color:var(--text)">Now:</b> going deep on SwiftUI and Kotlin Multiplatform.</div>
     </div>
@@ -1073,7 +1073,7 @@ html.reduce body::after{display:none}
         <a class="btn btn-accent" href="#contact" data-magnetic><span data-t="cta.start">Start a project</span> <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
       </div>
       <div class="f-cols">
-        <div class="f-col"><div class="label" data-t="ft.time">Local time</div><div style="font-family:var(--f-display);font-weight:600;font-size:26px;letter-spacing:-.02em"><span data-t="city">Samarkand</span> · <span id="clock">--:--</span></div><div class="mono" style="color:#8E8E98">GMT+5</div></div>
+        <div class="f-col"><div class="label" data-t="ft.time">Local time</div><div style="font-family:var(--f-display);font-weight:600;font-size:26px;letter-spacing:-.02em"><span id="clock">--:--</span></div><div class="mono" style="color:#8E8E98">GMT+5</div></div>
         <div class="f-col"><div class="label" data-t="ft.social">Social</div><a data-c="gh" href="https://github.com/Bekdiyordev" target="_blank" rel="noopener">GitHub ↗</a><a data-c="li" href="https://www.linkedin.com/in/bekdiyor-abdusharipov/" target="_blank" rel="noopener">LinkedIn ↗</a><a data-c="tg" href="https://t.me/bekdiyor04" target="_blank" rel="noopener">Telegram ↗</a></div>
         <div class="f-col"><div class="label" data-t="ft.contact">Contact</div><a data-c="mail" href="mailto:abekdiyor@gmail.com">abekdiyor@gmail.com</a><a data-c="tel" href="tel:+998995006123">+998 99 500 61 23</a><a href="#top" data-t="ft.top">Back to top ↑</a></div>
       </div>
@@ -1217,7 +1217,6 @@ var LI = LANGS.indexOf(LANG) === 2 ? 0 : LANGS.indexOf(LANG) + 1; /* index into 
 var I18N = {
   /* loader */
   'ld.top': ['Mobile Engineer — Portfolio','Mobil dasturchi — Portfolio','Мобильный разработчик — Портфолио'],
-  'ld.city': ['Samarkand, UZ','Samarqand, UZ','Самарканд, UZ'],
   'ld.bot': ['Compiling the good stuff','Eng yaxshilari yig‘ilmoqda','Собираю самое лучшее'],
   /* nav */
   'nav.work': ['Work','Ishlar','Работы'],
@@ -1232,7 +1231,6 @@ var I18N = {
   'act.s': ['Bekdiyor usually replies in ~2h','Bekdiyor odatda ~2 soatda javob beradi','Бекдиёр обычно отвечает за ~2 часа'],
   'theme.toDark': ['Switch to dark mode','Tungi rejimga o‘tish','Включить тёмную тему'],
   'theme.toLight': ['Switch to light mode','Kunduzgi rejimga o‘tish','Включить светлую тему'],
-  'city': ['Samarkand','Samarqand','Самарканд'],
   /* section labels (island) */
   'sec.intro': ['Intro','Kirish','Интро'],
   'sec.about': ['About','Men haqimda','Обо мне'],
@@ -1262,7 +1260,6 @@ var I18N = {
   'about.l': ['(02) About','(02) Men haqimda','(02) Обо мне'],
   'about.alt': ['Bekdiyor, mobile engineer','Bekdiyor, mobil dasturchi','Бекдиёр, мобильный разработчик'],
   'about.open': ['Open to projects','Loyihalarga ochiqman','Открыт к проектам'],
-  'about.sm': ['Bekdiyor · Samarkand','Bekdiyor · Samarqand','Бекдиёр · Самарканд'],
   'about.now': ['<b style="color:var(--text)">Now:</b> going deep on SwiftUI and Kotlin Multiplatform.','<b style="color:var(--text)">Hozir:</b> SwiftUI va Kotlin Multiplatform’ni chuqur o‘rganyapman.','<b style="color:var(--text)">Сейчас:</b> погружаюсь в SwiftUI и Kotlin Multiplatform.'],
   'about.m': ['I turn rough ideas into apps that feel <em>effortless.</em> Clean architecture under the hood, obsessive detail on the surface. Every animation timed, every edge case handled, every release measured. I care about the 60fps scroll, the empty state nobody designs, and the crash that never happens.',
     'Xom g‘oyalarni ishlatish <em>yengil</em> ilovalarga aylantiraman. Ichida toza arxitektura, tashqarida har bir detalga e’tibor. Har bir animatsiya o‘z vaqtida, har bir chekka holat hisobga olingan, har bir reliz o‘lchangan. Men uchun 60fps skroll, hech kim chizmaydigan bo‘sh ekran va hech qachon sodir bo‘lmaydigan crash muhim.',
@@ -1469,7 +1466,7 @@ function scrNavo(){
   return '<div class="scr" data-app="navo" style="background:#120D1F;color:#F5F3FF">'+
   '<div style="display:flex;justify-content:space-between;align-items:center"><span class="muted">Now playing</span><div class="eq"><i></i><i></i><i></i><i></i></div></div>'+
   '<div style="aspect-ratio:1;border-radius:24px;background:radial-gradient(circle at 30% 30%,#EC4899,transparent 55%),radial-gradient(circle at 75% 70%,#8B5CF6,transparent 60%),#2E1065;position:relative;overflow:hidden"><div style="position:absolute;inset:22%;border-radius:50%;border:1px solid rgba(255,255,255,.25)"></div><div style="position:absolute;inset:38%;border-radius:50%;background:rgba(255,255,255,.15)"></div></div>'+
-  '<div><div style="font-weight:700;font-size:19px">Samarqand tunlari</div><div class="muted" style="font-size:13px">Navo Originals</div></div>'+
+  '<div><div style="font-weight:700;font-size:19px">Yulduzli tunlar</div><div class="muted" style="font-size:13px">Navo Originals</div></div>'+
   '<div><div style="height:4px;border-radius:4px;background:rgba(255,255,255,.15)"><div style="width:42%;height:100%;border-radius:4px;background:#C4B5FD"></div></div><div style="display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:10px;opacity:.6;margin-top:6px"><span>1:24</span><span>3:18</span></div></div>'+
   '<div style="display:flex;justify-content:space-between;align-items:center;padding:0 16px"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#F5F3FF"><path d="M6 6h2v12H6zM9.5 12L18 6v12z"/></svg><div style="width:62px;height:62px;border-radius:50%;background:#F5F3FF;display:flex;align-items:center;justify-content:center"><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#120D1F"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg></div><svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="#F5F3FF"><path d="M16 6h2v12h-2zM6 6l8.5 6L6 18z"/></svg></div>'+
   '<div class="tabbar" style="background:#1E1633"><span></span><span></span><span></span><span></span></div></div>';
@@ -2162,7 +2159,7 @@ if (fine && !reduce){
 }
 
 /* clock */
-function tickClock(){ try{ $('#clock').textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Samarkand', hour: '2-digit', minute: '2-digit' }); }catch(e){} }
+function tickClock(){ try{ $('#clock').textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Tashkent', hour: '2-digit', minute: '2-digit' }); }catch(e){} }
 tickClock(); setInterval(tickClock, 20000);
 
 /* ================= layout measures ================= */

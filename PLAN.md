@@ -279,7 +279,7 @@ Bu "mavzu" sayt bo'ylab izchil — shuning uchun shablon emas, **muallif qo'li**
 
 ### 11 · Footer
 - Juda katta ism tipografiyasi (ekran kengligida), harflar cursor'ga reaksiya qiladi.
-- Jonli mahalliy vaqt: `Samarkand · 22:07 GMT+5`
+- Jonli mahalliy vaqt: `22:07 GMT+5` (shahar nomisiz)
 - Ijtimoiy tarmoqlar (GitHub, LinkedIn, Telegram) + Aloqa ustuni (email, telefon, `Back to top ↑`)
 - © yil · **sayt tashriflari soni** (CounterAPI, bepul; faqat haqiqiy hostingda ko'rinadi)
 
@@ -409,6 +409,7 @@ content/
 | 2026-11-09 | Footer'da **tashriflar soni** (CounterAPI, har brauzer sessiyasida 1 marta sanaladi — noyob odamlar emas, tashriflar) | Mijoz |
 | 2026-11-09 | Domen — oxirida | Mijoz |
 | 2026-11-10 | **⌘K buyruqlar menyusi olib tashlandi** (oddiy tashrifchiga kerakmas). Til — navbar va mobil menyuda | Mijoz |
+| 2026-11-10 | **"Samarkand" hamma joydan olib tashlandi** (loader, hero, About, footer vaqti). Footer'da faqat mahalliy vaqt + GMT+5 qoldi | Mijoz |
 
 ---
 
