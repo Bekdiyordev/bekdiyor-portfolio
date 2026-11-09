@@ -156,7 +156,7 @@ Bu "mavzu" sayt bo'ylab izchil — shuning uchun shablon emas, **muallif qo'li**
   - `hover` — kengayib to'liq menyu
   - `scroll down` — yashirinadi, `scroll up` — qaytadi
   - `mobile` — full-screen menyu (katta tipografiya, stagger animatsiya)
-- ~~`● Available for new projects`~~ — olib tashlandi (2026-11-07). ⌘K tugmasi ham navbardan olib tashlandi (Ctrl/⌘+K va footer'dagi link qoldi).
+- ~~`● Available for new projects`~~ — olib tashlandi (2026-11-07). ⌘K tugmasi ham navbardan olib tashlandi; 2026-11-10 da ⌘K menyusi butunlay olib tashlandi.
 
 ### 02 · Hero
 - ✅ **Hero foni: Spotlight stage tanlandi (hozircha)** — review panel va boshqa variantlar olib tashlandi (v1.4).
@@ -402,12 +402,13 @@ content/
 | 2026-11-07 | Release notes chap tomoni: **Year wheel** (v2.1) | Mijoz |
 | 2026-11-07 | Phone lift-off moslashtirildi: Hero va Projects orasida 3 bo'lim bor (tasdiqlangan tartib), shuning uchun telefon Hero'dan ko'tarilib ketadi va Projects'da aylanib "qo'nadi". To'liq uchish uchun Projects'ni Hero'dan keyinga ko'chirish kerak bo'ladi — mijoz qarori kutilmoqda | Claude |
 | 2026-11-09 | **Services / tarif kartalar butunlay olib tashlandi**, o'rniga hech narsa | Mijoz |
-| 2026-11-09 | **Til: uz (default) · ru · en.** Navbar'da til tugmasi (popover), mobil menyuda uchta tugma, ⌘K'da ham. Tanlov `localStorage pf-lang`da, `?lang=ru` havolasi ham ishlaydi | Mijoz |
+| 2026-11-09 | **Til: uz (default) · ru · en.** Navbar'da til tugmasi (popover), mobil menyuda uchta tugma. Tanlov `localStorage pf-lang`da, `?lang=ru` havolasi ham ishlaydi | Mijoz |
 | 2026-11-09 | **Forma → Telegram** (Vercel funksiyasi `api/telegram.js`, env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ALLOWED_ORIGIN). Fayl biriktirish o'rniga havola maydoni | Mijoz |
 | 2026-11-09 | Haqiqiy kontaktlar: tel +998995006123, Telegram @bekdiyor04, GitHub Bekdiyordev, LinkedIn bekdiyor-abdusharipov, email abekdiyor@gmail.com | Mijoz |
 | 2026-11-09 | Ortiqchalar olib tashlandi: footer Theme lab (3 rang), Mint/Acid variantlari, "Book a call", "Prototype · sample data" yozuvi; bo'limlar qayta raqamlandi (Process 06, Fikrlar 07, Aloqa 08) | Mijoz |
 | 2026-11-09 | Footer'da **tashriflar soni** (CounterAPI, har brauzer sessiyasida 1 marta sanaladi — noyob odamlar emas, tashriflar) | Mijoz |
 | 2026-11-09 | Domen — oxirida | Mijoz |
+| 2026-11-10 | **⌘K buyruqlar menyusi olib tashlandi** (oddiy tashrifchiga kerakmas). Til — navbar va mobil menyuda | Mijoz |
 
 ---
 
@@ -426,7 +427,7 @@ content/
 | # | G'oya | Nima beradi | Murakkablik |
 |---|-------|-------------|-------------|
 | G1 | ⭐ **Phone lift-off** — bitta telefon Hero'dan Projects'gacha scroll bilan uchib boradi (3.4'da) | Saytning "signature" momenti | Yuqori |
-| G2 | **⌘K Command palette** — klaviatura bilan navigatsiya, email nusxalash, theme, til almashtirish | Dasturchi ekanligingizni ko'rsatadi | O'rta |
+| G2 | ~~**⌘K Command palette**~~ (2026-11-10 olib tashlandi) — klaviatura bilan navigatsiya, email nusxalash, theme, til almashtirish | Dasturchi ekanligingizni ko'rsatadi | O'rta |
 | G3 | **App Store uslubidagi case study** — "Get" tugmasi, reyting, screenshot karusel, "What's new" | Mijoz loyihani haqiqiy ilova kabi his qiladi | O'rta |
 | G4 | **Jonli mini-prototip** — case study'dagi telefon ichida ilovani bosib ko'rish mumkin | Juda kuchli taassurot | Yuqori |
 | G5 | **Spotlight cursor** — dark fonda cursor atrofida yashirin grid/naqsh ko'rinadi | Premium his | Past |

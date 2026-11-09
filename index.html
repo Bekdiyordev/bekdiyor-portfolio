@@ -720,22 +720,6 @@ html.curtain #footer{position:fixed;left:0;right:0;bottom:0}
 .f-bot{display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;margin-top:40px;font-family:var(--f-mono);font-size:11px;color:#8E8E98}
 
 /* ---------- palette ---------- */
-#pal{position:fixed;inset:0;z-index:180;display:none;align-items:flex-start;justify-content:center;padding:14vh 16px 16px}
-#pal.open{display:flex}
-.pal-back{position:absolute;inset:0;background:rgba(5,5,6,.55);backdrop-filter:blur(6px);animation:fadeIn .25s}
-@keyframes fadeIn{from{opacity:0}}
-.pal-box{position:relative;width:min(560px,100%);background:#141418;color:#EDEDEF;border-radius:24px;box-shadow:0 40px 100px rgba(0,0,0,.5),inset 0 0 0 1px rgba(255,255,255,.1);overflow:hidden;animation:palIn .4s var(--spring)}
-@keyframes palIn{from{opacity:0;transform:scale(.94) translateY(-10px)}}
-.pal-in{display:flex;align-items:center;gap:12px;padding:18px 20px;border-bottom:1px solid rgba(255,255,255,.08)}
-.pal-in input{flex:1;background:none;border:0;outline:none;color:#EDEDEF;font:inherit;font-size:17px}
-.pal-in kbd,.pal-foot{font-family:var(--f-mono);font-size:11px;color:#8E8E98}
-.pal-in kbd{padding:4px 8px;border-radius:6px;background:rgba(255,255,255,.08)}
-#palList{max-height:360px;overflow:auto;padding:8px}
-.pal-group{font-family:var(--f-mono);font-size:10px;color:#8E8E98;padding:10px 12px 6px;text-transform:uppercase;letter-spacing:.08em}
-.pal-item{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px;border-radius:12px;font-size:15px;text-align:left}
-.pal-item.sel{background:rgba(255,255,255,.08)}
-.pal-item small{font-family:var(--f-mono);font-size:11px;color:#8E8E98}
-.pal-foot{padding:12px 20px;border-top:1px solid rgba(255,255,255,.08)}
 
 /* ---------- toast ---------- */
 #toast{position:fixed;left:50%;bottom:24px;z-index:190;translate:-50% calc(100% + 48px);visibility:hidden;background:#000;color:#F4F4F5;padding:13px 20px;border-radius:999px;font-size:14px;box-shadow:0 20px 40px rgba(0,0,0,.35),inset 0 0 0 1px rgba(255,255,255,.1);transition:translate .6s var(--spring),visibility .6s;display:flex;gap:10px;align-items:center;max-width:calc(100vw - 32px)}
@@ -768,7 +752,7 @@ html.curtain #footer{position:fixed;left:0;right:0;bottom:0}
   .hero-stage{height:560px;scale:.82;margin:-50px 0}
 }
 @media (max-width:760px){
-  .isl-links,#kBtn{display:none}
+  .isl-links{display:none}
   .island.scrolled:not(:hover):not(:focus-within) .isl-sec{max-width:150px}
   .isl-menu{display:flex}
   .isl-cta{padding:11px 14px}
@@ -1100,14 +1084,6 @@ html.reduce body::after{display:none}
 </footer>
 
 <!-- command palette -->
-<div id="pal" role="dialog" aria-modal="true" aria-label="Command menu" data-ta="aria-label:pal.a">
-  <div class="pal-back" id="palBack"></div>
-  <div class="pal-box">
-    <div class="pal-in"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E8E98" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="palInput" type="text" placeholder="Type a command or search…" data-ta="placeholder:pal.ph" aria-label="Search commands" autocomplete="off"><kbd>esc</kbd></div>
-    <div id="palList" role="listbox" aria-label="Commands"></div>
-    <div class="pal-foot" data-t="pal.foot">↑ ↓ navigate · ↵ select · ⌘K / Ctrl K toggle</div>
-  </div>
-</div>
 <div id="langPop" role="menu" data-ta="aria-label:nav.lang" aria-label="Language"><button type="button" role="menuitemradio" data-lang="uz"><b>UZ</b>O‘zbekcha</button><button type="button" role="menuitemradio" data-lang="ru"><b>RU</b>Русский</button><button type="button" role="menuitemradio" data-lang="en"><b>EN</b>English</button></div>
 <div id="toast" role="status"><i></i><span id="toastT"></span></div>
 
@@ -1412,18 +1388,6 @@ var I18N = {
   'ft.copy': ['© 2026 · Designed and built by Bekdiyor','© 2026 · Dizayn va kod: Bekdiyor','© 2026 · Дизайн и код: Бекдиёр'],
   'ft.visits': ['{n} visits','{n} ta tashrif','Посещений: {n}'],
   /* palette */
-  'pal.ph': ['Type a command or search…','Buyruq yozing yoki qidiring…','Введите команду или поиск…'],
-  'pal.foot': ['↑ ↓ navigate · ↵ select · ⌘K / Ctrl K toggle','↑ ↓ tanlash · ↵ ochish · ⌘K / Ctrl K','↑ ↓ навигация · ↵ выбрать · ⌘K / Ctrl K'],
-  'pal.a': ['Command menu','Buyruqlar menyusi','Меню команд'],
-  'pal.none': ['No matches','Hech narsa topilmadi','Ничего не найдено'],
-  'pal.nav': ['Navigate','O‘tish','Навигация'],
-  'pal.act': ['Actions','Amallar','Действия'],
-  'pal.app': ['Appearance','Ko‘rinish','Внешний вид'],
-  'pal.lang': ['Language','Til','Язык'],
-  'pal.go': ['Go to {s}','{s} bo‘limiga o‘tish','Перейти: {s}'],
-  'pal.mail': ['Copy email address','Email manzilni nusxalash','Скопировать email'],
-  'pal.tg': ['Message on Telegram','Telegramda yozish','Написать в Telegram'],
-  'pal.theme': ['Toggle dark / light mode','Tungi / kunduzgi rejim','Тёмная / светлая тема'],
   'cur.hi': ['Hi!','Salom!','Привет!']
 };
 function T(k, v){
@@ -2140,41 +2104,7 @@ $('#bStepLbl').textContent = T('f.step', { n: 1 }); $('#bNext').textContent = T(
 })();
 
 /* ================= command palette ================= */
-var pal = $('#pal'), palInput = $('#palInput'), palList = $('#palList'), palSel = 0, palItems = [];
-var CMDS = [
-  [T('pal.nav'), T('pal.go', { s: T('nav.work') }), 'work'], [T('pal.nav'), T('pal.go', { s: T('nav.about') }), 'about'], [T('pal.nav'), T('pal.go', { s: T('nav.stack') }), 'stack'], [T('pal.nav'), T('pal.go', { s: T('sec.exp') }), 'experience'],
-  [T('pal.nav'), T('pal.go', { s: T('nav.process') }), 'process'], [T('pal.nav'), T('pal.go', { s: T('nav.contact') }), 'contact'],
-  [T('pal.act'), T('cta.start'), function(){ goTo('contact'); }],
-  [T('pal.act'), T('pal.mail'), function(){ $('#copyMail').click(); }],
-  [T('pal.act'), T('pal.tg'), function(){ window.open('https://t.me/' + CONTENT.telegram, '_blank', 'noopener'); }],
-  [T('pal.app'), T('pal.theme'), function(){ toggleTheme(); }],
-  [T('pal.lang'), 'O‘zbekcha', function(){ setLang('uz'); }], [T('pal.lang'), 'Русский', function(){ setLang('ru'); }], [T('pal.lang'), 'English', function(){ setLang('en'); }]
-];
-function renderPal(){
-  var q = palInput.value.toLowerCase().trim(), last = '', html = '';
-  palItems = CMDS.filter(function(c){ return !q || c[1].toLowerCase().indexOf(q) > -1; });
-  palSel = clamp(palSel, 0, Math.max(0, palItems.length - 1));
-  palItems.forEach(function(c, i){
-    if (c[0] !== last){ html += '<div class="pal-group">' + c[0] + '</div>'; last = c[0]; }
-    html += '<button type="button" class="pal-item' + (i === palSel ? ' sel' : '') + '" role="option" aria-selected="' + (i === palSel) + '" data-i="' + i + '"><span>' + esc(c[1]) + '</span><small>' + (typeof c[2] === 'string' ? '↵' : 'run') + '</small></button>';
-  });
-  palList.innerHTML = html || '<div class="pal-group">' + T('pal.none') + '</div>';
-}
-function openPal(){ pal.classList.add('open'); palInput.value = ''; palSel = 0; renderPal(); setTimeout(function(){ palInput.focus(); }, 30); if (lenis) lenis.stop(); }
-function closePal(){ pal.classList.remove('open'); if (lenis) lenis.start(); }
-function runPal(i){ var c = palItems[i]; if (!c) return; closePal(); if (typeof c[2] === 'string') goTo(c[2]); else c[2](); }
-palInput.addEventListener('input', function(){ palSel = 0; renderPal(); });
-palList.addEventListener('click', function(e){ var b = e.target.closest('.pal-item'); if (b) runPal(+b.dataset.i); });
-palList.addEventListener('mousemove', function(e){ var b = e.target.closest('.pal-item'); if (b && +b.dataset.i !== palSel){ palSel = +b.dataset.i; renderPal(); } });
-$('#palBack').addEventListener('click', closePal);
-D.addEventListener('keydown', function(e){
-  if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')){ e.preventDefault(); pal.classList.contains('open') ? closePal() : openPal(); return; }
-  if (!pal.classList.contains('open')){ if (e.key === 'Escape') closeMenu(); return; }
-  if (e.key === 'Escape'){ closePal(); }
-  else if (e.key === 'ArrowDown'){ e.preventDefault(); palSel = (palSel + 1) % Math.max(1, palItems.length); renderPal(); }
-  else if (e.key === 'ArrowUp'){ e.preventDefault(); palSel = (palSel - 1 + palItems.length) % Math.max(1, palItems.length); renderPal(); }
-  else if (e.key === 'Enter'){ e.preventDefault(); runPal(palSel); }
-});
+D.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeMenu(); });
 
 /* ================= cursor + magnetic ================= */
 var cur = $('#cursor'), cDot = $('.c-dot'), cRing = $('.c-ring'), cLabel = $('.c-label');
@@ -2308,7 +2238,7 @@ function frame(now){
   island.classList.toggle('scrolled', y > 90);
   islProg.style.transform = 'scaleX(' + clamp(y / docH, 0, 1).toFixed(4) + ')';
   if (dy > 0) dirAcc = Math.max(0, dirAcc) + dy; else if (dy < 0) dirAcc = Math.min(0, dirAcc) + dy;
-  if (!hovering && !island.classList.contains('activity') && !pal.classList.contains('open')){
+  if (!hovering && !island.classList.contains('activity')){
     if (dirAcc > 140 && y > 700) islandWrap.classList.add('hide');
     else if (dirAcc < -40 || y < 300) islandWrap.classList.remove('hide');
   }

@@ -56,7 +56,7 @@ The footer shows a visit count from [CounterAPI](https://counterapi.dev) (free, 
 - Release notes with a year wheel and expandable cards
 - Selected work with two sticky devices (splash + app screen) that follow the active project
 - Pinned horizontal process with animated stage illustrations, testimonials marquee
-- Five-step brief form sent to Telegram, curtain-reveal footer, ⌘K / Ctrl K command menu
+- Five-step brief form sent to Telegram, curtain-reveal footer
 
 ## Credits
 
