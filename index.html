@@ -12,7 +12,6 @@
   var d=document.documentElement; d.classList.add('js');
   try{
     var t=localStorage.getItem('pf-theme'); if(t==='light') d.classList.add('light');
-    var a=localStorage.getItem('pf-accent'); if(a) d.setAttribute('data-accent',a);
     if(sessionStorage.getItem('pf-seen')) d.classList.add('seen');
   }catch(e){}
   if(matchMedia('(pointer: fine)').matches) d.classList.add('fine');
@@ -50,10 +49,6 @@ html.light{
 /* Neon palettes: green → purple. Default "aurora"; alternatives via data-accent */
 :root{--a1:#3DFF9A;--a2:#A259FF;--a1rgb:61,255,154;--a2rgb:162,89,255;--a1t:#3DFF9A;--a2t:#B98AFF}
 html.light{--a1t:#04955A;--a2t:#7B2FF7;--accent-text:#046C42}
-html[data-accent="mint"]{--a1:#2EF2C8;--a2:#8B5CF6;--a1rgb:46,242,200;--a2rgb:139,92,246;--a1t:#2EF2C8;--a2t:#A78BFA}
-html.light[data-accent="mint"]{--a1t:#08977F;--a2t:#6D28D9}
-html[data-accent="acid"]{--a1:#B8FF3C;--a2:#D946EF;--a1rgb:184,255,60;--a2rgb:217,70,239;--a1t:#B8FF3C;--a2t:#E879F9}
-html.light[data-accent="acid"]{--a1t:#4A8500;--a2t:#A21CAF}
 :root,html.light,html[data-accent]{
   --grad:linear-gradient(105deg,var(--a1),var(--a2));
   --grad-text:linear-gradient(100deg,var(--a1t) 10%,var(--a2t) 90%);
@@ -163,6 +158,21 @@ html.light .isl-icon-moon{display:block}
 #mmenu.open{clip-path:circle(150% at calc(100% - 44px) 40px);visibility:visible}
 #mmenu nav{display:flex;flex-direction:column;gap:4px}
 #mmenu nav a{font-family:var(--f-display);font-weight:700;font-size:clamp(2.6rem,12vw,4rem);letter-spacing:-.05em;line-height:1.05;display:flex;gap:14px;align-items:baseline;opacity:0;transform:translateY(30px);transition:opacity .5s,transform .7s var(--ease)}
+#mmenu .mm-bot{display:flex;flex-direction:column;gap:18px}
+.mm-lang{display:flex;gap:6px;padding:4px;border-radius:999px;background:rgba(255,255,255,.07);align-self:flex-start}
+.mm-lang button{padding:10px 16px;border-radius:999px;font-size:14px;color:#A1A1AA;transition:background .2s,color .2s}
+.mm-lang button.on{background:#fff;color:#000}
+.mm-meta{color:#8E8E98;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.isl-lang span{font-weight:600;letter-spacing:.02em}
+#langPop{position:fixed;z-index:120;width:180px;padding:6px;border-radius:20px;background:#000;color:#F4F4F5;box-shadow:0 18px 50px rgba(0,0,0,.4),inset 0 0 0 1px rgba(255,255,255,.1);display:flex;flex-direction:column;gap:2px;opacity:0;transform:translateY(-8px) scale(.96);transform-origin:top center;pointer-events:none;transition:opacity .25s,transform .4s var(--spring)}
+#langPop.open{opacity:1;transform:none;pointer-events:auto}
+#langPop button{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:14px;font-size:14px;text-align:left;color:#D4D4D8;transition:background .2s}
+#langPop button b{font-family:var(--f-mono);font-size:11px;font-weight:500;color:#8E8E98;width:20px}
+#langPop button:hover{background:rgba(255,255,255,.08)}
+#langPop button.on{background:rgba(255,255,255,.12);color:#fff}
+#langPop button.on b{color:var(--accent-bright)}
+.visits{display:inline-flex;align-items:center;gap:8px}
+.visits i{width:6px;height:6px;border-radius:50%;background:#34D399;animation:pulse 2s infinite}
 #mmenu nav a small{font-family:var(--f-mono);font-size:12px;color:#8E8E98;font-weight:400;letter-spacing:0}
 #mmenu.open nav a{opacity:1;transform:none}
 
@@ -182,8 +192,19 @@ html.curtain #main{border-radius:0 0 clamp(28px,4vw,56px) clamp(28px,4vw,56px);b
 .hero-in{position:relative;display:flex;flex-wrap:wrap;align-items:center;gap:40px}
 .hero-copy{flex:999 1 580px;min-width:0;display:flex;flex-direction:column;gap:28px}
 .hero-h{margin:0;font-family:var(--f-display);font-weight:700;font-size:clamp(3.3rem,8vw,8.6rem);line-height:.92;letter-spacing:-.058em}
+html[lang="ru"] .hero-h{font-size:clamp(2.6rem,6.6vw,7.2rem)}
 .lead{margin:0;max-width:540px;font-size:clamp(16px,1.4vw,19px);line-height:1.6;color:var(--dim)}
 .hero-cta{display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:18px 28px;border-radius:999px;font-weight:600;font-size:16px;transition:translate .5s var(--ease),scale .25s var(--spring),background .3s,color .3s,border-color .3s;will-change:translate}
+.btn:active{scale:.95}
+.btn-primary{background:var(--text);color:var(--bg);box-shadow:0 12px 30px var(--shadow)}
+.btn-ghost{border:1px solid var(--line-strong)}
+.btn-ghost:hover{border-color:var(--text)}
+.btn-accent:hover,.isl-cta:hover{background:var(--accent-hover)}
+.btn-accent{background:var(--accent);box-shadow:var(--accent-glow);color:var(--on-accent)}
+.btn svg{transition:transform .4s var(--ease)}
+.btn:hover svg{transform:translate(2px,-2px)}
+.hint{margin-top:16px;font-family:var(--f-mono);font-size:11px;color:var(--dim)}
 .stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid var(--line);margin-top:16px}
 .stat{padding:20px 12px 0 0}
 .stat+.stat{padding-left:16px;border-left:1px solid var(--line)}
@@ -538,35 +559,6 @@ html.light .work::before{background-image:radial-gradient(rgba(14,14,16,.09) 1px
 .minfo b{display:block;font-size:17px;font-weight:600}
 .minfo small{font-size:13px;color:var(--dim)}
 
-/* ---------- services ---------- */
-.services{background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);transition:background .5s}
-.services .wrap{padding-top:130px;padding-bottom:130px}
-.seg{position:relative;display:flex;padding:5px;border-radius:999px;background:var(--bg);border:1px solid var(--line)}
-.seg button{position:relative;z-index:1;padding:11px 18px;border-radius:999px;font-size:14px;font-weight:500;transition:color .4s}
-.seg button[aria-pressed="true"]{color:var(--bg)}
-.seg-pill{position:absolute;top:5px;bottom:5px;left:5px;border-radius:999px;background:var(--text);transition:transform .6s var(--spring),width .6s var(--spring)}
-.tiers{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:20px}
-.tier{position:relative;border-radius:34px;padding:36px;background:var(--bg);border:1px solid var(--line);display:flex;flex-direction:column;gap:22px;transition:translate .6s var(--ease)}
-.tier:hover{translate:0 -6px}
-.tier::before{content:"";position:absolute;inset:-1px;border-radius:inherit;padding:1px;background:radial-gradient(260px circle at var(--mx,50%) var(--my,0%),var(--accent-text),transparent 60%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .4s;pointer-events:none}
-.tier:hover::before{opacity:1}
-.tier.hot{background:var(--text);color:var(--bg);border-color:transparent}
-.tier-top{display:flex;justify-content:space-between;align-items:center;gap:10px}
-.tier-name{font-family:var(--f-display);font-weight:700;font-size:26px;letter-spacing:-.03em}
-.badge{font-family:var(--f-mono);font-size:10px;padding:6px 10px;border-radius:999px;background:var(--accent);color:var(--on-accent)}
-.tier p{margin:0;font-size:15px;line-height:1.5;opacity:.72}
-.price{display:flex;align-items:baseline;gap:6px}
-.price small{font-size:13px;opacity:.6}
-.price b{font-family:var(--f-display);font-weight:700;font-size:50px;letter-spacing:-.045em;font-variant-numeric:tabular-nums}
-.feats{display:flex;flex-direction:column;gap:10px;border-top:1px solid var(--line);padding-top:20px}
-.tier.hot .feats{border-color:rgba(127,127,127,.25)}
-.feats div{display:flex;gap:10px;font-size:14px}
-.feats svg{flex:none;margin-top:3px}
-.tier-cta{margin-top:auto;text-align:center;padding:16px;border-radius:999px;font-weight:600;background:var(--line);transition:scale .25s var(--spring),background .3s}
-.tier-cta:active{scale:.96}
-.tier.hot .tier-cta{background:var(--accent);box-shadow:var(--accent-glow);color:var(--on-accent)}
-.hint{margin-top:16px;font-family:var(--f-mono);font-size:11px;color:var(--dim)}
-
 /* ---------- process ---------- */
 .process{position:relative}
 .pr-sticky{position:relative}
@@ -682,14 +674,13 @@ html.light .c-box{background:linear-gradient(140deg,#0B1D15 0%,#0E0E10 48%,#1A10
 .opts.three .opt{align-items:center;text-align:center}
 .opt .pdot{width:30px;height:30px;border-radius:9px}
 .field{display:flex;flex-direction:column;gap:8px;font-size:13px;color:#5E5E66}
-.field input[type="text"],.field textarea{font:inherit;font-size:16px;color:#0E0E10;padding:14px 16px;border-radius:16px;border:2px solid #E4E4E7;background:#fff;outline:none;transition:border-color .2s;resize:vertical}
-.field input[type="text"]:focus,.field textarea:focus{border-color:#0E0E10}
+.field input[type="text"],.field input[type="url"],.field textarea{font:inherit;font-size:16px;color:#0E0E10;padding:14px 16px;border-radius:16px;border:2px solid #E4E4E7;background:#fff;outline:none;transition:border-color .2s;resize:vertical}
+.field input[type="text"]:focus,.field input[type="url"]:focus,.field textarea:focus{border-color:#0E0E10}
 .field input[type="range"]{accent-color:#0E0E10;width:100%}
 .range-row{display:flex;justify-content:space-between;font-family:var(--f-mono);font-size:11px}
 .range-row b{color:#0E0E10;font-size:13px}
-.file{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:16px;border:2px dashed #D4D4D8;font-size:14px;color:#5E5E66;transition:border-color .2s}
-.file:hover{border-color:#0E0E10}
-.file input{position:absolute;width:1px;height:1px;opacity:0}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+#doneTg{align-self:center;margin:4px 0 6px}
 .err{min-height:18px;margin:0;font-size:13px;color:#B91C1C}
 .b-nav{display:flex;gap:10px}
 .b-nav button{padding:15px 22px;border-radius:999px;font-size:15px;transition:scale .25s var(--spring),opacity .3s}
@@ -723,10 +714,6 @@ html.curtain #footer{position:fixed;left:0;right:0;bottom:0}
 .f-col .label{color:#8E8E98;margin-bottom:4px}
 .f-col a,.f-col button{text-align:left;transition:color .2s}
 .f-col a:hover,.f-col button:hover{color:var(--accent)}
-.swatches{display:flex;gap:8px}
-.sw{width:34px;height:34px;border-radius:50%;border:2px solid transparent;transition:scale .25s var(--spring),border-color .2s}
-.sw[aria-pressed="true"]{border-color:#fff}
-.sw:active{scale:.9}
 .f-word{display:flex;justify-content:center;font-family:var(--f-display);font-weight:800;font-size:clamp(3.6rem,15.5vw,15.5rem);letter-spacing:-.075em;line-height:.8;user-select:none;padding-top:20px}
 .f-word span{display:inline-block;transition:transform .5s var(--ease)}
 .f-word span:last-child{color:var(--accent-bright)}
@@ -794,7 +781,7 @@ html.curtain #footer{position:fixed;left:0;right:0;bottom:0}
   .bgword{top:20px}
 }
 @media (max-width:420px){
-  .isl-sec{display:none}
+  .isl-sec,.isl-lang{display:none}
   .hero-stage{scale:.7;margin:-100px 0 -90px}
 }
 html.reduce *,html.reduce *::before,html.reduce *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -805,9 +792,9 @@ html.reduce body::after{display:none}
 
 <!-- loader -->
 <div id="loader" aria-hidden="true">
-  <div class="ld-top"><span>Mobile Engineer — Portfolio</span><span>Samarkand, UZ</span></div>
+  <div class="ld-top"><span data-t="ld.top">Mobile Engineer — Portfolio</span><span data-t="ld.city">Samarkand, UZ</span></div>
   <div class="ld-name"><span style="animation-delay:0.00s">b</span><span style="animation-delay:0.04s">e</span><span style="animation-delay:0.09s">k</span><span style="animation-delay:0.14s">d</span><span style="animation-delay:0.18s">i</span><span style="animation-delay:0.22s">y</span><span style="animation-delay:0.27s">o</span><span style="animation-delay:0.32s">r</span><span style="animation-delay:0.36s">.</span></div>
-  <div class="ld-bottom"><span class="mono" style="color:#8E8E98">Compiling the good stuff</span><span class="ld-count" id="ldCount">000</span></div>
+  <div class="ld-bottom"><span class="mono" style="color:#8E8E98" data-t="ld.bot">Compiling the good stuff</span><span class="ld-count" id="ldCount">000</span></div>
   <div class="ld-bar" id="ldBar"></div>
 </div>
 
@@ -818,137 +805,140 @@ html.reduce body::after{display:none}
 <header class="island-wrap" id="islandWrap">
   <nav class="island" id="island" aria-label="Main">
     <a class="isl-logo" href="#top" data-hover><img class="isl-av" src="assets/bekdiyor-avatar.webp" alt="" width="32" height="32"><span>bekdiyor<i>.</i></span></a>
-    <span class="isl-group isl-sec"><b id="islIdx">01</b><span id="islLabel">Intro</span></span>
+    <span class="isl-group isl-sec"><b id="islIdx">01</b><span id="islLabel" data-t="sec.intro">Intro</span></span>
     <span class="isl-group isl-links" id="islLinks">
-      <a href="#work" data-sec="work">Work</a><a href="#about" data-sec="about">About</a><a href="#services" data-sec="services">Services</a><a href="#process" data-sec="process">Process</a>
+      <a href="#work" data-sec="work" data-t="nav.work">Work</a><a href="#about" data-sec="about" data-t="nav.about">About</a><a href="#process" data-sec="process" data-t="nav.process">Process</a>
     </span>
+    <button class="isl-btn isl-lang" id="langBtn" type="button" aria-haspopup="true" aria-expanded="false" data-ta="aria-label:nav.lang" aria-label="Language" data-hover><span id="langCur">UZ</span></button>
     <button class="isl-btn" id="themeBtn" type="button" aria-label="Switch theme" data-hover>
       <svg class="isl-icon-sun" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
       <svg class="isl-icon-moon" aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg>
     </button>
-    <a class="isl-cta" href="#contact" data-magnetic>Let's talk <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
-    <button class="isl-btn isl-menu" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h10"/></svg></button>
-    <span class="isl-act" aria-live="polite"><span class="ck"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span><b id="actTitle">Brief received</b><small id="actSub">Bekdiyor usually replies in ~2h</small></span></span>
+    <a class="isl-cta" href="#contact" data-magnetic><span data-t="nav.talk">Let’s talk</span> <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+    <button class="isl-btn isl-menu" id="menuBtn" type="button" data-ta="aria-label:nav.menu" aria-label="Open menu" aria-expanded="false"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 9h16M4 15h10"/></svg></button>
+    <span class="isl-act" aria-live="polite"><span class="ck"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span><b id="actTitle" data-t="act.t">Brief received</b><small id="actSub" data-t="act.s">Bekdiyor usually replies in ~2h</small></span></span>
     <span class="isl-prog" aria-hidden="true"><i id="islProg"></i></span>
   </nav>
 </header>
 
 <div id="mmenu" aria-hidden="true">
   <nav aria-label="Mobile">
-    <a href="#work" style="transition-delay:.15s"><small>01</small>Work</a>
-    <a href="#about" style="transition-delay:.2s"><small>02</small>About</a>
-    <a href="#stack" style="transition-delay:.25s"><small>03</small>Stack</a>
-    <a href="#services" style="transition-delay:.3s"><small>04</small>Services</a>
-    <a href="#process" style="transition-delay:.35s"><small>05</small>Process</a>
-    <a href="#contact" style="transition-delay:.4s"><small>06</small>Contact</a>
+    <a href="#work" style="transition-delay:.15s"><small>01</small><span data-t="nav.work">Work</span></a>
+    <a href="#about" style="transition-delay:.2s"><small>02</small><span data-t="nav.about">About</span></a>
+    <a href="#stack" style="transition-delay:.25s"><small>03</small><span data-t="nav.stack">Stack</span></a>
+    <a href="#process" style="transition-delay:.3s"><small>04</small><span data-t="nav.process">Process</span></a>
+    <a href="#contact" style="transition-delay:.35s"><small>05</small><span data-t="nav.contact">Contact</span></a>
   </nav>
-  <div class="mono" style="color:#8E8E98;display:flex;justify-content:space-between"><span>hello@bekdiyor.dev</span><span>Samarkand · GMT+5</span></div>
+  <div class="mm-bot">
+    <div class="mm-lang" role="group" data-ta="aria-label:nav.lang" aria-label="Language"><button type="button" data-lang="uz">O‘zbekcha</button><button type="button" data-lang="ru">Русский</button><button type="button" data-lang="en">English</button></div>
+    <div class="mono mm-meta"><a data-c="mail" href="mailto:abekdiyor@gmail.com">abekdiyor@gmail.com</a><a data-c="tel" href="tel:+998995006123">+998 99 500 61 23</a></div>
+  </div>
 </div>
 
 <main id="main">
 
 <!-- HERO -->
-<section class="hero" id="top" data-label="Intro" data-idx="01">
+<section class="hero" id="top" data-label="Intro" data-ta="data-label:sec.intro" data-idx="01">
   <div class="hero-grid" id="heroGrid" aria-hidden="true"></div>
   <div class="hero-glow layer" data-depth="0.25" aria-hidden="true"></div>
   <canvas id="heroBg" aria-hidden="true"></canvas>
   <div class="wrap hero-in">
     <div class="hero-copy">
-      <div class="eyebrow"><span>Mobile Engineer</span><i>/</i><span>Android · iOS</span><i>/</i><span>Samarkand, UZ</span></div>
-      <h1 class="hero-h" id="heroH" data-split>I build apps<br>people <em>love</em><br>to open daily.</h1>
-      <p class="lead">Three years shipping native Android apps with Kotlin and Jetpack Compose. Now bringing the same craft to iOS with SwiftUI. Fast, polished, and built to last well past v1.0.</p>
+      <div class="eyebrow"><span data-t="hero.role">Mobile Engineer</span><i>/</i><span>Android · iOS</span><i>/</i><span data-t="ld.city">Samarkand, UZ</span></div>
+      <h1 class="hero-h" id="heroH" data-t="hero.h" data-split>I build apps<br>people <em>love</em><br>to open daily.</h1>
+      <p class="lead" data-t="hero.lead">Three years shipping native Android apps with Kotlin and Jetpack Compose. Now bringing the same craft to iOS with SwiftUI. Fast, polished, and built to last well past v1.0.</p>
       <div class="hero-cta">
-        <a class="btn btn-primary" href="#work" data-magnetic>View selected work <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
-        <a class="btn btn-ghost" href="#contact" data-magnetic>Start a project</a>
+        <a class="btn btn-primary" href="#work" data-magnetic><span data-t="hero.cta1">View selected work</span> <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 5v14M5 12l7 7 7-7"/></svg></a>
+        <a class="btn btn-ghost" href="#contact" data-magnetic data-t="cta.start">Start a project</a>
       </div>
       <div class="stats" id="stats"></div>
     </div>
     <div class="hero-stage" id="heroStage">
-      <div class="plat plat-and" data-dir="-1" data-rot="-7" aria-label="Android, since 2023" role="img">
+      <div class="plat plat-and" data-dir="-1" data-rot="-7" aria-label="Android, since 2023" data-ta="aria-label:hero.andA" role="img">
         <span class="plat-ic" data-icon="android"></span>
         <span class="plat-title">Android</span>
-        <span class="plat-since">Since <b>2023</b></span>
+        <span class="plat-since" data-t="hero.and">Since <b>2023</b></span>
       </div>
-      <div class="plat plat-ios" data-dir="1" data-rot="6" aria-label="iOS, since 2026" role="img">
+      <div class="plat plat-ios" data-dir="1" data-rot="6" aria-label="iOS, since 2026" data-ta="aria-label:hero.iosA" role="img">
         <span class="plat-ic" data-icon="ios"></span>
         <span class="plat-title">iOS</span>
-        <span class="plat-since">Since <b>2026</b></span>
+        <span class="plat-since" data-t="hero.ios">Since <b>2026</b></span>
       </div>
       <div class="layer" data-depth="0.55" id="heroPhoneLayer"><div class="phone" id="heroPhone"></div></div>
-      <div class="float f1 layer" data-depth="1.25" style="left:10px;bottom:60px"><div class="chip-card"><span class="app-ic" style="background:#FF4D6D;color:#1A0006">P</span><span><b>Pulse</b><small>4.9 ★ · 120K monthly users</small></span></div></div>
-      <div class="float f2 layer" data-depth="1.05" style="right:-6px;top:70px"><div class="chip-card"><span class="app-ic" style="background:#16A34A;color:#fff"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span><b>Build passed</b><small>release/3.2 · 2m 14s</small></span></div></div>
+      <div class="float f1 layer" data-depth="1.25" style="left:10px;bottom:60px"><div class="chip-card"><span class="app-ic" style="background:#FF4D6D;color:#1A0006">P</span><span><b>Pulse</b><small data-t="hero.chip1">4.9 ★ · 120K monthly users</small></span></div></div>
+      <div class="float f2 layer" data-depth="1.05" style="right:-6px;top:70px"><div class="chip-card"><span class="app-ic" style="background:#16A34A;color:#fff"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></span><span><b data-t="hero.chip2">Build passed</b><small>release/3.2 · 2m 14s</small></span></div></div>
     </div>
   </div>
 </section>
 
-<div class="marquee" aria-label="Teams I've worked with"><div class="mq-track" id="logoTrack" data-marquee="0.6"></div></div>
+<div class="marquee" aria-label="Teams I've worked with" data-ta="aria-label:logos.a"><div class="mq-track" id="logoTrack" data-marquee="0.6"></div></div>
 
 <!-- ABOUT -->
-<section class="sec about" id="about" data-label="About" data-idx="02">
-  <div class="bgword" data-h="-0.35" aria-hidden="true">ABOUT · ABOUT · </div>
+<section class="sec about" id="about" data-label="About" data-idx="02" data-ta="data-label:sec.about">
+  <div class="bgword" data-h="-0.35" aria-hidden="true" data-t="about.bg">ABOUT · ABOUT · </div>
   <div class="wrap about-in">
     <div class="about-side">
-      <div class="label">(02) About</div>
+      <div class="label" data-t="about.l">(02) About</div>
       <div class="portrait" id="portrait" data-pbg="arch" data-cursor="Salom!">
         <div class="portrait-frame"><div class="portrait-bg" data-speed="0.78"></div></div>
-        <div class="portrait-cut"><img class="portrait-img" data-speed="1.07" src="assets/bekdiyor-cutout.webp" alt="Bekdiyor, mobile engineer" width="760" height="883"></div>
-        <div class="portrait-tag"><span class="dot"></span>Open to projects</div>
-        <small>Bekdiyor · Samarkand</small>
+        <div class="portrait-cut"><img class="portrait-img" data-speed="1.07" src="assets/bekdiyor-cutout.webp" alt="Bekdiyor, mobile engineer" data-ta="alt:about.alt" width="760" height="883"></div>
+        <div class="portrait-tag"><span class="dot"></span><span data-t="about.open">Open to projects</span></div>
+        <small data-t="about.sm">Bekdiyor · Samarkand</small>
       </div>
-      <div style="font-size:14px;color:var(--dim)"><b style="color:var(--text)">Now:</b> going deep on SwiftUI and Kotlin Multiplatform.</div>
+      <div style="font-size:14px;color:var(--dim)" data-t="about.now"><b style="color:var(--text)">Now:</b> going deep on SwiftUI and Kotlin Multiplatform.</div>
     </div>
-    <p class="manifesto" id="manifesto">I turn rough ideas into apps that feel <em>effortless.</em> Clean architecture under the hood, obsessive detail on the surface. Every animation timed, every edge case handled, every release measured. I care about the 60fps scroll, the empty state nobody designs, and the crash that never happens.</p>
+    <p class="manifesto" id="manifesto" data-t="about.m">I turn rough ideas into apps that feel <em>effortless.</em> Clean architecture under the hood, obsessive detail on the surface. Every animation timed, every edge case handled, every release measured. I care about the 60fps scroll, the empty state nobody designs, and the crash that never happens.</p>
   </div>
 </section>
 
 <!-- STACK -->
-<section class="sec stack" id="stack" data-label="Stack" data-idx="03">
+<section class="sec stack" id="stack" data-label="Stack" data-idx="03" data-ta="data-label:sec.stack">
   <div class="wrap">
     <div class="sec-head">
-      <div><div class="label">(03) Stack</div><h2 class="h2" id="skTitle" data-split>My <em class="plain">home</em> screen.</h2></div>
+      <div><div class="label" data-t="stack.l">(03) Stack</div><h2 class="h2" id="skTitle" data-t="stack.h" data-split>My <em class="plain">home</em> screen.</h2></div>
     </div>
 
     <div class="skv on" id="skv-home" data-reveal>
       <div class="hs-wrap">
         <div class="hs-side">
-          <div class="hs-note"><span class="n">01</span><div><b>Dock = daily drivers</b><span>Kotlin, Compose, Swift and SwiftUI live where my thumb always lands.</span></div></div>
-          <div class="hs-note"><span class="n">02</span><div><b>Tap a folder</b><span>Architecture and Data open just like on your phone.</span></div></div>
+          <div class="hs-note"><span class="n">01</span><div data-t="hs.n1"><b>Dock = daily drivers</b><span>Kotlin, Compose, Swift and SwiftUI live where my thumb always lands.</span></div></div>
+          <div class="hs-note"><span class="n">02</span><div data-t="hs.n2"><b>Tap a folder</b><span>Architecture and Data open just like on your phone.</span></div></div>
         </div>
         <div>
           <div class="hs-phone">
             <div class="hs-screen" id="hsScreen">
               <div class="hs-notch"></div>
               <div class="hs-status"><span>9:41</span><span>●●● ▮</span></div>
-              <button type="button" class="hs-done" id="hsDone">Done</button>
+              <button type="button" class="hs-done" id="hsDone" data-t="hs.done">Done</button>
               <div class="hs-pages" id="hsPages"><div class="hs-track" id="hsTrack"><div class="hs-page" id="hsP1"></div><div class="hs-page" id="hsP2"></div></div></div>
               <div class="hs-dots" id="hsDots"><button type="button" aria-label="Page 1" aria-current="true"></button><button type="button" aria-label="Page 2" aria-current="false"></button></div>
-              <div class="hs-search"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>Search</div>
+              <div class="hs-search"><svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><span data-t="hs.search">Search</span></div>
               <div class="hs-dock" id="hsDock"></div>
               <div class="hs-fold" id="hsFold"><h4 id="hsFoldT">Folder</h4><div class="panel" id="hsFoldP"></div></div>
             </div>
           </div>
-          <div class="hs-arrows"><button type="button" id="hsPrev" aria-label="Previous page"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="hsNext" aria-label="Next page"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
+          <div class="hs-arrows"><button type="button" id="hsPrev" data-ta="aria-label:hs.prev" aria-label="Previous page"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" id="hsNext" data-ta="aria-label:hs.next" aria-label="Next page"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div>
         </div>
         <div class="hs-side right">
-          <div class="hs-note"><span class="n">03</span><div><b>Swipe for page two</b><span>Drag the screen, use the dots or the arrows below.</span></div></div>
-          <div class="hs-note"><span class="n">04</span><div><b>Press and hold</b><span>Icons start to jiggle, just like edit mode. Hover any icon for details.</span></div></div>
+          <div class="hs-note"><span class="n">03</span><div data-t="hs.n3"><b>Swipe for page two</b><span>Drag the screen, use the dots or the arrows below.</span></div></div>
+          <div class="hs-note"><span class="n">04</span><div data-t="hs.n4"><b>Press and hold</b><span>Icons start to jiggle, just like edit mode. Hover any icon for details.</span></div></div>
         </div>
       </div>
     </div>
 
-    <div class="hint" id="skHint">Swipe the screen, open a folder, press and hold to jiggle. Hover any icon for details.</div>
+    <div class="hint" id="skHint" data-t="hs.hint">Swipe the screen, open a folder, press and hold to jiggle. Hover any icon for details.</div>
   </div>
 </section>
 
 <!-- EXPERIENCE -->
-<section class="sec exp" id="experience" data-label="Experience" data-idx="04">
+<section class="sec exp" id="experience" data-label="Experience" data-idx="04" data-ta="data-label:sec.exp">
   <div class="wrap exp-wrap">
     <div class="exp-head">
-      <div><div class="label" style="margin-bottom:16px">(04) Experience</div><h2 class="h2" data-split>Release <em class="plain">notes.</em></h2></div>
+      <div><div class="label" style="margin-bottom:16px" data-t="exp.l">(04) Experience</div><h2 class="h2" data-split data-t="exp.h">Release <em class="plain">notes.</em></h2></div>
       <div class="exp-head-r">
-        <p>My career as a changelog. Every role shipped something you can measure.</p>
+        <p data-t="exp.p">My career as a changelog. Every role shipped something you can measure.</p>
         <div class="exp-actions">
-          <a class="linkline" href="#resume" data-soon="The résumé PDF is added in phase 7.">Download résumé (PDF) <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"/></svg></a>
+          <a class="linkline" href="#resume" data-soon="1"><span data-t="exp.cv">Download résumé (PDF)</span> <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 4v12M6 10l6 6 6-6M5 20h14"/></svg></a>
         </div>
       </div>
     </div>
@@ -966,12 +956,12 @@ html.reduce body::after{display:none}
 </section>
 
 <!-- WORK -->
-<section class="sec work" id="work" data-label="Selected work" data-idx="05">
-  <div class="bgword" data-h="0.3" aria-hidden="true" style="top:60px">SHIPPED · SHIPPED · </div>
+<section class="sec work" id="work" data-label="Selected work" data-idx="05" data-ta="data-label:sec.work">
+  <div class="bgword" data-h="0.3" aria-hidden="true" style="top:60px" data-t="work.bg">SHIPPED · SHIPPED · </div>
   <div class="wrap" style="position:relative">
     <div class="sec-head" style="margin-bottom:24px">
-      <div><div class="label">(05) Selected work</div><h2 class="h2" data-split style="font-size:clamp(3rem,7vw,6.6rem);line-height:.95">Apps I've <em>shipped.</em></h2></div>
-      <p class="dimtxt" style="max-width:360px;margin:0">Scroll. The phones stay with you: splash screen behind, the real app in front, and the room changes to each product's colours.</p>
+      <div><div class="label" data-t="work.l">(05) Selected work</div><h2 class="h2" data-split style="font-size:clamp(3rem,7vw,6.6rem);line-height:.95" data-t="work.h">Apps I've <em>shipped.</em></h2></div>
+      <p class="dimtxt" style="max-width:360px;margin:0" data-t="work.p">Scroll. The phones stay with you: splash screen behind, the real app in front, and the room changes to each product's colours.</p>
     </div>
     <div class="work-grid">
       <div class="sp" id="sp">
@@ -988,30 +978,18 @@ html.reduce body::after{display:none}
     </div>
   </div>
 </section>
-<section class="more" aria-label="More work">
+<section class="more" aria-label="More work" data-ta="aria-label:more.a">
   <div class="wrap">
-    <div class="more-head"><h3>More work</h3><a href="#all" class="dimtxt" data-soon="The full projects page comes in phase 7.">All projects (12) →</a></div>
+    <div class="more-head"><h3 data-t="more.h">More work</h3><a href="#all" class="dimtxt" data-soon="1" data-t="more.all">All projects (12) →</a></div>
     <div class="mgrid" id="mgrid"></div>
   </div>
 </section>
 
-<!-- SERVICES -->
-<section class="sec services" id="services" data-label="Services" data-idx="06">
-  <div class="wrap">
-    <div class="sec-head" style="margin-bottom:56px">
-      <div><div class="label">(06) Services</div><h2 class="h2" data-split>What I can <em class="plain">build</em> for you.</h2></div>
-      <div class="seg" id="seg" role="group" aria-label="Pricing model"><span class="seg-pill" id="segPill"></span><button type="button" aria-pressed="true" data-bill="0">Fixed project</button><button type="button" aria-pressed="false" data-bill="1">Monthly retainer</button></div>
-    </div>
-    <div class="tiers" id="tiers"></div>
-    <div class="hint">Prices are placeholders until we decide how to show them.</div>
-  </div>
-</section>
-
 <!-- PROCESS -->
-<section class="sec process" id="process" data-label="Process" data-idx="07">
+<section class="sec process" id="process" data-label="Process" data-idx="06" data-ta="data-label:sec.process">
   <div class="pr-sticky" id="prSticky">
-    <div class="bgword" data-h="-0.25" aria-hidden="true" style="top:auto;bottom:-20px;opacity:.35">IDEA → STORE · IDEA → STORE · </div>
-    <div class="wrap pr-head"><div class="label" style="margin-bottom:16px">(07) Process</div><h2 class="h2" data-split>From idea to <em>store.</em></h2></div>
+    <div class="bgword" data-h="-0.25" aria-hidden="true" style="top:auto;bottom:-20px;opacity:.35" data-t="pr.bg">IDEA → STORE · IDEA → STORE · </div>
+    <div class="wrap pr-head"><div class="label" style="margin-bottom:16px" data-t="pr.l">(06) Process</div><h2 class="h2" data-split data-t="pr.h">From idea to <em>store.</em></h2></div>
     <div class="pr-line"><i id="prFill"></i></div>
     <div class="pr-track" id="prTrack"></div>
   </div>
@@ -1019,79 +997,81 @@ html.reduce body::after{display:none}
 </section>
 
 <!-- QUOTES -->
-<section class="sec quotes" id="words" data-label="Kind words" data-idx="08">
-  <div class="wrap" style="margin-bottom:40px"><div class="label">(08) Kind words <span style="opacity:.7">· sample quotes</span></div></div>
+<section class="sec quotes" id="words" data-label="Kind words" data-idx="07" data-ta="data-label:sec.words">
+  <div class="wrap" style="margin-bottom:40px"><div class="label" data-t="q.l">(07) Kind words <span style="opacity:.7">· sample quotes</span></div></div>
   <div class="q-row" id="q1" data-marquee="0.5" data-skew></div>
   <div class="q-row" id="q2" data-marquee="-0.4" data-skew></div>
 </section>
 
 <!-- CONTACT -->
-<section class="sec contact" id="contact" data-label="Contact" data-idx="09">
+<section class="sec contact" id="contact" data-label="Contact" data-idx="08" data-ta="data-label:sec.contact">
   <div class="wrap">
     <div class="c-box">
       <div class="c-glow" data-speed="0.7" aria-hidden="true"></div>
       <div class="c-copy">
-        <div class="label" style="color:#8E8E98">(09) Start a project</div>
-        <div class="me-chip"><img src="assets/bekdiyor-avatar.webp" alt="" width="48" height="48"><span><b>Bekdiyor</b><small>Usually replies within 2 hours</small></span><span class="dot"></span></div>
-        <h2 class="h2" data-split>Got an idea?<br><em>Let's ship it.</em></h2>
-        <p>Tell me about it in five quick steps. I reply within 24 hours, usually much faster.</p>
+        <div class="label" style="color:#8E8E98" data-t="c.l">(08) Start a project</div>
+        <div class="me-chip"><img src="assets/bekdiyor-avatar.webp" alt="" width="48" height="48"><span><b>Bekdiyor</b><small data-t="c.reply">Usually replies within 2 hours</small></span><span class="dot"></span></div>
+        <h2 class="h2" data-split data-t="c.h">Got an idea?<br><em>Let’s ship it.</em></h2>
+        <p data-t="c.p">Tell me about it in five quick steps. I reply within 24 hours, usually much faster.</p>
         <div class="quick">
-          <a href="#tg" data-soon="Your real Telegram link goes here at launch."><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 4z"/></svg>Telegram</a>
-          <button type="button" id="copyMail" data-cursor="Copy"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>hello@bekdiyor.dev</button>
-          <a href="#call" data-soon="A booking link (Cal.com) connects here at launch."><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M8 3v4M16 3v4M3 10h18"/></svg>Book a 20-min call</a>
+          <a data-c="tg" href="https://t.me/bekdiyor04" target="_blank" rel="noopener" data-cursor="Telegram"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 4L3 11l6 2 2 6 3-4 5 4z"/></svg><span>@bekdiyor04</span></a>
+          <button type="button" id="copyMail" data-ta="data-cursor:c.copy" data-cursor="Copy"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg><span data-c="mailtxt">abekdiyor@gmail.com</span></button>
+          <a data-c="tel" href="tel:+998995006123" data-ta="data-cursor:c.call" data-cursor="Call"><svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2"/></svg><span>+998 99 500 61 23</span></a>
         </div>
       </div>
       <form class="brief" id="brief" novalidate data-speed="1.06">
-        <div class="b-top"><span id="bStepLbl">Step 1 of 5</span><span>~1 min</span></div>
+        <div class="b-top"><span id="bStepLbl">Step 1 of 5</span><span data-t="f.min">~1 min</span></div>
         <div class="b-prog" id="bProg"><span class="on"><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span><span><i></i></span></div>
         <div class="b-steps">
           <div role="group" class="bstep on" data-key="type">
-            <div class="bq">What are we building?</div>
+            <div class="bq" data-t="f.q1">What are we building?</div>
             <div class="opts" data-group="type">
-              <button type="button" class="opt" data-v="New app" aria-pressed="false">New app<small>From idea to the stores</small></button>
-              <button type="button" class="opt" data-v="Improve existing" aria-pressed="false">Improve existing<small>Faster, fewer crashes</small></button>
-              <button type="button" class="opt" data-v="Consulting" aria-pressed="false">Consulting<small>Architecture, code review</small></button>
-              <button type="button" class="opt" data-v="Something else" aria-pressed="false">Something else<small>Let's talk it through</small></button>
+              <button type="button" class="opt" data-v="New app" data-ta="data-v:o.new" aria-pressed="false"><span data-t="o.new">New app</span><small data-t="o.newS">From idea to the stores</small></button>
+              <button type="button" class="opt" data-v="Improve existing" data-ta="data-v:o.imp" aria-pressed="false"><span data-t="o.imp">Improve existing</span><small data-t="o.impS">Faster, fewer crashes</small></button>
+              <button type="button" class="opt" data-v="Consulting" data-ta="data-v:o.con" aria-pressed="false"><span data-t="o.con">Consulting</span><small data-t="o.conS">Architecture, code review</small></button>
+              <button type="button" class="opt" data-v="Something else" data-ta="data-v:o.else" aria-pressed="false"><span data-t="o.else">Something else</span><small data-t="o.elseS">Let’s talk it through</small></button>
             </div>
           </div>
           <div role="group" class="bstep" data-key="plat">
-            <div class="bq">Which platforms do you need?</div>
+            <div class="bq" data-t="f.q2">Which platforms do you need?</div>
             <div class="opts three" data-group="plat">
               <button type="button" class="opt" data-v="Android" aria-pressed="false"><span class="pdot" style="background:#3DDC84"></span>Android</button>
               <button type="button" class="opt" data-v="iOS" aria-pressed="false"><span class="pdot" style="background:#1C8CFF"></span>iOS</button>
-              <button type="button" class="opt" data-v="Both" aria-pressed="false"><span class="pdot" style="background:linear-gradient(135deg,#3DDC84 50%,#1C8CFF 50%)"></span>Both</button>
+              <button type="button" class="opt" data-v="Both" data-ta="data-v:o.both" aria-pressed="false"><span class="pdot" style="background:linear-gradient(135deg,#3DDC84 50%,#1C8CFF 50%)"></span><span data-t="o.both">Both</span></button>
             </div>
           </div>
           <div role="group" class="bstep" data-key="budget">
-            <div class="bq">Budget and timeline</div>
-            <div class="field"><label for="fBudget">Budget range</label><input type="range" id="fBudget" min="1" max="20" value="8"><div class="range-row"><span>$1k</span><b id="budgetOut">~ $8k</b><span>$20k+</span></div></div>
+            <div class="bq" data-t="f.q3">Budget and timeline</div>
+            <div class="field"><label for="fBudget" data-t="f.budget">Budget range</label><input type="range" id="fBudget" min="1" max="20" value="8"><div class="range-row"><span>$1k</span><b id="budgetOut">~ $8k</b><span>$20k+</span></div></div>
             <div class="opts" data-group="time">
-              <button type="button" class="opt" data-v="ASAP" aria-pressed="false">ASAP</button>
-              <button type="button" class="opt" data-v="1–2 months" aria-pressed="false">1–2 months</button>
-              <button type="button" class="opt" data-v="3+ months" aria-pressed="false">3+ months</button>
-              <button type="button" class="opt" data-v="Flexible" aria-pressed="false">Flexible</button>
+              <button type="button" class="opt" data-v="ASAP" data-ta="data-v:o.asap" data-t="o.asap" aria-pressed="false">ASAP</button>
+              <button type="button" class="opt" data-v="1–2 months" data-ta="data-v:o.12" data-t="o.12" aria-pressed="false">1–2 months</button>
+              <button type="button" class="opt" data-v="3+ months" data-ta="data-v:o.3" data-t="o.3" aria-pressed="false">3+ months</button>
+              <button type="button" class="opt" data-v="Flexible" data-ta="data-v:o.flex" data-t="o.flex" aria-pressed="false">Flexible</button>
             </div>
           </div>
           <div role="group" class="bstep" data-key="idea">
-            <div class="bq">Tell me about the idea</div>
-            <div class="field"><label for="fIdea">A few sentences are enough</label><textarea id="fIdea" rows="5" placeholder="Who is it for, what problem does it solve, any apps you like…"></textarea></div>
-            <label class="file" for="fFile"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12l-8.5 8.5a5 5 0 0 1-7-7L14 5a3.5 3.5 0 0 1 5 5l-8.5 8.5a2 2 0 0 1-3-3L15 8"/></svg><span id="fileLbl">Attach a brief or sketch (optional)</span><input type="file" id="fFile"></label>
+            <div class="bq" data-t="f.q4">Tell me about the idea</div>
+            <div class="field"><label for="fIdea" data-t="f.idea">A few sentences are enough</label><textarea id="fIdea" rows="5" maxlength="2000" data-ta="placeholder:f.ideaP" placeholder="Who is it for, what problem does it solve, any apps you like…"></textarea></div>
+<div class="field"><label for="fLink" data-t="f.link">Link to a brief, Figma or reference (optional)</label><input type="url" id="fLink" inputmode="url" autocomplete="url" placeholder="https://"></div>
           </div>
           <div role="group" class="bstep" data-key="who">
-            <div class="bq">How can I reach you?</div>
-            <div class="field"><label for="fName">Your name</label><input type="text" id="fName" autocomplete="name" placeholder="Malika"></div>
-            <div class="field"><label for="fContact">Telegram or email</label><input type="text" id="fContact" autocomplete="email" placeholder="@username or you@company.com"></div>
+            <div class="bq" data-t="f.q5">How can I reach you?</div>
+            <div class="field"><label for="fName" data-t="f.name">Your name</label><input type="text" id="fName" autocomplete="name" maxlength="80" data-ta="placeholder:f.nameP" placeholder="Malika"></div>
+            <div class="field"><label for="fContact" data-t="f.contact">Telegram, phone or email</label><input type="text" id="fContact" autocomplete="email" maxlength="120" data-ta="placeholder:f.contactP" placeholder="@username, +998… or you@mail.com"></div>
+            <div class="hp" aria-hidden="true"><label for="fHp">Company</label><input type="text" id="fHp" tabindex="-1" autocomplete="off"></div>
           </div>
           <p class="err" id="bErr" role="alert"></p>
         </div>
-        <div class="b-nav"><button type="button" id="bBack" disabled>Back</button><button type="submit" id="bNext">Continue →</button></div>
-        <div class="b-foot">Goes straight to my Telegram · no spam, ever</div>
+        <div class="b-nav"><button type="button" id="bBack" disabled data-t="f.back">Back</button><button type="submit" id="bNext">Continue →</button></div>
+        <div class="b-foot" data-t="f.foot">Goes straight to my Telegram · no spam, ever</div>
         <div class="done" id="bDone">
           <div class="done-ck"><svg aria-hidden="true" width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5L20 7"/></svg></div>
           <h3 id="doneTitle">Thanks!</h3>
           <div class="summary" id="summary"></div>
-          <p>Prototype: the brief is not sent anywhere yet. At launch it goes straight to my Telegram and email.</p>
-          <button type="button" id="bAgain" class="mono" style="text-decoration:underline">Start over</button>
+          <p id="doneMsg"></p>
+          <a id="doneTg" class="btn btn-accent" href="https://t.me/bekdiyor04" target="_blank" rel="noopener" hidden><span data-t="f.openTg">Open Telegram</span></a>
+          <button type="button" id="bAgain" class="mono" style="text-decoration:underline" data-t="f.again">Start over</button>
         </div>
         <div class="confetti" id="confetti" aria-hidden="true"></div>
       </form>
@@ -1105,38 +1085,30 @@ html.reduce body::after{display:none}
   <div class="wrap">
     <div class="f-top">
       <div class="f-cta">
-        <h3>Have an app in mind?<br>Let's make it real.</h3>
-        <a class="btn btn-accent" href="#contact" data-magnetic>Start a project <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
+        <h3 data-t="ft.h">Have an app in mind?<br>Let’s make it real.</h3>
+        <a class="btn btn-accent" href="#contact" data-magnetic><span data-t="cta.start">Start a project</span> <svg aria-hidden="true" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7M8 7h9v9"/></svg></a>
       </div>
       <div class="f-cols">
-        <div class="f-col"><div class="label">Local time</div><div style="font-family:var(--f-display);font-weight:600;font-size:26px;letter-spacing:-.02em">Samarkand · <span id="clock">--:--</span></div><div class="mono" style="color:#8E8E98">GMT+5</div></div>
-        <div class="f-col"><div class="label">Social</div><a href="#gh" data-soon="Your GitHub link goes here.">GitHub ↗</a><a href="#li" data-soon="Your LinkedIn link goes here.">LinkedIn ↗</a><a href="#tg" data-soon="Your Telegram link goes here.">Telegram ↗</a></div>
-        <div class="f-col"><div class="label">Theme lab · background</div>
-          <div class="swatches" id="swatches" role="group" aria-label="Accent colour">
-            <button type="button" class="sw" data-accent="aurora" style="background:linear-gradient(135deg,#3DFF9A,#A259FF)" aria-label="Neon Aurora accent" aria-pressed="true"></button>
-            <button type="button" class="sw" data-accent="mint" style="background:linear-gradient(135deg,#2EF2C8,#8B5CF6)" aria-label="Mint Ultraviolet accent" aria-pressed="false"></button>
-            <button type="button" class="sw" data-accent="acid" style="background:linear-gradient(135deg,#B8FF3C,#D946EF)" aria-label="Acid Orchid accent" aria-pressed="false"></button>
-          </div>
-          <button type="button" id="themeBtn2">Toggle dark / light</button>
-          <button type="button" id="kBtn2">Command menu ⌘K</button>
-          <a href="#top">Back to top ↑</a>
-        </div>
+        <div class="f-col"><div class="label" data-t="ft.time">Local time</div><div style="font-family:var(--f-display);font-weight:600;font-size:26px;letter-spacing:-.02em"><span data-t="city">Samarkand</span> · <span id="clock">--:--</span></div><div class="mono" style="color:#8E8E98">GMT+5</div></div>
+        <div class="f-col"><div class="label" data-t="ft.social">Social</div><a data-c="gh" href="https://github.com/Bekdiyordev" target="_blank" rel="noopener">GitHub ↗</a><a data-c="li" href="https://www.linkedin.com/in/bekdiyor-abdusharipov/" target="_blank" rel="noopener">LinkedIn ↗</a><a data-c="tg" href="https://t.me/bekdiyor04" target="_blank" rel="noopener">Telegram ↗</a></div>
+        <div class="f-col"><div class="label" data-t="ft.contact">Contact</div><a data-c="mail" href="mailto:abekdiyor@gmail.com">abekdiyor@gmail.com</a><a data-c="tel" href="tel:+998995006123">+998 99 500 61 23</a><a href="#top" data-t="ft.top">Back to top ↑</a></div>
       </div>
     </div>
     <div class="f-word" id="fWord" aria-hidden="true"><span>b</span><span>e</span><span>k</span><span>d</span><span>i</span><span>y</span><span>o</span><span>r</span><span>.</span></div>
-    <div class="f-bot"><span>© 2026 · Designed and built by Bekdiyor</span><span>Prototype v2.1 · sample data</span></div>
+    <div class="f-bot"><span data-t="ft.copy">© 2026 · Designed and built by Bekdiyor</span><span id="visits" class="visits" hidden><i></i><span id="visitsN"></span></span></div>
   </div>
 </footer>
 
 <!-- command palette -->
-<div id="pal" role="dialog" aria-modal="true" aria-label="Command menu">
+<div id="pal" role="dialog" aria-modal="true" aria-label="Command menu" data-ta="aria-label:pal.a">
   <div class="pal-back" id="palBack"></div>
   <div class="pal-box">
-    <div class="pal-in"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E8E98" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="palInput" type="text" placeholder="Type a command or search…" aria-label="Search commands" autocomplete="off"><kbd>esc</kbd></div>
+    <div class="pal-in"><svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#8E8E98" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg><input id="palInput" type="text" placeholder="Type a command or search…" data-ta="placeholder:pal.ph" aria-label="Search commands" autocomplete="off"><kbd>esc</kbd></div>
     <div id="palList" role="listbox" aria-label="Commands"></div>
-    <div class="pal-foot">↑ ↓ navigate · ↵ select · ⌘K / Ctrl K toggle</div>
+    <div class="pal-foot" data-t="pal.foot">↑ ↓ navigate · ↵ select · ⌘K / Ctrl K toggle</div>
   </div>
 </div>
+<div id="langPop" role="menu" data-ta="aria-label:nav.lang" aria-label="Language"><button type="button" role="menuitemradio" data-lang="uz"><b>UZ</b>O‘zbekcha</button><button type="button" role="menuitemradio" data-lang="ru"><b>RU</b>Русский</button><button type="button" role="menuitemradio" data-lang="en"><b>EN</b>English</button></div>
 <div id="toast" role="status"><i></i><span id="toastT"></span></div>
 
 <script>
@@ -1144,89 +1116,345 @@ html.reduce body::after{display:none}
 'use strict';
 /* ================= CONTENT (edit here) ================= */
 var CONTENT = {
-  email: 'hello@bekdiyor.dev',
+  /* Contacts (real) */
+  email: 'abekdiyor@gmail.com',
+  phone: '+998995006123',
+  phoneLabel: '+998 99 500 61 23',
+  telegram: 'bekdiyor04',
+  github: 'https://github.com/Bekdiyordev',
+  linkedin: 'https://www.linkedin.com/in/bekdiyor-abdusharipov/',
+  /* Brief form: POST target (serverless function that forwards to Telegram). Empty = fallback to Telegram chat. */
+  formEndpoint: '/api/telegram',
+  /* Visitor counter (CounterAPI, no key). Set to '' to hide. */
+  counter: { ns: 'bekdiyor-portfolio', name: 'visits' },
   // Platform tile icons: 'si:<slug>' (Simple Icons), raw SVG markup, or an image path.
   platformIcons: { android: 'si:android', ios: 'si:apple' },
+  /* Text fields below can be a plain string or {en, uz, ru}. */
   stats: [
-    {n:3, suf:'+', l:'years shipping'},
-    {n:15, suf:'+', l:'apps released'},
-    {n:1, suf:'M+', l:'downloads'},
-    {n:4.8, suf:'★', l:'avg. store rating', dec:1}
+    {n:3, suf:'+', l:{en:'years shipping', uz:'yillik tajriba', ru:'года в разработке'}},
+    {n:15, suf:'+', l:{en:'apps released', uz:'chiqarilgan ilova', ru:'выпущенных приложений'}},
+    {n:1, suf:'M+', l:{en:'downloads', uz:'yuklab olish', ru:'скачиваний'}},
+    {n:4.8, suf:'★', l:{en:'avg. store rating', uz:'o‘rtacha reyting', ru:'средний рейтинг'}, dec:1}
   ],
   logos: ['Kapital Labs','Northwind Mobility','Pixel Forge','Somsa Go','Navo Music','Chorsu','Halol Pay','Orbita'],
   // Skills: i = 'si:<slug>' (Simple Icons, CC0) or 'cu:<name>' (custom line icon).
   skills: [
-    {n:'Kotlin', i:'si:kotlin', c:'#7F52FF', cat:'Languages', lvl:0, since:'2022', ring:0, size:'xl', apps:'12 apps', d:'Coroutines, Flow, DSLs. My main language for 3+ years.'},
-    {n:'Jetpack Compose', i:'si:jetpackcompose', c:'#1A73E8', cat:'UI', lvl:0, since:'2022', ring:0, size:'xl', apps:'12 apps', d:'Production apps, custom design systems, shared-element transitions and motion.'},
-    {n:'Swift', i:'si:swift', c:'#F05138', cat:'Languages', lvl:2, since:'2026', ring:2, size:'md', d:'Porting Pulse to iOS. Async/await, Combine basics.'},
-    {n:'SwiftUI', i:'cu:swiftui', c:'linear-gradient(145deg,#1C8CFF,#5E5CE6)', cat:'UI', lvl:2, since:'2026', ring:2, size:'md', d:'Layouts, animations and navigation for my first iOS releases.'},
-    {n:'Java', i:'si:openjdk', c:'#E76F00', cat:'Languages', lvl:1, since:'2022', ring:1, size:'sm', d:'Legacy codebases and gradual migrations to Kotlin.'},
-    {n:'Multiplatform', i:'si:kotlin', c:'linear-gradient(145deg,#7F52FF,#E44857)', cat:'Languages', lvl:2, since:'2025', ring:2, size:'sm', d:'Sharing business logic between Android and iOS.'},
-    {n:'Material 3', i:'si:materialdesign', c:'#2B2B33', cat:'UI', lvl:0, since:'2022', ring:1, size:'sm', d:'Dynamic color, theming and accessible components.'},
-    {n:'Figma', i:'si:figma', c:'#F24E1E', cat:'UI', lvl:1, since:'2022', ring:1, size:'sm', d:'I build from design files and prototype my own flows.'},
-    {n:'Coroutines & Flow', i:'cu:flow', c:'#18181B', f:'#3CCB86', cat:'Architecture', lvl:0, since:'2022', ring:0, size:'md', d:'Structured concurrency, Flow operators, testing with Turbine.'},
-    {n:'MVVM / MVI', i:'cu:mvi', c:'#3F3F46', cat:'Architecture', lvl:0, since:'2022', ring:0, size:'md', d:'Unidirectional data flow, clean state handling, feature modules.'},
-    {n:'Clean Arch', i:'cu:clean', c:'#27272A', cat:'Architecture', lvl:1, since:'2023', ring:1, size:'sm', d:'Domain, data and presentation layers that stay testable.'},
-    {n:'Hilt', i:'cu:hilt', c:'#2E7D32', cat:'Architecture', lvl:1, since:'2023', ring:1, size:'sm', d:'Dependency injection for multi-module apps.'},
-    {n:'Android Studio', i:'si:androidstudio', c:'#3DDC84', f:'#073042', cat:'Tools', lvl:0, since:'2022', ring:0, size:'sm', d:'Profilers, layout inspector, baseline profiles.'},
-    {n:'Xcode', i:'si:xcode', c:'#147EFB', cat:'Tools', lvl:2, since:'2026', ring:2, size:'sm', d:'Instruments, previews and TestFlight builds.'},
-    {n:'Gradle', i:'si:gradle', c:'#02303A', cat:'Tools', lvl:1, since:'2022', ring:1, size:'sm', d:'Version catalogs, convention plugins, build speed.'},
-    {n:'Firebase', i:'si:firebase', c:'#FFA000', cat:'Tools', lvl:0, since:'2022', ring:0, size:'md', d:'Auth, Firestore, Crashlytics, Remote Config, FCM.'},
-    {n:'Room', i:'cu:db', c:'#00897B', cat:'Tools', lvl:0, since:'2022', ring:1, size:'sm', d:'Offline-first storage, migrations, paging.'},
-    {n:'Retrofit', i:'cu:net', c:'#48B983', f:'#04210F', cat:'Tools', lvl:0, since:'2022', ring:1, size:'sm', d:'REST clients, interceptors, token refresh.'},
-    {n:'Ktor', i:'si:ktor', c:'#087CFA', cat:'Tools', lvl:1, since:'2024', ring:2, size:'sm', d:'HTTP client for Multiplatform, WebSockets.'},
-    {n:'Git', i:'si:git', c:'#F05032', cat:'Tools', lvl:0, since:'2022', ring:1, size:'sm', d:'Clean history, code review, trunk-based flow.'},
-    {n:'GitHub Actions', i:'si:githubactions', c:'#2088FF', cat:'Tools', lvl:1, since:'2023', ring:2, size:'sm', d:'CI for every pull request: lint, tests, builds.'},
-    {n:'Fastlane', i:'si:fastlane', c:'#0B8E3A', cat:'Tools', lvl:1, since:'2023', ring:2, size:'sm', d:'Automated signing and store releases.'}
+    {n:'Kotlin', i:'si:kotlin', c:'#7F52FF', cat:'lang', lvl:0, since:'2022', ring:0, size:'xl', d:{en:'Coroutines, Flow, DSLs. My main language for 3+ years.', uz:'Coroutines, Flow, DSL. 3 yildan ortiq asosiy tilim.', ru:'Coroutines, Flow, DSL. Мой основной язык уже 3+ года.'}},
+    {n:'Jetpack Compose', i:'si:jetpackcompose', c:'#1A73E8', cat:'ui', lvl:0, since:'2022', ring:0, size:'xl', d:{en:'Production apps, custom design systems, shared-element transitions and motion.', uz:'Production ilovalar, o‘z dizayn tizimlari, shared-element o‘tishlar va animatsiyalar.', ru:'Продакшн-приложения, свои дизайн-системы, shared-element переходы и анимации.'}},
+    {n:'Swift', i:'si:swift', c:'#F05138', cat:'lang', lvl:2, since:'2026', ring:2, size:'md', d:{en:'Porting Pulse to iOS. Async/await, Combine basics.', uz:'Pulse’ni iOS’ga ko‘chiryapman. Async/await, Combine asoslari.', ru:'Переношу Pulse на iOS. Async/await, основы Combine.'}},
+    {n:'SwiftUI', i:'cu:swiftui', c:'linear-gradient(145deg,#1C8CFF,#5E5CE6)', cat:'ui', lvl:2, since:'2026', ring:2, size:'md', d:{en:'Layouts, animations and navigation for my first iOS releases.', uz:'Birinchi iOS relizlarim uchun layout, animatsiya va navigatsiya.', ru:'Вёрстка, анимации и навигация для моих первых iOS-релизов.'}},
+    {n:'Java', i:'si:openjdk', c:'#E76F00', cat:'lang', lvl:1, since:'2022', ring:1, size:'sm', d:{en:'Legacy codebases and gradual migrations to Kotlin.', uz:'Eski kod bazalar va Kotlin’ga bosqichma-bosqich o‘tish.', ru:'Legacy-код и постепенная миграция на Kotlin.'}},
+    {n:'Multiplatform', i:'si:kotlin', c:'linear-gradient(145deg,#7F52FF,#E44857)', cat:'lang', lvl:2, since:'2025', ring:2, size:'sm', d:{en:'Sharing business logic between Android and iOS.', uz:'Android va iOS o‘rtasida umumiy biznes-logika.', ru:'Общая бизнес-логика для Android и iOS.'}},
+    {n:'Material 3', i:'si:materialdesign', c:'#2B2B33', cat:'ui', lvl:0, since:'2022', ring:1, size:'sm', d:{en:'Dynamic color, theming and accessible components.', uz:'Dynamic color, mavzular va qulay (accessible) komponentlar.', ru:'Dynamic color, темы и доступные компоненты.'}},
+    {n:'Figma', i:'si:figma', c:'#F24E1E', cat:'ui', lvl:1, since:'2022', ring:1, size:'sm', d:{en:'I build from design files and prototype my own flows.', uz:'Dizayn fayllaridan ishlayman va o‘z flow’larimni prototip qilaman.', ru:'Работаю по макетам и прототипирую собственные флоу.'}},
+    {n:'Coroutines & Flow', i:'cu:flow', c:'#18181B', f:'#3CCB86', cat:'arch', lvl:0, since:'2022', ring:0, size:'md', d:{en:'Structured concurrency, Flow operators, testing with Turbine.', uz:'Structured concurrency, Flow operatorlari, Turbine bilan testlash.', ru:'Structured concurrency, операторы Flow, тесты с Turbine.'}},
+    {n:'MVVM / MVI', i:'cu:mvi', c:'#3F3F46', cat:'arch', lvl:0, since:'2022', ring:0, size:'md', d:{en:'Unidirectional data flow, clean state handling, feature modules.', uz:'Bir yo‘nalishli data flow, toza state boshqaruvi, feature modullar.', ru:'Однонаправленный поток данных, чистая работа со стейтом, feature-модули.'}},
+    {n:'Clean Arch', i:'cu:clean', c:'#27272A', cat:'arch', lvl:1, since:'2023', ring:1, size:'sm', d:{en:'Domain, data and presentation layers that stay testable.', uz:'Test qilish oson bo‘lgan domain, data va presentation qatlamlari.', ru:'Слои domain, data и presentation, которые легко тестировать.'}},
+    {n:'Hilt', i:'cu:hilt', c:'#2E7D32', cat:'arch', lvl:1, since:'2023', ring:1, size:'sm', d:{en:'Dependency injection for multi-module apps.', uz:'Ko‘p modulli ilovalar uchun dependency injection.', ru:'Внедрение зависимостей в многомодульных приложениях.'}},
+    {n:'Android Studio', i:'si:androidstudio', c:'#3DDC84', f:'#073042', cat:'tools', lvl:0, since:'2022', ring:0, size:'sm', d:{en:'Profilers, layout inspector, baseline profiles.', uz:'Profiler’lar, layout inspector, baseline profiles.', ru:'Профайлеры, layout inspector, baseline profiles.'}},
+    {n:'Xcode', i:'si:xcode', c:'#147EFB', cat:'tools', lvl:2, since:'2026', ring:2, size:'sm', d:{en:'Instruments, previews and TestFlight builds.', uz:'Instruments, preview’lar va TestFlight build’lari.', ru:'Instruments, превью и сборки в TestFlight.'}},
+    {n:'Gradle', i:'si:gradle', c:'#02303A', cat:'tools', lvl:1, since:'2022', ring:1, size:'sm', d:{en:'Version catalogs, convention plugins, build speed.', uz:'Version catalog, convention plugin, build tezligi.', ru:'Version catalogs, convention plugins, скорость сборки.'}},
+    {n:'Firebase', i:'si:firebase', c:'#FFA000', cat:'tools', lvl:0, since:'2022', ring:0, size:'md', d:{en:'Auth, Firestore, Crashlytics, Remote Config, FCM.', uz:'Auth, Firestore, Crashlytics, Remote Config, FCM.', ru:'Auth, Firestore, Crashlytics, Remote Config, FCM.'}},
+    {n:'Room', i:'cu:db', c:'#00897B', cat:'tools', lvl:0, since:'2022', ring:1, size:'sm', d:{en:'Offline-first storage, migrations, paging.', uz:'Offline-first saqlash, migratsiyalar, paging.', ru:'Offline-first хранение, миграции, пагинация.'}},
+    {n:'Retrofit', i:'cu:net', c:'#48B983', f:'#04210F', cat:'tools', lvl:0, since:'2022', ring:1, size:'sm', d:{en:'REST clients, interceptors, token refresh.', uz:'REST klientlar, interceptor’lar, token yangilash.', ru:'REST-клиенты, интерсепторы, обновление токенов.'}},
+    {n:'Ktor', i:'si:ktor', c:'#087CFA', cat:'tools', lvl:1, since:'2024', ring:2, size:'sm', d:{en:'HTTP client for Multiplatform, WebSockets.', uz:'Multiplatform uchun HTTP klient, WebSocket’lar.', ru:'HTTP-клиент для Multiplatform, WebSockets.'}},
+    {n:'Git', i:'si:git', c:'#F05032', cat:'tools', lvl:0, since:'2022', ring:1, size:'sm', d:{en:'Clean history, code review, trunk-based flow.', uz:'Toza tarix, code review, trunk-based flow.', ru:'Чистая история, код-ревью, trunk-based flow.'}},
+    {n:'GitHub Actions', i:'si:githubactions', c:'#2088FF', cat:'tools', lvl:1, since:'2023', ring:2, size:'sm', d:{en:'CI for every pull request: lint, tests, builds.', uz:'Har bir pull request uchun CI: lint, testlar, build.', ru:'CI на каждый pull request: линт, тесты, сборки.'}},
+    {n:'Fastlane', i:'si:fastlane', c:'#0B8E3A', cat:'tools', lvl:1, since:'2023', ring:2, size:'sm', d:{en:'Automated signing and store releases.', uz:'Avtomatik imzolash va store’ga reliz.', ru:'Автоматическая подпись и релизы в сторы.'}}
   ],
   experience: [
-    {v:'v3.1-beta', role:'iOS Engineer (in progress)', co:'Personal and client work', when:'2026 — now', c:'#1C8CFF', ab:'iO', hash:'e41b7d0', sum:'Bringing my Android craft to iOS, one screen at a time.', proj:[['Pulse for iOS','#FF4D6D',1],['Navo','#8B5CF6',1]], stack:['Swift','SwiftUI','KMP','HealthKit','TestFlight'], team:'Solo, with one product designer', resp:['Ported Pulse core screens to SwiftUI','Shared networking and models through KMP','Set up TestFlight and App Store Connect pipeline'], metrics:[['2','iOS apps in progress'],['KMP','shared business logic']], notes:[['BETA','Porting Pulse to iOS with SwiftUI and HealthKit'],['NEW','Shared business logic through Kotlin Multiplatform']]},
-    {v:'v3.0', role:'Senior Android Engineer', co:'Kapital Labs', when:'2024 — now', c:'#10B981', ab:'K', hash:'a3f9c21', sum:'Led the Compose rebuild of a banking app used by 500K people.', proj:[['Halol Wallet','#10B981',1],['Kapital Business','#0EA5E9'],['Card Center','#F59E0B']], stack:['Kotlin','Compose','Hilt','Coroutines','Ktor','Baseline Profiles'], team:'8 engineers · I lead 3', resp:['Led the migration from XML views to Jetpack Compose','Introduced startup tracing and baseline profiles','Mentored three junior developers','Own the two-week release train'], metrics:[['1.1s','cold start, was 2.4s'],['99.7%','crash-free sessions']], notes:[['NEW','Led the rebuild of a 500K-user banking app in Jetpack Compose'],['PERF','Cold start cut from 2.4s to 1.1s'],['FIX','Crash-free sessions up from 97.1% to 99.7%']]},
-    {v:'v2.0', role:'Android Engineer', co:'Northwind Mobility', when:'2023 — 2024', c:'#3B82F6', ab:'N', hash:'7c20e9b', sum:'Built real-time ride-hailing apps for riders and drivers.', proj:[["Yo'lda Rider",'#22D3EE'],["Yo'lda Driver",'#06B6D4']], stack:['Kotlin','Maps SDK','WebSockets','Room','WorkManager'], team:'5 mobile engineers', resp:['Built live trip tracking with WebSockets','Designed offline-first sync for drivers with weak signal','Cut APK size by 38% with R8 and dynamic features'], metrics:[['−38%','APK size'],['Live','ride tracking']], notes:[['NEW','Real-time ride tracking with WebSockets and Maps SDK'],['NEW','Offline-first sync with Room and WorkManager'],['PERF','APK size reduced by 38%']]},
-    {v:'v1.0', role:'Junior Mobile Developer', co:'Pixel Forge Studio', when:'2022 — 2023', c:'#F97316', ab:'P', hash:'1d0f3aa', sum:'Agency years: six client apps from idea to Google Play.', proj:[['Somsa Go','#FFB800'],['Chorsu','#3B82F6'],['Kitobxon','#F472B6'],['+3 more','#71717A']], stack:['Kotlin','Java','Firebase','XML views','Retrofit'], team:'Agency team of 12', resp:['Shipped six client apps end to end','Set up CI/CD with GitHub Actions and Fastlane','Wrote the team\'s Android code style guide'], metrics:[['6','client apps shipped'],['CI/CD','from day one']], notes:[['NEW','Shipped 6 client apps to Google Play'],['FIX','Set up CI/CD with GitHub Actions and Fastlane']]}
+    {v:'v3.1-beta', role:{en:'iOS Engineer (in progress)', uz:'iOS dasturchi (jarayonda)', ru:'iOS-разработчик (в процессе)'}, co:{en:'Personal and client work', uz:'Shaxsiy va mijoz loyihalari', ru:'Личные и клиентские проекты'}, when:{en:'2026 — now', uz:'2026 — hozir', ru:'2026 — сейчас'}, c:'#1C8CFF', ab:'iO', hash:'e41b7d0',
+     sum:{en:'Bringing my Android craft to iOS, one screen at a time.', uz:'Android’dagi tajribamni ekranma-ekran iOS’ga olib o‘tyapman.', ru:'Переношу свой Android-опыт на iOS, экран за экраном.'},
+     proj:[['Pulse for iOS','#FF4D6D',1],['Navo','#8B5CF6',1]], stack:['Swift','SwiftUI','KMP','HealthKit','TestFlight'],
+     team:{en:'Solo, with one product designer', uz:'Yakka, bitta product dizayner bilan', ru:'Один, вместе с продакт-дизайнером'},
+     resp:[{en:'Ported Pulse core screens to SwiftUI', uz:'Pulse’ning asosiy ekranlarini SwiftUI’ga ko‘chirdim', ru:'Перенёс основные экраны Pulse на SwiftUI'},{en:'Shared networking and models through KMP', uz:'Tarmoq qatlami va modellarni KMP orqali umumlashtirdim', ru:'Вынес сеть и модели в общий модуль KMP'},{en:'Set up TestFlight and App Store Connect pipeline', uz:'TestFlight va App Store Connect pipeline’ini sozladim', ru:'Настроил пайплайн TestFlight и App Store Connect'}],
+     metrics:[['2',{en:'iOS apps in progress', uz:'iOS ilova jarayonda', ru:'iOS-приложения в работе'}],['KMP',{en:'shared business logic', uz:'umumiy biznes-logika', ru:'общая бизнес-логика'}]],
+     notes:[['BETA',{en:'Porting Pulse to iOS with SwiftUI and HealthKit', uz:'Pulse’ni SwiftUI va HealthKit bilan iOS’ga ko‘chirish', ru:'Перенос Pulse на iOS со SwiftUI и HealthKit'}],['NEW',{en:'Shared business logic through Kotlin Multiplatform', uz:'Kotlin Multiplatform orqali umumiy biznes-logika', ru:'Общая бизнес-логика на Kotlin Multiplatform'}]]},
+    {v:'v3.0', role:{en:'Senior Android Engineer', uz:'Senior Android dasturchi', ru:'Senior Android-разработчик'}, co:'Kapital Labs', when:{en:'2024 — now', uz:'2024 — hozir', ru:'2024 — сейчас'}, c:'#10B981', ab:'K', hash:'a3f9c21',
+     sum:{en:'Led the Compose rebuild of a banking app used by 500K people.', uz:'500 ming kishi foydalanadigan bank ilovasini Compose’da qayta qurishga rahbarlik qildim.', ru:'Руководил переписыванием на Compose банковского приложения с 500K пользователей.'},
+     proj:[['Halol Wallet','#10B981',1],['Kapital Business','#0EA5E9'],['Card Center','#F59E0B']], stack:['Kotlin','Compose','Hilt','Coroutines','Ktor','Baseline Profiles'],
+     team:{en:'8 engineers · I lead 3', uz:'8 dasturchi · 3 tasiga rahbarman', ru:'8 инженеров · веду троих'},
+     resp:[{en:'Led the migration from XML views to Jetpack Compose', uz:'XML view’lardan Jetpack Compose’ga o‘tishni boshqardim', ru:'Руководил миграцией с XML на Jetpack Compose'},{en:'Introduced startup tracing and baseline profiles', uz:'Startup tracing va baseline profiles’ni joriy qildim', ru:'Внедрил startup tracing и baseline profiles'},{en:'Mentored three junior developers', uz:'Uchta junior dasturchiga mentorlik qildim', ru:'Менторил трёх джунов'},{en:'Own the two-week release train', uz:'Ikki haftalik reliz siklini boshqaraman', ru:'Отвечаю за двухнедельный релизный цикл'}],
+     metrics:[['1.1s',{en:'cold start, was 2.4s', uz:'cold start, avval 2.4s', ru:'холодный старт, было 2.4s'}],['99.7%',{en:'crash-free sessions', uz:'crash’siz sessiyalar', ru:'сессий без крашей'}]],
+     notes:[['NEW',{en:'Led the rebuild of a 500K-user banking app in Jetpack Compose', uz:'500K foydalanuvchili bank ilovasini Jetpack Compose’da qayta qurish', ru:'Переписали банковское приложение на 500K пользователей на Jetpack Compose'}],['PERF',{en:'Cold start cut from 2.4s to 1.1s', uz:'Cold start 2.4s dan 1.1s gacha qisqardi', ru:'Холодный старт сократился с 2.4s до 1.1s'}],['FIX',{en:'Crash-free sessions up from 97.1% to 99.7%', uz:'Crash’siz sessiyalar 97.1% dan 99.7% ga oshdi', ru:'Сессий без крашей стало 99.7% вместо 97.1%'}]]},
+    {v:'v2.0', role:{en:'Android Engineer', uz:'Android dasturchi', ru:'Android-разработчик'}, co:'Northwind Mobility', when:'2023 — 2024', c:'#3B82F6', ab:'N', hash:'7c20e9b',
+     sum:{en:'Built real-time ride-hailing apps for riders and drivers.', uz:'Yo‘lovchi va haydovchilar uchun real-time taksi ilovalarini yaratdim.', ru:'Делал real-time приложения такси для пассажиров и водителей.'},
+     proj:[["Yo'lda Rider",'#22D3EE'],["Yo'lda Driver",'#06B6D4']], stack:['Kotlin','Maps SDK','WebSockets','Room','WorkManager'],
+     team:{en:'5 mobile engineers', uz:'5 mobil dasturchi', ru:'5 мобильных разработчиков'},
+     resp:[{en:'Built live trip tracking with WebSockets', uz:'WebSocket bilan safarni jonli kuzatishni yaratdim', ru:'Сделал live-трекинг поездки на WebSockets'},{en:'Designed offline-first sync for drivers with weak signal', uz:'Signali kuchsiz haydovchilar uchun offline-first sinxronlashni loyihaladim', ru:'Спроектировал offline-first синхронизацию для водителей со слабой связью'},{en:'Cut APK size by 38% with R8 and dynamic features', uz:'R8 va dynamic features bilan APK hajmini 38% ga kamaytirdim', ru:'Уменьшил APK на 38% с R8 и dynamic features'}],
+     metrics:[['−38%',{en:'APK size', uz:'APK hajmi', ru:'размер APK'}],['Live',{en:'ride tracking', uz:'safar kuzatuvi', ru:'трекинг поездки'}]],
+     notes:[['NEW',{en:'Real-time ride tracking with WebSockets and Maps SDK', uz:'WebSocket va Maps SDK bilan real-time safar kuzatuvi', ru:'Real-time трекинг поездки на WebSockets и Maps SDK'}],['NEW',{en:'Offline-first sync with Room and WorkManager', uz:'Room va WorkManager bilan offline-first sinxronlash', ru:'Offline-first синхронизация на Room и WorkManager'}],['PERF',{en:'APK size reduced by 38%', uz:'APK hajmi 38% ga kamaydi', ru:'APK стал меньше на 38%'}]]},
+    {v:'v1.0', role:{en:'Junior Mobile Developer', uz:'Junior mobil dasturchi', ru:'Junior мобильный разработчик'}, co:'Pixel Forge Studio', when:'2022 — 2023', c:'#F97316', ab:'P', hash:'1d0f3aa',
+     sum:{en:'Agency years: six client apps from idea to Google Play.', uz:'Agentlik yillari: oltita mijoz ilovasi g‘oyadan Google Play’gacha.', ru:'Годы в агентстве: шесть клиентских приложений от идеи до Google Play.'},
+     proj:[['Somsa Go','#FFB800'],['Chorsu','#3B82F6'],['Kitobxon','#F472B6'],[{en:'+3 more', uz:'+3 ta', ru:'+3 ещё'},'#71717A']], stack:['Kotlin','Java','Firebase','XML views','Retrofit'],
+     team:{en:'Agency team of 12', uz:'12 kishilik agentlik jamoasi', ru:'Команда агентства из 12 человек'},
+     resp:[{en:'Shipped six client apps end to end', uz:'Oltita mijoz ilovasini boshidan oxirigacha chiqardim', ru:'Выпустил шесть клиентских приложений под ключ'},{en:'Set up CI/CD with GitHub Actions and Fastlane', uz:'GitHub Actions va Fastlane bilan CI/CD sozladim', ru:'Настроил CI/CD на GitHub Actions и Fastlane'},{en:'Wrote the team\'s Android code style guide', uz:'Jamoa uchun Android code style qo‘llanmasini yozdim', ru:'Написал командный гайд по стилю Android-кода'}],
+     metrics:[['6',{en:'client apps shipped', uz:'mijoz ilovasi chiqarildi', ru:'клиентских приложений'}],['CI/CD',{en:'from day one', uz:'birinchi kundan', ru:'с первого дня'}]],
+     notes:[['NEW',{en:'Shipped 6 client apps to Google Play', uz:'Google Play’ga 6 ta mijoz ilovasi chiqarildi', ru:'6 клиентских приложений в Google Play'}],['FIX',{en:'Set up CI/CD with GitHub Actions and Fastlane', uz:'GitHub Actions va Fastlane bilan CI/CD sozlandi', ru:'Настроен CI/CD на GitHub Actions и Fastlane'}]]}
   ],
   featured: [
-    {id:'wallet', name:'Halol Wallet', ab:'H', cat:'Fintech · Android', color:'#10B981', ink:'#022C22', bgD:'#071A13', bgL:'#DDF1E8', s1:'rgba(16,185,129,.55)', s2:'rgba(52,211,153,.35)',
-     pitch:'Instant transfers, bill pay and a virtual card in three taps, built for people who never trusted banking apps.',
-     metrics:[['500K+','installs'],['4.8★','Play rating'],['1.1s','cold start']], tags:['Kotlin','Compose','Hilt','Ktor']},
-    {id:'pulse', name:'Pulse', ab:'P', cat:'Health & fitness · Android + iOS', color:'#FF4D6D', ink:'#1A0006', bgD:'#1C0A10', bgL:'#FBE4E9', s1:'rgba(255,77,109,.5)', s2:'rgba(255,184,0,.3)',
-     pitch:'Turns daily movement into rings you actually want to close. Streaks, sleep and heart rate in one calm dashboard.',
-     metrics:[['120K','monthly users'],['4.9★','App Store'],['42%','day-30 retention']], tags:['Compose','SwiftUI','HealthKit','KMP']},
-    {id:'navo', name:'Navo', ab:'N', cat:'Music streaming · iOS', color:'#8B5CF6', ink:'#0E0620', bgD:'#110B22', bgL:'#ECE6FD', s1:'rgba(139,92,246,.55)', s2:'rgba(236,72,153,.35)',
-     pitch:'Uzbek music, offline-first. Gapless playback, lyrics sync and a player that feels as good as it sounds.',
-     metrics:[['80K','listeners'],['3.2M','streams / month'],['60fps','animations']], tags:['SwiftUI','AVFoundation','Combine']}
+    {id:'wallet', name:'Halol Wallet', ab:'H', cat:{en:'Fintech · Android', uz:'Fintech · Android', ru:'Финтех · Android'}, color:'#10B981', ink:'#022C22', bgD:'#071A13', bgL:'#DDF1E8', s1:'rgba(16,185,129,.55)', s2:'rgba(52,211,153,.35)',
+     pitch:{en:'Instant transfers, bill pay and a virtual card in three taps, built for people who never trusted banking apps.', uz:'Bir zumda o‘tkazmalar, to‘lovlar va virtual karta — uch bosishda. Bank ilovalariga ishonmaganlar uchun.', ru:'Мгновенные переводы, оплата счетов и виртуальная карта в три касания — для тех, кто никогда не доверял банковским приложениям.'},
+     metrics:[['500K+',{en:'installs', uz:'o‘rnatish', ru:'установок'}],['4.8★',{en:'Play rating', uz:'Play reytingi', ru:'рейтинг в Play'}],['1.1s','cold start']], tags:['Kotlin','Compose','Hilt','Ktor']},
+    {id:'pulse', name:'Pulse', ab:'P', cat:{en:'Health & fitness · Android + iOS', uz:'Salomatlik va fitnes · Android + iOS', ru:'Здоровье и фитнес · Android + iOS'}, color:'#FF4D6D', ink:'#1A0006', bgD:'#1C0A10', bgL:'#FBE4E9', s1:'rgba(255,77,109,.5)', s2:'rgba(255,184,0,.3)',
+     pitch:{en:'Turns daily movement into rings you actually want to close. Streaks, sleep and heart rate in one calm dashboard.', uz:'Kunlik harakatni yopgingiz keladigan halqalarga aylantiradi. Streak, uyqu va yurak urishi — bitta sokin panelda.', ru:'Превращает ежедневное движение в кольца, которые хочется закрыть. Серии, сон и пульс на одном спокойном экране.'},
+     metrics:[['120K',{en:'monthly users', uz:'oylik foydalanuvchi', ru:'пользователей в месяц'}],['4.9★','App Store'],['42%',{en:'day-30 retention', uz:'30-kun retention', ru:'retention 30-го дня'}]], tags:['Compose','SwiftUI','HealthKit','KMP']},
+    {id:'navo', name:'Navo', ab:'N', cat:{en:'Music streaming · iOS', uz:'Musiqa striming · iOS', ru:'Музыкальный стриминг · iOS'}, color:'#8B5CF6', ink:'#0E0620', bgD:'#110B22', bgL:'#ECE6FD', s1:'rgba(139,92,246,.55)', s2:'rgba(236,72,153,.35)',
+     pitch:{en:'Uzbek music, offline-first. Gapless playback, lyrics sync and a player that feels as good as it sounds.', uz:'O‘zbek musiqasi, offline-first. Uzilishsiz ijro, sinxron qo‘shiq matni va eshitilganidek yoqimli pleyer.', ru:'Узбекская музыка, offline-first. Воспроизведение без пауз, синхронный текст и плеер, который ощущается так же хорошо, как звучит.'},
+     metrics:[['80K',{en:'listeners', uz:'tinglovchi', ru:'слушателей'}],['3.2M',{en:'streams / month', uz:'oyiga tinglash', ru:'прослушиваний в месяц'}],['60fps',{en:'animations', uz:'animatsiyalar', ru:'анимации'}]], tags:['SwiftUI','AVFoundation','Combine']}
   ],
   more: [
-    {name:'Somsa Go', cat:'Food delivery', plat:'Android', color:'#FFB800', screen:'#1A1405'},
-    {name:'Chorsu', cat:'Marketplace', plat:'Android', color:'#3B82F6', screen:'#0B1220'},
-    {name:"Yo'lda", cat:'Ride-hailing', plat:'Android · iOS', color:'#22D3EE', screen:'#061A1F'},
-    {name:'Kitobxon', cat:'Reading app', plat:'Android', color:'#F472B6', screen:'#1F0A16'}
-  ],
-  tiers: [
-    {name:'MVP Launch', desc:'From idea to a polished v1.0 in the store. The fastest way to test your product with real users.', p:[2900,1400], feats:['Android or iOS native app','UI polish and motion details','Firebase backend and auth','Store listing and release','30 days of bug fixes'], cta:'Start an MVP'},
-    {name:'Full Product', hot:true, desc:'A complete, scalable app with your backend, analytics and the architecture to grow for years.', p:[7500,3200], feats:['Android + iOS','Clean architecture (MVVM / MVI)','API integration and offline mode','Analytics, crash reporting, CI/CD','90 days of support'], cta:'Build the full thing'},
-    {name:'Rescue & Scale', desc:'App slow, crashing, or stuck on old code? I audit, refactor and make it fly.', p:[1200,1200], feats:['Code and performance audit','Crash-rate reduction','Migration to Compose / SwiftUI','Tests and CI','Weekly progress reports'], cta:'Fix my app'}
+    {name:'Somsa Go', cat:{en:'Food delivery', uz:'Ovqat yetkazish', ru:'Доставка еды'}, plat:'Android', color:'#FFB800', screen:'#1A1405'},
+    {name:'Chorsu', cat:{en:'Marketplace', uz:'Marketpleys', ru:'Маркетплейс'}, plat:'Android', color:'#3B82F6', screen:'#0B1220'},
+    {name:"Yo'lda", cat:{en:'Ride-hailing', uz:'Taksi', ru:'Такси'}, plat:'Android · iOS', color:'#22D3EE', screen:'#061A1F'},
+    {name:'Kitobxon', cat:{en:'Reading app', uz:'Kitob o‘qish', ru:'Чтение книг'}, plat:'Android', color:'#F472B6', screen:'#1F0A16'}
   ],
   steps: [
-    ['01','Discover','A call about goals, users and scope. You get a clear plan and a fixed quote.','~ 2 days','discover',['Scope doc','Fixed quote','Timeline']],
-    ['02','Design','Flows and high-fidelity screens in Figma, plus a clickable prototype.','~ 1 week','design',['User flows','Figma screens','Prototype']],
-    ['03','Build','Weekly builds on your phone. You see progress every Friday.','3–8 weeks','build',['Weekly builds','Clean code','Code review']],
-    ['04','Test','Automated and on-device testing, performance and crash checks.','~ 1 week','test',['Unit + UI tests','Device matrix','Perf report']],
-    ['05','Ship','Store assets, review and release, with launch-day support.','~ 3 days','ship',['Store listing','Release','Launch support']],
-    ['06','Support','Monitoring, fixes and new features as you grow.','ongoing','support',['Crash monitoring','Monthly report','New features']]
+    ['01',{en:'Discover', uz:'Tahlil', ru:'Анализ'},{en:'A call about goals, users and scope. You get a clear plan and a fixed quote.', uz:'Maqsad, foydalanuvchilar va hajm haqida qo‘ng‘iroq. Aniq reja va qat’iy narx olasiz.', ru:'Созвон о целях, пользователях и объёме. Вы получаете понятный план и фиксированную оценку.'},{en:'~ 2 days', uz:'~ 2 kun', ru:'~ 2 дня'},'discover',[{en:'Scope doc', uz:'Hajm hujjati', ru:'Документ объёма'},{en:'Fixed quote', uz:'Qat’iy narx', ru:'Фикс. оценка'},{en:'Timeline', uz:'Muddatlar', ru:'Сроки'}]],
+    ['02',{en:'Design', uz:'Dizayn', ru:'Дизайн'},{en:'Flows and high-fidelity screens in Figma, plus a clickable prototype.', uz:'Figma’da flow’lar va to‘liq ekranlar, ustiga bosiladigan prototip.', ru:'Флоу и детальные экраны в Figma плюс кликабельный прототип.'},{en:'~ 1 week', uz:'~ 1 hafta', ru:'~ 1 неделя'},'design',[{en:'User flows', uz:'User flow’lar', ru:'User flows'},{en:'Figma screens', uz:'Figma ekranlari', ru:'Экраны в Figma'},{en:'Prototype', uz:'Prototip', ru:'Прототип'}]],
+    ['03',{en:'Build', uz:'Ishlab chiqish', ru:'Разработка'},{en:'Weekly builds on your phone. You see progress every Friday.', uz:'Har hafta telefoningizda yangi build. Natijani har juma ko‘rasiz.', ru:'Еженедельные сборки на вашем телефоне. Прогресс — каждую пятницу.'},{en:'3–8 weeks', uz:'3–8 hafta', ru:'3–8 недель'},'build',[{en:'Weekly builds', uz:'Haftalik build', ru:'Сборки каждую неделю'},{en:'Clean code', uz:'Toza kod', ru:'Чистый код'},{en:'Code review', uz:'Code review', ru:'Код-ревью'}]],
+    ['04',{en:'Test', uz:'Test', ru:'Тесты'},{en:'Automated and on-device testing, performance and crash checks.', uz:'Avtomatik va real qurilmada testlash, tezlik va crash tekshiruvi.', ru:'Автотесты и проверка на устройствах, производительность и краши.'},{en:'~ 1 week', uz:'~ 1 hafta', ru:'~ 1 неделя'},'test',[{en:'Unit + UI tests', uz:'Unit + UI testlar', ru:'Unit + UI тесты'},{en:'Device matrix', uz:'Qurilmalar ro‘yxati', ru:'Матрица устройств'},{en:'Perf report', uz:'Tezlik hisoboti', ru:'Отчёт о производительности'}]],
+    ['05',{en:'Ship', uz:'Reliz', ru:'Релиз'},{en:'Store assets, review and release, with launch-day support.', uz:'Store materiallari, review va reliz, ishga tushirish kuni yordam bilan.', ru:'Материалы для стора, ревью и релиз, поддержка в день запуска.'},{en:'~ 3 days', uz:'~ 3 kun', ru:'~ 3 дня'},'ship',[{en:'Store listing', uz:'Store sahifasi', ru:'Страница в сторе'},{en:'Release', uz:'Reliz', ru:'Релиз'},{en:'Launch support', uz:'Ishga tushirishda yordam', ru:'Поддержка запуска'}]],
+    ['06',{en:'Support', uz:'Qo‘llab-quvvatlash', ru:'Поддержка'},{en:'Monitoring, fixes and new features as you grow.', uz:'Monitoring, tuzatishlar va o‘sishingiz bilan yangi funksiyalar.', ru:'Мониторинг, исправления и новые функции по мере роста.'},{en:'ongoing', uz:'doimiy', ru:'постоянно'},'support',[{en:'Crash monitoring', uz:'Crash monitoring', ru:'Мониторинг крашей'},{en:'Monthly report', uz:'Oylik hisobot', ru:'Ежемесячный отчёт'},{en:'New features', uz:'Yangi funksiyalar', ru:'Новые функции'}]]
   ],
   quotes: [
-    ['Bekdiyor rebuilt our app in Compose and our crash rate basically disappeared. A rare mix of speed and care.','Malika R.','Product Lead, Kapital Labs','#10B981'],
-    ['He thinks like a product person, not only a developer. He pushed back on features that did not matter.','Jasur T.','Founder, Somsa Go','#FFB800'],
-    ['Weekly builds, zero surprises. We launched two weeks early.','Anna K.','CEO, Navo','#8B5CF6'],
-    ['The animations are what users mention in reviews. That says everything.','Timur S.','CTO, Pulse','#FF4D6D'],
-    ['Clear estimates, honest updates, and the code is a pleasure to inherit.','Bekzod M.','Engineering Manager, Chorsu','#3B82F6'],
-    ['Our ride app went from 3.9 to 4.7 stars in two releases.',"Dilnoza A.","COO, Yo'lda",'#22D3EE']
+    [{en:'Bekdiyor rebuilt our app in Compose and our crash rate basically disappeared. A rare mix of speed and care.', uz:'Bekdiyor ilovamizni Compose’da qayta qurdi va crash’lar deyarli yo‘qoldi. Tezlik va puxtalikning kamyob uyg‘unligi.', ru:'Бекдиёр переписал наше приложение на Compose, и краши практически исчезли. Редкое сочетание скорости и аккуратности.'},'Malika R.',{en:'Product Lead, Kapital Labs', uz:'Product Lead, Kapital Labs', ru:'Product Lead, Kapital Labs'},'#10B981'],
+    [{en:'He thinks like a product person, not only a developer. He pushed back on features that did not matter.', uz:'U faqat dasturchi emas, mahsulot egasidek o‘ylaydi. Keraksiz funksiyalarga ochiq e’tiroz bildirdi.', ru:'Он думает как продакт, а не только как разработчик. Спорил с фичами, которые не имели значения.'},'Jasur T.',{en:'Founder, Somsa Go', uz:'Asoschi, Somsa Go', ru:'Основатель, Somsa Go'},'#FFB800'],
+    [{en:'Weekly builds, zero surprises. We launched two weeks early.', uz:'Haftalik build’lar, hech qanday kutilmagan holat. Ikki hafta oldin ishga tushdik.', ru:'Сборки каждую неделю, никаких сюрпризов. Запустились на две недели раньше.'},'Anna K.',{en:'CEO, Navo', uz:'CEO, Navo', ru:'CEO, Navo'},'#8B5CF6'],
+    [{en:'The animations are what users mention in reviews. That says everything.', uz:'Foydalanuvchilar sharhlarda aynan animatsiyalarni tilga oladi. Bu hammasini aytib turibdi.', ru:'Пользователи в отзывах упоминают именно анимации. Это говорит обо всём.'},'Timur S.',{en:'CTO, Pulse', uz:'CTO, Pulse', ru:'CTO, Pulse'},'#FF4D6D'],
+    [{en:'Clear estimates, honest updates, and the code is a pleasure to inherit.', uz:'Aniq baholar, halol hisobotlar, kodini qabul qilib olish esa maroqli.', ru:'Чёткие оценки, честные апдейты, а код приятно принимать.'},'Bekzod M.',{en:'Engineering Manager, Chorsu', uz:'Engineering Manager, Chorsu', ru:'Engineering Manager, Chorsu'},'#3B82F6'],
+    [{en:'Our ride app went from 3.9 to 4.7 stars in two releases.', uz:'Taksi ilovamiz ikki relizda 3.9 dan 4.7 yulduzgacha ko‘tarildi.', ru:'Наше приложение такси за два релиза выросло с 3.9 до 4.7 звёзд.'},"Dilnoza A.",{en:"COO, Yo'lda", uz:"COO, Yo'lda", ru:"COO, Yo'lda"},'#22D3EE']
   ]
 };
 
 /* Brand icons: Simple Icons (CC0 1.0, simpleicons.org). Trademarks belong to their owners. */
 var ICONS = {"kotlin": "M24 24H0V0h24L12 12Z", "swift": "M7.508 0c-.287 0-.573 0-.86.002-.241.002-.483.003-.724.01-.132.003-.263.009-.395.015A9.154 9.154 0 0 0 4.348.15 5.492 5.492 0 0 0 2.85.645 5.04 5.04 0 0 0 .645 2.848c-.245.48-.4.972-.495 1.5-.093.52-.122 1.05-.136 1.576a35.2 35.2 0 0 0-.012.724C0 6.935 0 7.221 0 7.508v8.984c0 .287 0 .575.002.862.002.24.005.481.012.722.014.526.043 1.057.136 1.576.095.528.25 1.02.495 1.5a5.03 5.03 0 0 0 2.205 2.203c.48.244.97.4 1.498.495.52.093 1.05.124 1.576.138.241.007.483.009.724.01.287.002.573.002.86.002h8.984c.287 0 .573 0 .86-.002.241-.001.483-.003.724-.01a10.523 10.523 0 0 0 1.578-.138 5.322 5.322 0 0 0 1.498-.495 5.035 5.035 0 0 0 2.203-2.203c.245-.48.4-.972.495-1.5.093-.52.124-1.05.138-1.576.007-.241.009-.481.01-.722.002-.287.002-.575.002-.862V7.508c0-.287 0-.573-.002-.86a33.662 33.662 0 0 0-.01-.724 10.5 10.5 0 0 0-.138-1.576 5.328 5.328 0 0 0-.495-1.5A5.039 5.039 0 0 0 21.152.645 5.32 5.32 0 0 0 19.654.15a10.493 10.493 0 0 0-1.578-.138 34.98 34.98 0 0 0-.722-.01C17.067 0 16.779 0 16.492 0H7.508zm6.035 3.41c4.114 2.47 6.545 7.162 5.549 11.131-.024.093-.05.181-.076.272l.002.001c2.062 2.538 1.5 5.258 1.236 4.745-1.072-2.086-3.066-1.568-4.088-1.043a6.803 6.803 0 0 1-.281.158l-.02.012-.002.002c-2.115 1.123-4.957 1.205-7.812-.022a12.568 12.568 0 0 1-5.64-4.838c.649.48 1.35.902 2.097 1.252 3.019 1.414 6.051 1.311 8.197-.002C9.651 12.73 7.101 9.67 5.146 7.191a10.628 10.628 0 0 1-1.005-1.384c2.34 2.142 6.038 4.83 7.365 5.576C8.69 8.408 6.208 4.743 6.324 4.86c4.436 4.47 8.528 6.996 8.528 6.996.154.085.27.154.36.213.085-.215.16-.437.224-.668.708-2.588-.09-5.548-1.893-7.992z", "jetpackcompose": "M12.135.003a2.577 2.577 0 0 0-1.42.344L2.55 5.06a2.577 2.577 0 0 0-.953.967l3.957 2.17a1.765 1.765 0 0 1 .603-.588l4.951-2.86a1.761 1.761 0 0 1 1.76 0l4.951 2.86a1.753 1.753 0 0 1 .526.46l3.921-2.265a2.577 2.577 0 0 0-.816-.744L13.291.347a2.577 2.577 0 0 0-1.152-.34Zm-.145 4.912a1.36 1.36 0 0 0-.68.182L6.36 7.953a1.345 1.345 0 0 0-.454.435l1.92 1.055a1.05 1.05 0 0 1 .31-.275l3.34-1.928a1.054 1.054 0 0 1 1.051 0l3.336 1.928a1.066 1.066 0 0 1 .238.199l.018-.01-.002-.002 1.877-1.08a1.353 1.353 0 0 0-.373-.322l-4.95-2.86a1.357 1.357 0 0 0-.68-.178Zm10.432 1.149-3.92 2.26a1.757 1.757 0 0 1 .2.812v5.715c0 .627-.332 1.21-.88 1.528l-4.95 2.86a1.761 1.761 0 0 1-.64.214v4.524a2.577 2.577 0 0 0 1.059-.313l8.162-4.713a2.577 2.577 0 0 0 1.289-2.23V7.297a2.577 2.577 0 0 0-.318-1.228Zm-20.937.238a2.577 2.577 0 0 0-.227.99v9.43c0 .918.491 1.767 1.293 2.229l8.162 4.713a2.57 2.57 0 0 0 1.225.336v-4.531a1.761 1.761 0 0 1-.833-.235L6.156 16.38a1.765 1.765 0 0 1-.877-1.528V9.136a1.776 1.776 0 0 1 .131-.676Zm16.67 2.223-1.89 1.092a1.058 1.058 0 0 1 .124.46v3.856c0 .378-.2.72-.526.907l-3.336 1.93a1.04 1.04 0 0 1-.295.107v2.17c.152-.027.304-.078.44-.157l4.949-2.859a1.36 1.36 0 0 0 .68-1.18V9.136a1.36 1.36 0 0 0-.147-.607Zm-12.387.13a1.36 1.36 0 0 0-.088.481v5.715a1.36 1.36 0 0 0 .68 1.18l4.95 2.86c.194.112.412.166.627.177v-2.174a1.054 1.054 0 0 1-.46-.123L8.14 14.843a1.054 1.054 0 0 1-.532-.908v-3.853a.99.99 0 0 1 .077-.38l-.034-.013z", "openjdk": "M11.915 0 11.7.215C9.515 2.4 7.47 6.39 6.046 10.483c-1.064 1.024-3.633 2.81-3.711 3.551-.093.87 1.746 2.611 1.55 3.235-.198.625-1.304 1.408-1.014 1.939.1.188.823.011 1.277-.491a13.389 13.389 0 0 0-.017 2.14c.076.906.27 1.668.643 2.232.372.563.956.911 1.667.911.397 0 .727-.114 1.024-.264.298-.149.571-.33.91-.5.68-.34 1.634-.666 3.53-.604 1.903.062 2.872.39 3.559.704.687.314 1.15.664 1.925.664.767 0 1.395-.336 1.807-.9.412-.563.631-1.33.72-2.24.06-.623.055-1.32 0-2.066.454.45 1.117.604 1.213.424.29-.53-.816-1.314-1.013-1.937-.198-.624 1.642-2.366 1.549-3.236-.08-.748-2.707-2.568-3.748-3.586C16.428 6.374 14.308 2.394 12.13.215zm.175 6.038a2.95 2.95 0 0 1 2.943 2.942 2.95 2.95 0 0 1-2.943 2.943A2.95 2.95 0 0 1 9.148 8.98a2.95 2.95 0 0 1 2.942-2.942zM8.685 7.983a3.515 3.515 0 0 0-.145.997c0 1.951 1.6 3.55 3.55 3.55 1.95 0 3.55-1.598 3.55-3.55 0-.329-.046-.648-.132-.951.334.095.64.208.915.336a42.699 42.699 0 0 1 2.042 5.829c.678 2.545 1.01 4.92.846 6.607-.082.844-.29 1.51-.606 1.94-.315.431-.713.651-1.315.651-.593 0-.932-.27-1.673-.61-.741-.338-1.825-.694-3.792-.758-1.974-.064-3.073.293-3.821.669-.375.188-.659.373-.911.5s-.466.2-.752.2c-.53 0-.876-.209-1.16-.64-.285-.43-.474-1.101-.545-1.948-.141-1.693.176-4.069.823-6.614a43.155 43.155 0 0 1 1.934-5.783c.348-.167.749-.31 1.192-.425zm-3.382 4.362a.216.216 0 0 1 .13.031c-.166.56-.323 1.116-.463 1.665a33.849 33.849 0 0 0-.547 2.555 3.9 3.9 0 0 0-.2-.39c-.58-1.012-.914-1.642-1.16-2.08.315-.24 1.679-1.755 2.24-1.781zm13.394.01c.562.027 1.926 1.543 2.24 1.783-.246.438-.58 1.068-1.16 2.08a4.428 4.428 0 0 0-.163.309 32.354 32.354 0 0 0-.562-2.49 40.579 40.579 0 0 0-.482-1.652.216.216 0 0 1 .127-.03z", "materialdesign": "M11.9998 23.9997c-1.6545 0-3.218-.309-4.691-.927-1.4544-.6364-2.7269-1.4909-3.8179-2.5639-1.073-1.0905-1.9274-2.3634-2.5634-3.8179C.3085 15.2179 0 13.6545 0 12c0-1.6725.309-3.2364.927-4.6909.6365-1.4545 1.491-2.718 2.564-3.791C4.5818 2.4278 5.8543 1.5733 7.3087.9548c1.473-.6365 3.0365-.9545 4.691-.9545 1.673 0 3.2364.318 4.6909.955 1.4544.618 2.7179 1.4725 3.7909 2.563 1.091 1.073 1.945 2.3364 2.5634 3.7909C23.6815 8.7641 24 10.3275 24 12c0 1.655-.3185 3.218-.955 4.6909-.618 1.4545-1.4724 2.7274-2.5634 3.818-1.073 1.0729-2.3365 1.9274-3.791 2.5639-1.455.618-3.0179.927-4.6909.927zm-7.6364-5.8633V5.8636A9.4843 9.4843 0 0 0 2.755 8.7001C2.373 9.7365 2.1825 10.8365 2.1825 12s.1905 2.2725.5724 3.3274a9.5713 9.5713 0 0 0 1.609 2.809zm1.5-13.7727H18.163a9.4848 9.4848 0 0 0-2.836-1.609c-1.0549-.382-2.1639-.5725-3.3273-.5725-1.1635 0-2.2725.1905-3.327.5725a9.5713 9.5713 0 0 0-2.8094 1.609Zm6.1364 10.3637 4.1179-8.1818H7.9088Zm1.091 2.727h4.3633V8.7276Zm-6.5454 0h4.3634L6.5454 8.7276Zm8.7813 3.791c1.0545-.382 2-.918 2.836-1.609H5.8628a9.5713 9.5713 0 0 0 2.8094 1.609c1.0545.3819 2.1635.5724 3.327.5724 1.0543 0 2.1823-.1579 3.3274-.5725zm4.3089-3.109a9.5713 9.5713 0 0 0 1.609-2.809c.382-1.055.5724-2.164.5724-3.3274 0-1.1635-.1905-2.2635-.5724-3.3-.382-1.055-.918-1.9999-1.609-2.8364Z", "figma": "M15.852 8.981h-4.588V0h4.588c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.491-4.49 4.491zM12.735 7.51h3.117c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-3.117V7.51zm0 1.471H8.148c-2.476 0-4.49-2.014-4.49-4.49S5.672 0 8.148 0h4.588v8.981zm-4.587-7.51c-1.665 0-3.019 1.355-3.019 3.019s1.354 3.02 3.019 3.02h3.117V1.471H8.148zm4.587 15.019H8.148c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h4.588v8.98zM8.148 8.981c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h3.117V8.981H8.148zM8.172 24c-2.489 0-4.515-2.014-4.515-4.49s2.014-4.49 4.49-4.49h4.588v4.441c0 2.503-2.047 4.539-4.563 4.539zm-.024-7.51a3.023 3.023 0 0 0-3.019 3.019c0 1.665 1.365 3.019 3.044 3.019 1.705 0 3.093-1.376 3.093-3.068v-2.97H8.148zm7.704 0h-.098c-2.476 0-4.49-2.014-4.49-4.49s2.014-4.49 4.49-4.49h.098c2.476 0 4.49 2.014 4.49 4.49s-2.014 4.49-4.49 4.49zm-.097-7.509c-1.665 0-3.019 1.355-3.019 3.019s1.355 3.019 3.019 3.019h.098c1.665 0 3.019-1.355 3.019-3.019s-1.355-3.019-3.019-3.019h-.098z", "firebase": "M19.455 8.369c-.538-.748-1.778-2.285-3.681-4.569-.826-.991-1.535-1.832-1.884-2.245a146 146 0 0 0-.488-.576l-.207-.245-.113-.133-.022-.032-.01-.005L12.57 0l-.609.488c-1.555 1.246-2.828 2.851-3.681 4.64-.523 1.064-.864 2.105-1.043 3.176-.047.241-.088.489-.121.738-.209-.017-.421-.028-.632-.033-.018-.001-.035-.002-.059-.003a7.46 7.46 0 0 0-2.28.274l-.317.089-.163.286c-.765 1.342-1.198 2.869-1.252 4.416-.07 2.01.477 3.954 1.583 5.625 1.082 1.633 2.61 2.882 4.42 3.611l.236.095.071.025.003-.001a9.59 9.59 0 0 0 2.941.568q.171.006.342.006c1.273 0 2.513-.249 3.69-.742l.008.004.313-.145a9.63 9.63 0 0 0 3.927-3.335c1.01-1.49 1.577-3.234 1.641-5.042.075-2.161-.643-4.304-2.133-6.371m-7.083 6.695c.328 1.244.264 2.44-.191 3.558-1.135-1.12-1.967-2.352-2.475-3.665-.543-1.404-.87-2.74-.974-3.975.48.157.922.366 1.315.622 1.132.737 1.914 1.902 2.325 3.461zm.207 6.022c.482.368.99.712 1.513 1.028-.771.21-1.565.302-2.369.273a8 8 0 0 1-.373-.022c.458-.394.869-.823 1.228-1.279zm1.347-6.431c-.516-1.957-1.527-3.437-3.002-4.398-.647-.421-1.385-.741-2.194-.95.011-.134.026-.268.043-.4.014-.113.03-.216.046-.313.133-.689.332-1.37.589-2.025.099-.25.206-.499.321-.74l.004-.008c.177-.358.376-.719.61-1.105l.092-.152-.003-.001c.544-.851 1.197-1.627 1.942-2.311l.288.341c.672.796 1.304 1.548 1.878 2.237 1.291 1.549 2.966 3.583 3.612 4.48 1.277 1.771 1.893 3.579 1.83 5.375-.049 1.395-.461 2.755-1.195 3.933-.694 1.116-1.661 2.05-2.8 2.708-.636-.318-1.559-.839-2.539-1.599.79-1.575.952-3.28.479-5.072zm-2.575 5.397c-.725.939-1.587 1.55-2.09 1.856-.081-.029-.163-.06-.243-.093l-.065-.026c-1.49-.616-2.747-1.656-3.635-3.01-.907-1.384-1.356-2.993-1.298-4.653.041-1.19.338-2.327.882-3.379.316-.07.638-.114.96-.131l.084-.002c.162-.003.324-.003.478 0 .227.011.454.035.677.07.073 1.513.445 3.145 1.105 4.852.637 1.644 1.694 3.162 3.144 4.515z", "git": "M13.09 23.549a1.54 1.54 0 0 1-2.18 0L.451 13.089a1.54 1.54 0 0 1 0-2.179l7.191-7.19 2.733 2.733a1.85 1.85 0 0 0 .964 2.326v6.66a1.849 1.849 0 1 0 1.54 0V8.957l2.508 2.508a1.85 1.85 0 1 0 1.09-1.09l-2.634-2.634a1.85 1.85 0 0 0-2.378-2.377L8.73 2.63 10.91.451a1.54 1.54 0 0 1 2.179 0l10.459 10.46a1.54 1.54 0 0 1 0 2.179z", "githubactions": "M10.984 13.836a.5.5 0 0 1-.353-.146l-.745-.743a.5.5 0 1 1 .706-.708l.392.391 1.181-1.18a.5.5 0 0 1 .708.707l-1.535 1.533a.504.504 0 0 1-.354.146zm9.353-.147l1.534-1.532a.5.5 0 0 0-.707-.707l-1.181 1.18-.392-.391a.5.5 0 1 0-.706.708l.746.743a.497.497 0 0 0 .706-.001zM4.527 7.452l2.557-1.585A1 1 0 0 0 7.09 4.17L4.533 2.56A1 1 0 0 0 3 3.406v3.196a1.001 1.001 0 0 0 1.527.85zm2.03-2.436L4 6.602V3.406l2.557 1.61zM24 12.5c0 1.93-1.57 3.5-3.5 3.5a3.503 3.503 0 0 1-3.46-3h-2.08a3.503 3.503 0 0 1-3.46 3 3.502 3.502 0 0 1-3.46-3h-.558c-.972 0-1.85-.399-2.482-1.042V17c0 1.654 1.346 3 3 3h.04c.244-1.693 1.7-3 3.46-3 1.93 0 3.5 1.57 3.5 3.5S13.43 24 11.5 24a3.502 3.502 0 0 1-3.46-3H8c-2.206 0-4-1.794-4-4V9.899A5.008 5.008 0 0 1 0 5c0-2.757 2.243-5 5-5s5 2.243 5 5a5.005 5.005 0 0 1-4.952 4.998A2.482 2.482 0 0 0 7.482 12h.558c.244-1.693 1.7-3 3.46-3a3.502 3.502 0 0 1 3.46 3h2.08a3.503 3.503 0 0 1 3.46-3c1.93 0 3.5 1.57 3.5 3.5zm-15 8c0 1.378 1.122 2.5 2.5 2.5s2.5-1.122 2.5-2.5-1.122-2.5-2.5-2.5S9 19.122 9 20.5zM5 9c2.206 0 4-1.794 4-4S7.206 1 5 1 1 2.794 1 5s1.794 4 4 4zm9 3.5c0-1.378-1.122-2.5-2.5-2.5S9 11.122 9 12.5s1.122 2.5 2.5 2.5 2.5-1.122 2.5-2.5zm9 0c0-1.378-1.122-2.5-2.5-2.5S18 11.122 18 12.5s1.122 2.5 2.5 2.5 2.5-1.122 2.5-2.5zm-13 8a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0zm2 0a.5.5 0 1 0 1 0 .5.5 0 0 0-1 0zm12 0c0 1.93-1.57 3.5-3.5 3.5a3.503 3.503 0 0 1-3.46-3.002c-.007.001-.013.005-.021.005l-.506.017h-.017a.5.5 0 0 1-.016-.999l.506-.017c.018-.002.035.006.052.007A3.503 3.503 0 0 1 20.5 17c1.93 0 3.5 1.57 3.5 3.5zm-1 0c0-1.378-1.122-2.5-2.5-2.5S18 19.122 18 20.5s1.122 2.5 2.5 2.5 2.5-1.122 2.5-2.5z", "gradle": "M22.695 4.297a3.807 3.807 0 0 0-5.29-.09.368.368 0 0 0 0 .533l.46.47a.363.363 0 0 0 .474.032 2.182 2.182 0 0 1 2.86 3.291c-3.023 3.02-7.056-5.447-16.211-1.083a1.24 1.24 0 0 0-.534 1.745l1.571 2.713a1.238 1.238 0 0 0 1.681.461l.037-.02-.029.02.688-.384a16.083 16.083 0 0 0 2.193-1.635.384.384 0 0 1 .499-.016.357.357 0 0 1 .016.534 16.435 16.435 0 0 1-2.316 1.741H8.77l-.696.39a1.958 1.958 0 0 1-.963.25 1.987 1.987 0 0 1-1.726-.989L3.9 9.696C1.06 11.72-.686 15.603.26 20.522a.363.363 0 0 0 .354.296h1.675a.363.363 0 0 0 .37-.331 2.478 2.478 0 0 1 4.915 0 .36.36 0 0 0 .357.317h1.638a.363.363 0 0 0 .357-.317 2.478 2.478 0 0 1 4.914 0 .363.363 0 0 0 .358.317h1.627a.363.363 0 0 0 .363-.357c.037-2.294.656-4.93 2.42-6.25 6.108-4.57 4.502-8.486 3.088-9.9zm-6.229 6.901l-1.165-.584a.73.73 0 1 1 1.165.587z", "androidstudio": "M19.2693 10.3368c-.3321 0-.6026.2705-.6026.6031v9.8324h-1.7379l-3.3355-6.9396c.476-.5387.6797-1.286.5243-2.0009a2.2862 2.2862 0 0 0-1.2893-1.6248v-.8124c.0121-.2871-.1426-.5787-.4043-.7407-.1391-.0825-.2884-.1234-.4402-.1234a.8478.8478 0 0 0-.4318.1182c-.2701.1671-.4248.4587-.4123.7662l-.0003.721c-1.0149.3668-1.6619 1.4153-1.4867 2.5197a2.282 2.282 0 0 0 .5916 1.2103l-3.2096 6.9064H4.0928c-1.0949-.007-1.9797-.8948-1.9832-1.9896V5.016c-.0055 1.1024.8836 2.0006 1.9859 2.0062a2.024 2.024 0 0 0 .1326-.0037h14.7453s2.5343-.2189 2.8619 1.5392c-.2491.0287-.4449.2321-.4449.4889 0 .7115-.5791 1.2901-1.3028 1.2901h-.8183zM17.222 22.5366c.2347.4837.0329 1.066-.4507 1.3007-.1296.0629-.2666.0895-.4018.0927a.9738.9738 0 0 1-.3194-.0455c-.024-.0078-.046-.0209-.0694-.0305a.9701.9701 0 0 1-.2277-.1321c-.0247-.0192-.0495-.038-.0724-.0598-.0825-.0783-.1574-.1672-.21-.2757l-1.2554-2.6143-1.5585-3.2452a.7725.7725 0 0 0-.6995-.4443h-.0024a.792.792 0 0 0-.7083.4443l-1.5109 3.2452-1.2321 2.6464a.9722.9722 0 0 1-.7985.5795c-.0626.0053-.1238-.0024-.185-.0087-.0344-.0036-.069-.0053-.1025-.0124-.0489-.0103-.0954-.0278-.142-.0452-.0301-.0113-.0613-.0197-.0901-.0339-.0496-.0244-.0948-.0565-.1397-.0889-.0217-.0156-.0457-.0275-.0662-.045a.9862.9862 0 0 1-.1695-.1844.9788.9788 0 0 1-.0708-.9852l.8469-1.8223 3.2676-7.0314a1.7964 1.7964 0 0 1-.7072-1.1637c-.1555-.9799.5129-1.9003 1.4928-2.0559V9.3946a.3542.3542 0 0 1 .1674-.3155.3468.3468 0 0 1 .3541 0 .354.354 0 0 1 .1674.3155v1.159l.0129.0064a1.8028 1.8028 0 0 1 1.2878 1.378 1.7835 1.7835 0 0 1-.6439 1.7836l3.3889 7.0507.8481 1.7643zM12.9841 12.306c.0042-.6081-.4854-1.1044-1.0935-1.1085a1.1204 1.1204 0 0 0-.7856.3219 1.101 1.101 0 0 0-.323.7716c-.0042.6081.4854 1.1044 1.0935 1.1085h.0077c.6046 0 1.0967-.488 1.1009-1.0935zm-1.027 5.2768c-.1119.0005-.2121.0632-.2571.1553l-1.4127 3.0342h3.3733l-1.4564-3.0328a.274.274 0 0 0-.2471-.1567zm8.1432-6.7459l-.0129-.0001h-.8177a.103.103 0 0 0-.103.103v12.9103a.103.103 0 0 0 .0966.103h.8435c.9861-.0035 1.7836-.804 1.7836-1.79V9.0468c0 .9887-.8014 1.7901-1.7901 1.7901zM2.6098 5.0161v.019c.0039.816.6719 1.483 1.4874 1.4869a12.061 12.061 0 0 1 .1309-.0034h1.1286c.1972-1.315.7607-2.525 1.638-3.4859H4.0993c-.9266.0031-1.6971.6401-1.9191 1.4975.2417.0355.4296.235.4296.4859zm6.3381-2.8977L7.9112.3284a.219.219 0 0 1 0-.2189A.2384.2384 0 0 1 8.098 0a.219.219 0 0 1 .1867.1094l1.0496 1.8158a6.4907 6.4907 0 0 1 5.3186 0L15.696.1094a.2189.2189 0 0 1 .3734.2189l-1.0302 1.79c1.6671.9125 2.7974 2.5439 3.0975 4.4018l-12.286-.0014c.3004-1.8572 1.4305-3.488 3.0972-4.4003zm5.3774 2.6202a.515.515 0 0 0 .5271.5028.515.515 0 0 0 .5151-.5151.5213.5213 0 0 0-.8885-.367.5151.5151 0 0 0-.1537.3793zm-5.7178-.0067a.5151.5151 0 0 0 .5207.5095.5086.5086 0 0 0 .367-.1481.5215.5215 0 1 0-.734-.7341.515.515 0 0 0-.1537.3727z", "xcode": "M19.06 5.3327c.4517-.1936.7744-.2581 1.097-.1936.5163.1291.7744.5163.968.7098.1936.3872.9034.7744 1.2261.8389.2581.0645.7098-.6453 1.0325-1.2906.3227-.5808.5163-1.3552.4517-1.5488-.0645-.1936-.968-.5808-1.1616-.5808-.1291 0-.3872.1291-.8389.0645-.4517-.0645-.9034-.5808-1.1616-.968-.4517-.6453-1.097-1.0325-1.6778-1.3552-.6453-.3227-1.3552-.5163-2.065-.6453-1.0325-.2581-2.065-.4517-3.0975-.3227-.5808.0645-1.2906.1291-1.8069.3227-.0645 0-.1936.1936-.0645.1936s.5808.0645.5808.0645-.5807.1292-.5807.2583c0 .1291.0645.1291.1291.1291.0645 0 1.4842-.0645 2.065 0 .6453.1291 1.3552.4517 1.8069 1.2261.7744 1.4197.4517 2.7749.2581 3.2266-.968 2.1295-8.6472 15.2294-9.0344 16.1328-.3873.9034-.5163 1.4842.5807 2.065s1.6778.3227 2.0005-.0645c.3872-.5163 7.0339-17.1654 9.2925-18.2624zm-3.6138 8.7117h1.5488c1.0325 0 1.2261.5163 1.2261.7098.0645.5163-.1936 1.1616-1.2261 1.1616h-.968l.7744 1.2906c.4517.7744.2581 1.1616 0 1.4197-.3872.3872-1.2261.3872-1.6778-.4517l-.9034-1.5488c-.6453 1.4197-1.2906 2.9684-2.065 4.7753h4.0009c1.9359 0 3.5492-1.6133 3.5492-3.5492V6.5588c-.0645-.1291-.1936-.0645-.2581 0-.3872.4517-1.4842 2.0004-4.001 7.4856zm-9.8087 8.0019h-.3227c-2.3231 0-4.1945-1.8714-4.1945-4.1945V7.0105c0-2.3231 1.8714-4.1945 4.1945-4.1945h9.3571c-.1936-.1936-.968-.5163-1.7423-.4517-.3227 0-.968.1291-1.3552-.1291-.3872-.3227-.3227-.5163-.9034-.5163H4.9277c-2.6458 0-4.7753 2.1295-4.7753 4.7753v11.7447c0 2.6458 2.1295 4.7753 4.4527 4.7108.6452 0 .8388-.5162 1.0324-.9034zM20.4152 6.9459v10.9058c0 2.3231-1.8714 4.1945-4.1945 4.1945H11.897s-.3872 1.0325.8389 1.0325h3.8719c2.6458 0 4.7753-2.1295 4.7753-4.7753V8.8173c.0646-.9034-.7098-1.4842-.9679-1.8714zm-18.5851.0646v10.8413c0 1.9359 1.6133 3.5492 3.5492 3.5492h.5808c0-.0645.7744-1.4197 2.4522-4.2591.1936-.3872.4517-.7744.7098-1.2261H4.4114c-.5808 0-.9034-.3872-.968-.7098-.1291-.5163.1936-1.1616.9034-1.1616h2.3877l3.033-5.2916s-.7098-1.2906-.9034-1.6133c-.2582-.4517-.1291-.9034.129-1.1615.3872-.3872 1.0325-.5808 1.6778.4517l.2581.3872.2581-.3872c.5808-.8389.968-.7744 1.2906-.7098.5163.1291.8389.7098.3872 1.6133L8.864 14.0444h1.3552c.4517-.7744.9034-1.5488 1.3552-2.3877-.0645-.3227-.1291-.7098-.0645-1.0325.0645-.5163.3227-.968.6453-1.3552l.3872.6453c1.2261-2.1295 2.1295-3.9364 2.3877-4.6463.1291-.3872.3227-1.1616.1291-1.8069H5.3794c-2.0005.0001-3.5493 1.6134-3.5493 3.5494zM4.605 17.7872c0-.0645.7744-1.4197.7744-1.4197 1.2261-.3227 1.8069.4517 1.8714.5163 0 0-.8389 1.4842-1.097 1.7423s-.5808.3227-.9034.2581c-.5164-.129-.839-.6453-.6454-1.097z", "ktor": "M8 0 0 8l8 8V8h8zm8 8v8H8l8 8 8-8z", "fastlane": "M8.144 19.182a1.445 1.445 0 00-1.237-.868l-1.615-4.976-.37-1.135c-.017.01-.112.052-.13.06-.008.01-.025.01-.033.018a.366.366 0 00-.07.037.472.472 0 01-.102.043c-.043.016-.078.034-.12.042-.035.01-.07.027-.104.036-.04.01-.083.025-.126.034-.034.01-.068.017-.103.026a.584.584 0 01-.137.017c-.035.01-.07.01-.103.017-.028 0-.054 0-.08.01h-.16c-.052 0-.095 0-.146-.01-.035 0-.07 0-.095-.01l-.165-.025c-.026-.01-.052-.01-.086-.017a2.456 2.456 0 01-.25-.06 2.498 2.498 0 01-1.633-3.137C1.7 7.97 3.102 7.23 4.417 7.65l.344-1.1A3.673 3.673 0 00.167 8.94a3.674 3.674 0 002.39 4.59 3.877 3.877 0 001.624.128l1.634 5.035a1.432 1.432 0 00-.232.267 1.47 1.47 0 00.387 2.053 1.47 1.47 0 002.2-.662 1.572 1.572 0 00-.03-1.167zM11.901.412a3.656 3.656 0 00-3.62 3.697c.01.54.147 1.09.38 1.58L4.381 8.8a1.468 1.468 0 00-.327-.138 1.47 1.47 0 00-1.83.997c-.233.78.214 1.596.996 1.83.103.032.207.05.31.05.404.025.8-.11 1.09-.38.2-.18.354-.4.43-.678a1.44 1.44 0 00.018-.764l4.237-3.08.962-.702c-.017-.018-.077-.086-.094-.103l-.026-.026c-.017-.018-.035-.036-.052-.06a.46.46 0 01-.07-.087 1.952 1.952 0 00-.076-.103c-.026-.026-.043-.06-.07-.086a1.027 1.027 0 01-.068-.11.56.56 0 00-.06-.096.746.746 0 01-.06-.12c-.017-.034-.034-.06-.043-.095l-.026-.07c-.006-.017-.014-.042-.023-.06-.01-.034-.025-.07-.034-.094-.016-.044-.025-.096-.042-.147l-.025-.096c-.01-.05-.017-.11-.026-.163 0-.025-.01-.05-.018-.085a2.269 2.269 0 01-.017-.26 2.502 2.502 0 012.475-2.526 2.502 2.502 0 012.526 2.475l1.152-.01C15.576 2.01 13.92.386 11.9.41zm11.908 8.664a3.664 3.664 0 00-4.632-2.303 3.803 3.803 0 00-1.385.851l-4.28-3.109c.026-.113.034-.233.034-.354a1.483 1.483 0 00-1.512-1.435 1.483 1.483 0 00-1.436 1.513 1.47 1.47 0 00.744 1.23c.232.128.5.205.782.197.267-.01.525-.086.73-.224l4.239 3.077.962.705.07-.12c.008-.008.008-.025.016-.034.008-.027.025-.044.034-.07.017-.034.034-.06.05-.094a.46.46 0 00.07-.112l.06-.085c.026-.035.052-.07.086-.104.026-.026.043-.05.07-.086l.094-.095.077-.078c.018-.017.035-.034.06-.05.018-.018.036-.027.053-.044a.282.282 0 01.086-.06c.04-.026.084-.052.12-.078a.528.528 0 01.084-.05c.052-.027.094-.053.146-.08.026-.008.052-.025.077-.033a2.51 2.51 0 013.412 1.477 2.507 2.507 0 01-1.572 3.17l.37 1.09c1.9-.627 2.93-2.7 2.294-4.615zm-2.166.62a1.474 1.474 0 00-1.881-.895 1.532 1.532 0 00-.284.14c-.344.214-.584.56-.662.945-.05.258-.043.533.052.8.094.257.24.463.438.627l-1.616 4.976-.37 1.134c.018 0 .112.026.138.026.017 0 .026 0 .043.01.028.008.054.008.08.017.035.01.07.017.104.025.043.01.086.026.13.035.033.01.068.017.102.034l.12.05c.035.018.07.027.103.044.04.017.076.043.12.06.033.017.06.034.093.052.026.01.043.025.06.043.018.01.035.024.052.033.026.018.06.035.086.06a.58.58 0 01.113.096c.025.016.05.042.077.06.043.033.077.076.12.12.02.016.043.034.06.06.06.06.11.13.164.197a2.505 2.505 0 01-.516 3.497 2.507 2.507 0 01-3.5-.515l-.927.686c1.205 1.616 3.5 1.96 5.116.757 1.615-1.203 1.96-3.497.756-5.112a3.82 3.82 0 00-1.237-1.058l1.632-5.036a1.479 1.479 0 001.238-1.968zM18.2 18.905a1.446 1.446 0 00-1.315-.558 1.38 1.38 0 00-.748.3c-.215.163-.37.378-.465.61H9.243c0 .017.01.12.02.137 0 .018 0 .026.01.043 0 .026.01.052.01.078 0 .034.007.07.007.112 0 .043 0 .086.01.128v.112c0 .043-.01.086-.01.13 0 .034-.01.068-.01.11-.01.044-.02.087-.02.138-.007.035-.007.07-.015.103-.01.025-.01.05-.017.08-.01.014-.01.04-.018.06-.01.03-.017.066-.026.1-.017.043-.034.095-.052.14-.01.032-.025.06-.034.092a2.771 2.771 0 01-.077.146c-.016.025-.024.05-.033.077a2.132 2.132 0 01-.138.215 2.504 2.504 0 01-3.49.583 2.501 2.501 0 01-.585-3.489l-.937-.67a3.658 3.658 0 00.86 5.096 3.656 3.656 0 005.095-.86c.318-.445.524-.97.628-1.502h5.294a1.479 1.479 0 002.252.567c.61-.508.73-1.436.232-2.08z", "android": "M18.4395 5.5586c-.675 1.1664-1.352 2.3318-2.0274 3.498-.0366-.0155-.0742-.0286-.1113-.043-1.8249-.6957-3.484-.8-4.42-.787-1.8551.0185-3.3544.4643-4.2597.8203-.084-.1494-1.7526-3.021-2.0215-3.4864a1.1451 1.1451 0 0 0-.1406-.1914c-.3312-.364-.9054-.4859-1.379-.203-.475.282-.7136.9361-.3886 1.5019 1.9466 3.3696-.0966-.2158 1.9473 3.3593.0172.031-.4946.2642-1.3926 1.0177C2.8987 12.176.452 14.772 0 18.9902h24c-.119-1.1108-.3686-2.099-.7461-3.0683-.7438-1.9118-1.8435-3.2928-2.7402-4.1836a12.1048 12.1048 0 0 0-2.1309-1.6875c.6594-1.122 1.312-2.2559 1.9649-3.3848.2077-.3615.1886-.7956-.0079-1.1191a1.1001 1.1001 0 0 0-.8515-.5332c-.5225-.0536-.9392.3128-1.0488.5449zm-.0391 8.461c.3944.5926.324 1.3306-.1563 1.6503-.4799.3197-1.188.0985-1.582-.4941-.3944-.5927-.324-1.3307.1563-1.6504.4727-.315 1.1812-.1086 1.582.4941zM7.207 13.5273c.4803.3197.5506 1.0577.1563 1.6504-.394.5926-1.1038.8138-1.584.4941-.48-.3197-.5503-1.0577-.1563-1.6504.4008-.6021 1.1087-.8106 1.584-.4941z", "apple": "M12.152 6.896c-.948 0-2.415-1.078-3.96-1.04-2.04.027-3.91 1.183-4.961 3.014-2.117 3.675-.546 9.103 1.519 12.09 1.013 1.454 2.208 3.09 3.792 3.039 1.52-.065 2.09-.987 3.935-.987 1.831 0 2.35.987 3.96.948 1.637-.026 2.676-1.48 3.676-2.948 1.156-1.688 1.636-3.325 1.662-3.415-.039-.013-3.182-1.221-3.22-4.857-.026-3.04 2.48-4.494 2.597-4.559-1.429-2.09-3.623-2.324-4.39-2.376-2-.156-3.675 1.09-4.61 1.09zM15.53 3.83c.843-1.012 1.4-2.427 1.245-3.83-1.207.052-2.662.805-3.532 1.818-.78.896-1.454 2.338-1.273 3.714 1.338.104 2.715-.688 3.559-1.701"};
+
+/* ================= i18n: uz (default) · ru · en ================= */
+var LANGS = ['uz','ru','en'];
+var LANG = (function(){
+  var q = (location.search.match(/[?&]lang=(uz|ru|en)\b/) || [])[1];
+  var s = null; try{ s = localStorage.getItem('pf-lang'); }catch(e){}
+  return q || (LANGS.indexOf(s) > -1 ? s : 'uz');
+})();
+var LI = LANGS.indexOf(LANG) === 2 ? 0 : LANGS.indexOf(LANG) + 1; /* index into [en, uz, ru] */
+var I18N = {
+  /* loader */
+  'ld.top': ['Mobile Engineer — Portfolio','Mobil dasturchi — Portfolio','Мобильный разработчик — Портфолио'],
+  'ld.city': ['Samarkand, UZ','Samarqand, UZ','Самарканд, UZ'],
+  'ld.bot': ['Compiling the good stuff','Eng yaxshilari yig‘ilmoqda','Собираю самое лучшее'],
+  /* nav */
+  'nav.work': ['Work','Ishlar','Работы'],
+  'nav.about': ['About','Men haqimda','Обо мне'],
+  'nav.stack': ['Stack','Stek','Стек'],
+  'nav.process': ['Process','Jarayon','Процесс'],
+  'nav.contact': ['Contact','Aloqa','Контакты'],
+  'nav.talk': ['Let’s talk','Gaplashamiz','Обсудим'],
+  'nav.menu': ['Open menu','Menyuni ochish','Открыть меню'],
+  'nav.lang': ['Language','Til','Язык'],
+  'act.t': ['Brief received','Ariza qabul qilindi','Заявка получена'],
+  'act.s': ['Bekdiyor usually replies in ~2h','Bekdiyor odatda ~2 soatda javob beradi','Бекдиёр обычно отвечает за ~2 часа'],
+  'theme.toDark': ['Switch to dark mode','Tungi rejimga o‘tish','Включить тёмную тему'],
+  'theme.toLight': ['Switch to light mode','Kunduzgi rejimga o‘tish','Включить светлую тему'],
+  'city': ['Samarkand','Samarqand','Самарканд'],
+  /* section labels (island) */
+  'sec.intro': ['Intro','Kirish','Интро'],
+  'sec.about': ['About','Men haqimda','Обо мне'],
+  'sec.stack': ['Stack','Stek','Стек'],
+  'sec.exp': ['Experience','Tajriba','Опыт'],
+  'sec.work': ['Selected work','Tanlangan ishlar','Избранные работы'],
+  'sec.process': ['Process','Jarayon','Процесс'],
+  'sec.words': ['Kind words','Fikrlar','Отзывы'],
+  'sec.contact': ['Contact','Aloqa','Контакты'],
+  /* hero */
+  'hero.role': ['Mobile Engineer','Mobil dasturchi','Мобильный разработчик'],
+  'hero.h': ['I build apps<br>people <em>love</em><br>to open daily.','Har kuni <em>sevib</em><br>ochiladigan<br>ilovalar.','Приложения,<br>которые <em>любят</em><br>открывать.'],
+  'hero.lead': ['Three years shipping native Android apps with Kotlin and Jetpack Compose. Now bringing the same craft to iOS with SwiftUI. Fast, polished, and built to last well past v1.0.',
+    'Uch yildan beri Kotlin va Jetpack Compose’da native Android ilovalar chiqaraman. Endi xuddi shu sifatni SwiftUI bilan iOS’ga olib kiryapman. Tez, silliq va v1.0 dan keyin ham uzoq yashaydigan ilovalar.',
+    'Три года выпускаю нативные Android-приложения на Kotlin и Jetpack Compose. Теперь переношу тот же подход на iOS со SwiftUI. Быстро, аккуратно и надолго — далеко после v1.0.'],
+  'hero.cta1': ['View selected work','Ishlarni ko‘rish','Смотреть работы'],
+  'cta.start': ['Start a project','Loyiha boshlash','Начать проект'],
+  'hero.and': ['Since <b>2023</b>','<b>2023</b> yildan','С <b>2023</b>'],
+  'hero.ios': ['Since <b>2026</b>','<b>2026</b> yildan','С <b>2026</b>'],
+  'hero.andA': ['Android, since 2023','Android, 2023 yildan','Android, с 2023'],
+  'hero.iosA': ['iOS, since 2026','iOS, 2026 yildan','iOS, с 2026'],
+  'hero.chip1': ['4.9 ★ · 120K monthly users','4.9 ★ · oyiga 120K foydalanuvchi','4.9 ★ · 120K в месяц'],
+  'hero.chip2': ['Build passed','Build tayyor','Сборка прошла'],
+  'logos.a': ['Teams I’ve worked with','Birga ishlagan jamoalar','Команды, с которыми я работал'],
+  /* about */
+  'about.bg': ['ABOUT · ABOUT · ','HAQIMDA · HAQIMDA · ','ОБО МНЕ · ОБО МНЕ · '],
+  'about.l': ['(02) About','(02) Men haqimda','(02) Обо мне'],
+  'about.alt': ['Bekdiyor, mobile engineer','Bekdiyor, mobil dasturchi','Бекдиёр, мобильный разработчик'],
+  'about.open': ['Open to projects','Loyihalarga ochiqman','Открыт к проектам'],
+  'about.sm': ['Bekdiyor · Samarkand','Bekdiyor · Samarqand','Бекдиёр · Самарканд'],
+  'about.now': ['<b style="color:var(--text)">Now:</b> going deep on SwiftUI and Kotlin Multiplatform.','<b style="color:var(--text)">Hozir:</b> SwiftUI va Kotlin Multiplatform’ni chuqur o‘rganyapman.','<b style="color:var(--text)">Сейчас:</b> погружаюсь в SwiftUI и Kotlin Multiplatform.'],
+  'about.m': ['I turn rough ideas into apps that feel <em>effortless.</em> Clean architecture under the hood, obsessive detail on the surface. Every animation timed, every edge case handled, every release measured. I care about the 60fps scroll, the empty state nobody designs, and the crash that never happens.',
+    'Xom g‘oyalarni ishlatish <em>yengil</em> ilovalarga aylantiraman. Ichida toza arxitektura, tashqarida har bir detalga e’tibor. Har bir animatsiya o‘z vaqtida, har bir chekka holat hisobga olingan, har bir reliz o‘lchangan. Men uchun 60fps skroll, hech kim chizmaydigan bo‘sh ekran va hech qachon sodir bo‘lmaydigan crash muhim.',
+    'Превращаю сырые идеи в приложения, которыми пользоваться <em>легко.</em> Чистая архитектура внутри, одержимость деталями снаружи. Каждая анимация выверена, каждый крайний случай учтён, каждый релиз измерен. Мне важны скролл в 60fps, пустой экран, который никто не рисует, и краш, который так и не случился.'],
+  /* stack */
+  'stack.l': ['(03) Stack','(03) Stek','(03) Стек'],
+  'stack.h': ['My <em class="plain">home</em> screen.','Mening <em class="plain">bosh</em> ekranim.','Мой <em class="plain">домашний</em> экран.'],
+  'hs.n1': ['<b>Dock = daily drivers</b><span>Kotlin, Compose, Swift and SwiftUI live where my thumb always lands.</span>','<b>Dock = har kungi vositalar</b><span>Kotlin, Compose, Swift va SwiftUI doim bosh barmog‘im tushadigan joyda.</span>','<b>Док = главные инструменты</b><span>Kotlin, Compose, Swift и SwiftUI там, куда всегда попадает большой палец.</span>'],
+  'hs.n2': ['<b>Tap a folder</b><span>Architecture and Data open just like on your phone.</span>','<b>Papkani bosing</b><span>Arxitektura va Ma’lumotlar xuddi telefoningizdagidek ochiladi.</span>','<b>Нажмите на папку</b><span>Архитектура и Данные открываются как на телефоне.</span>'],
+  'hs.n3': ['<b>Swipe for page two</b><span>Drag the screen, use the dots or the arrows below.</span>','<b>Ikkinchi sahifaga suring</b><span>Ekranni suring yoki pastdagi nuqta va strelkalarni bosing.</span>','<b>Листайте на вторую страницу</b><span>Тяните экран или жмите точки и стрелки ниже.</span>'],
+  'hs.n4': ['<b>Press and hold</b><span>Icons start to jiggle, just like edit mode. Hover any icon for details.</span>','<b>Bosib turing</b><span>Ikonkalar tahrirlash rejimidagidek titraydi. Tafsilot uchun ikonka ustiga olib boring.</span>','<b>Нажмите и удерживайте</b><span>Иконки задрожат, как в режиме правки. Наведите на иконку, чтобы увидеть детали.</span>'],
+  'hs.done': ['Done','Tayyor','Готово'],
+  'hs.search': ['Search','Qidiruv','Поиск'],
+  'hs.hint': ['Swipe the screen, open a folder, press and hold to jiggle. Hover any icon for details.','Ekranni suring, papkani oching, titratish uchun bosib turing. Tafsilot uchun ikonka ustiga olib boring.','Листайте экран, открывайте папку, удерживайте, чтобы иконки задрожали. Наведите на иконку для деталей.'],
+  'hs.prev': ['Previous page','Oldingi sahifa','Предыдущая страница'],
+  'hs.next': ['Next page','Keyingi sahifa','Следующая страница'],
+  'lvl0': ['Daily driver','Har kuni','Каждый день'],
+  'lvl1': ['Comfortable','Erkin ishlayman','Уверенно'],
+  'lvl2': ['Learning','O‘rganyapman','Изучаю'],
+  'cat.lang': ['Languages','Tillar','Языки'],
+  'cat.ui': ['UI','UI','UI'],
+  'cat.arch': ['Architecture','Arxitektura','Архитектура'],
+  'cat.tools': ['Tools','Vositalar','Инструменты'],
+  'cat.data': ['Data','Ma’lumotlar','Данные'],
+  'pop.lp': ['Long-press','Bosib turing','Удерживайте'],
+  'pop.since': ['Since','Boshlagan yil:','С'],
+  'fold.open': ['Open folder','Papkani ochish','Открыть папку'],
+  'w.yrs': ['3+ yrs','3+ yil','3+ года'],
+  'w.apps': ['12 apps shipped','12 ta ilova chiqarildi','12 приложений выпущено'],
+  'w.learn': ['Now learning','Hozir o‘rganyapman','Сейчас изучаю'],
+  'w.since26': ['since 2026','2026 yildan','с 2026'],
+  'w.cad': ['Release cadence','Reliz ritmi','Ритм релизов'],
+  'w.8w': ['last 8 weeks','so‘nggi 8 hafta','последние 8 недель'],
+  'w.fri': ['A build on your phone every Friday · Fastlane + GitHub Actions','Har juma telefoningizda yangi build · Fastlane + GitHub Actions','Сборка на вашем телефоне каждую пятницу · Fastlane + GitHub Actions'],
+  /* experience */
+  'exp.l': ['(04) Experience','(04) Tajriba','(04) Опыт'],
+  'exp.h': ['Release <em class="plain">notes.</em>','Reliz <em class="plain">qaydlari.</em>','Заметки <em class="plain">к релизам.</em>'],
+  'exp.p': ['My career as a changelog. Every role shipped something you can measure.','Karyeram changelog ko‘rinishida. Har bir lavozimda o‘lchasa bo‘ladigan natija bor.','Моя карьера в формате changelog. На каждой роли — измеримый результат.'],
+  'exp.cv': ['Download résumé (PDF)','Rezyumeni yuklab olish (PDF)','Скачать резюме (PDF)'],
+  'rel.proj': ['Projects','Loyihalar','Проекты'],
+  'rel.notes': ['Release notes','Reliz qaydlari','Заметки к релизу'],
+  'rel.did': ['What I did','Nima qildim','Что я делал'],
+  'rel.impact': ['Impact','Natija','Результат'],
+  'rel.team': ['Team','Jamoa','Команда'],
+  'rel.stack': ['Stack','Stek','Стек'],
+  'rel.more': ['Details','Batafsil','Подробнее'],
+  'rel.less': ['Less','Yig‘ish','Свернуть'],
+  /* work */
+  'work.bg': ['SHIPPED · SHIPPED · ','RELIZ · RELIZ · ','РЕЛИЗ · РЕЛИЗ · '],
+  'work.l': ['(05) Selected work','(05) Tanlangan ishlar','(05) Избранные работы'],
+  'work.h': ['Apps I’ve <em>shipped.</em>','Chiqargan <em>ilovalarim.</em>','Мои <em>приложения.</em>'],
+  'work.p': ['Scroll. The phones stay with you: splash screen behind, the real app in front, and the room changes to each product’s colours.','Pastga suring. Telefonlar siz bilan qoladi: orqada splash ekran, oldinda haqiqiy ilova, fon esa har bir mahsulot rangiga o‘zgaradi.','Листайте. Телефоны остаются с вами: сзади сплэш, спереди само приложение, а фон меняется под цвета продукта.'],
+  'work.case': ['Case study','Batafsil','Подробнее'],
+  'work.view': ['View','Ko‘rish','Смотреть'],
+  'more.a': ['More work','Boshqa ishlar','Другие работы'],
+  'more.h': ['More work','Boshqa ishlar','Другие работы'],
+  'more.all': ['All projects (12) →','Barcha loyihalar (12) →','Все проекты (12) →'],
+  'soon': ['Coming soon.','Tez orada qo‘shiladi.','Скоро появится.'],
+  'soon.case': ['Case studies are coming soon.','Batafsil sahifalar tez orada qo‘shiladi.','Подробные кейсы скоро появятся.'],
+  /* process */
+  'pr.bg': ['IDEA → STORE · IDEA → STORE · ','G‘OYA → STORE · G‘OYA → STORE · ','ИДЕЯ → STORE · ИДЕЯ → STORE · '],
+  'pr.l': ['(06) Process','(06) Jarayon','(06) Процесс'],
+  'pr.h': ['From idea to <em>store.</em>','G‘oyadan <em>store’gacha.</em>','От идеи до <em>стора.</em>'],
+  /* quotes */
+  'q.l': ['(07) Kind words <span style="opacity:.7">· sample quotes</span>','(07) Fikrlar <span style="opacity:.7">· namuna</span>','(07) Отзывы <span style="opacity:.7">· примеры</span>'],
+  /* contact */
+  'c.l': ['(08) Start a project','(08) Loyiha boshlash','(08) Начать проект'],
+  'c.reply': ['Usually replies within 2 hours','Odatda 2 soat ichida javob beradi','Обычно отвечает в течение 2 часов'],
+  'c.h': ['Got an idea?<br><em>Let’s ship it.</em>','G‘oyangiz bormi?<br><em>Keling, chiqaramiz.</em>','Есть идея?<br><em>Давайте запустим.</em>'],
+  'c.p': ['Tell me about it in five quick steps. I reply within 24 hours, usually much faster.','Besh qisqa qadamda aytib bering. 24 soat ichida, odatda ancha tezroq javob beraman.','Расскажите о ней в пять коротких шагов. Отвечу в течение 24 часов, обычно гораздо быстрее.'],
+  'c.copy': ['Copy','Nusxa','Копировать'],
+  'c.call': ['Call','Qo‘ng‘iroq','Позвонить'],
+  'mail.ok': ['Email copied: ','Email nusxalandi: ','Email скопирован: '],
+  'mail.no': ['Email: ','Email: ','Email: '],
+  /* brief form */
+  'f.min': ['~1 min','~1 daqiqa','~1 мин'],
+  'f.step': ['Step {n} of 5','{n}-qadam / 5','Шаг {n} из 5'],
+  'f.q1': ['What are we building?','Nima yaratamiz?','Что делаем?'],
+  'o.new': ['New app','Yangi ilova','Новое приложение'], 'o.newS': ['From idea to the stores','G‘oyadan store’largacha','От идеи до сторов'],
+  'o.imp': ['Improve existing','Mavjudini yaxshilash','Улучшить текущее'], 'o.impS': ['Faster, fewer crashes','Tezroq, kamroq crash','Быстрее, меньше крашей'],
+  'o.con': ['Consulting','Maslahat','Консультация'], 'o.conS': ['Architecture, code review','Arxitektura, code review','Архитектура, код-ревью'],
+  'o.else': ['Something else','Boshqa narsa','Другое'], 'o.elseS': ['Let’s talk it through','Birga muhokama qilamiz','Обсудим вместе'],
+  'f.q2': ['Which platforms do you need?','Qaysi platformalar kerak?','Какие платформы нужны?'],
+  'o.both': ['Both','Ikkalasi','Обе'],
+  'f.q3': ['Budget and timeline','Byudjet va muddat','Бюджет и сроки'],
+  'f.budget': ['Budget range','Taxminiy byudjet','Примерный бюджет'],
+  'o.asap': ['ASAP','Imkon qadar tez','Как можно скорее'],
+  'o.12': ['1–2 months','1–2 oy','1–2 месяца'],
+  'o.3': ['3+ months','3+ oy','3+ месяца'],
+  'o.flex': ['Flexible','Moslashuvchan','Гибко'],
+  'f.q4': ['Tell me about the idea','G‘oya haqida aytib bering','Расскажите об идее'],
+  'f.idea': ['A few sentences are enough','Bir-ikki gap kifoya','Достаточно пары предложений'],
+  'f.ideaP': ['Who is it for, what problem does it solve, any apps you like…','Kim uchun, qaysi muammoni hal qiladi, qaysi ilovalar yoqadi…','Для кого, какую проблему решает, какие приложения нравятся…'],
+  'f.link': ['Link to a brief, Figma or reference (optional)','Brif, Figma yoki namunaga havola (ixtiyoriy)','Ссылка на бриф, Figma или пример (необязательно)'],
+  'f.q5': ['How can I reach you?','Siz bilan qanday bog‘lanay?','Как с вами связаться?'],
+  'f.name': ['Your name','Ismingiz','Ваше имя'],
+  'f.nameP': ['Malika','Malika','Малика'],
+  'f.contact': ['Telegram, phone or email','Telegram, telefon yoki email','Telegram, телефон или email'],
+  'f.contactP': ['@username, +998… or you@mail.com','@username, +998… yoki siz@mail.com','@username, +998… или you@mail.com'],
+  'f.back': ['Back','Orqaga','Назад'],
+  'f.next': ['Continue →','Davom etish →','Далее →'],
+  'f.send': ['Send brief →','Yuborish →','Отправить →'],
+  'f.sending': ['Sending…','Yuborilmoqda…','Отправляю…'],
+  'f.foot': ['Goes straight to my Telegram · no spam, ever','To‘g‘ridan-to‘g‘ri Telegramimga boradi · spam yo‘q','Сразу приходит мне в Telegram · без спама'],
+  'f.e1': ['Pick what we are building.','Nima yaratishimizni tanlang.','Выберите, что делаем.'],
+  'f.e2': ['Pick a platform.','Platformani tanlang.','Выберите платформу.'],
+  'f.e3': ['Pick a timeline.','Muddatni tanlang.','Выберите сроки.'],
+  'f.e4': ['Write at least a sentence about the idea.','G‘oya haqida kamida bir gap yozing.','Напишите хотя бы одно предложение об идее.'],
+  'f.e5': ['Add your name.','Ismingizni yozing.','Укажите имя.'],
+  'f.e6': ['Add a Telegram @username, a phone number or an email.','Telegram @username, telefon raqam yoki email yozing.','Укажите Telegram @username, телефон или email.'],
+  'f.eLink': ['The link should start with http:// or https://','Havola http:// yoki https:// bilan boshlansin','Ссылка должна начинаться с http:// или https://'],
+  'f.thanks': ['Thanks, {n}!','Rahmat, {n}!','Спасибо, {n}!'],
+  'f.ok': ['Your brief is in my Telegram. I’ll get back to you soon.','Arizangiz Telegramimga yetib keldi. Tez orada javob beraman.','Заявка уже у меня в Telegram. Скоро отвечу.'],
+  'f.fail': ['It couldn’t be sent automatically. I copied the brief: open Telegram and paste it to me.','Avtomatik yuborilmadi. Ariza matni nusxalandi: Telegramni ochib, menga yuboring.','Не удалось отправить автоматически. Я скопировал заявку: откройте Telegram и вставьте её мне.'],
+  'f.openTg': ['Open Telegram','Telegramni ochish','Открыть Telegram'],
+  'f.again': ['Start over','Qaytadan','Заново'],
+  /* footer */
+  'ft.h': ['Have an app in mind?<br>Let’s make it real.','Ilova g‘oyangiz bormi?<br>Keling, yaratamiz.','Есть идея приложения?<br>Давайте сделаем.'],
+  'ft.time': ['Local time','Mahalliy vaqt','Местное время'],
+  'ft.social': ['Social','Tarmoqlar','Соцсети'],
+  'ft.contact': ['Contact','Aloqa','Контакты'],
+  'ft.top': ['Back to top ↑','Tepaga ↑','Наверх ↑'],
+  'ft.copy': ['© 2026 · Designed and built by Bekdiyor','© 2026 · Dizayn va kod: Bekdiyor','© 2026 · Дизайн и код: Бекдиёр'],
+  'ft.visits': ['{n} visits','{n} ta tashrif','Посещений: {n}'],
+  /* palette */
+  'pal.ph': ['Type a command or search…','Buyruq yozing yoki qidiring…','Введите команду или поиск…'],
+  'pal.foot': ['↑ ↓ navigate · ↵ select · ⌘K / Ctrl K toggle','↑ ↓ tanlash · ↵ ochish · ⌘K / Ctrl K','↑ ↓ навигация · ↵ выбрать · ⌘K / Ctrl K'],
+  'pal.a': ['Command menu','Buyruqlar menyusi','Меню команд'],
+  'pal.none': ['No matches','Hech narsa topilmadi','Ничего не найдено'],
+  'pal.nav': ['Navigate','O‘tish','Навигация'],
+  'pal.act': ['Actions','Amallar','Действия'],
+  'pal.app': ['Appearance','Ko‘rinish','Внешний вид'],
+  'pal.lang': ['Language','Til','Язык'],
+  'pal.go': ['Go to {s}','{s} bo‘limiga o‘tish','Перейти: {s}'],
+  'pal.mail': ['Copy email address','Email manzilni nusxalash','Скопировать email'],
+  'pal.tg': ['Message on Telegram','Telegramda yozish','Написать в Telegram'],
+  'pal.theme': ['Toggle dark / light mode','Tungi / kunduzgi rejim','Тёмная / светлая тема'],
+  'cur.hi': ['Hi!','Salom!','Привет!']
+};
+function T(k, v){
+  var e = I18N[k], s = e ? (e[LI] != null ? e[LI] : e[0]) : k;
+  if (v) for (var p in v) s = s.split('{' + p + '}').join(v[p]);
+  return s;
+}
+/* {en, uz, ru} objects anywhere in CONTENT become plain strings for the active language */
+function localize(o){
+  if (Array.isArray(o)) return o.map(localize);
+  if (o && typeof o === 'object'){
+    if ('en' in o && ('uz' in o || 'ru' in o)) return o[LANG] != null ? o[LANG] : o.en;
+    var r = {}; for (var k in o) r[k] = localize(o[k]); return r;
+  }
+  return o;
+}
+CONTENT = localize(CONTENT);
+document.documentElement.lang = LANG;
+/* static markup: data-t → innerHTML, data-ta="attr:key;attr:key" → attributes */
+if (LANG !== 'en'){
+  Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function(el){ if (I18N[el.dataset.t]) el.innerHTML = T(el.dataset.t); });
+  Array.prototype.forEach.call(document.querySelectorAll('[data-ta]'), function(el){
+    el.dataset.ta.split(';').forEach(function(p){ var kv = p.split(':'); if (I18N[kv[1]]) el.setAttribute(kv[0], T(kv[1])); });
+  });
+}
+function setLang(l){
+  if (LANGS.indexOf(l) < 0 || l === LANG) return;
+  try{ localStorage.setItem('pf-lang', l); }catch(e){}
+  var u = location.href.replace(/([?&])lang=(uz|ru|en)&?/, '$1').replace(/[?&]$/, '');
+  if (/[?&]lang=/.test(location.href)) location.href = u; else location.reload();
+}
 
 /* ================= helpers ================= */
 var D = document, H = D.documentElement;
@@ -1318,14 +1546,14 @@ $('#timeline').insertAdjacentHTML('beforeend', CONTENT.experience.map(function(e
     '<div class="rel-head"><span class="vtag">' + esc(e.v) + '</span><span class="rel-role">' + esc(e.role) + '</span></div>' +
     '<div class="rel-co"><span class="co-tile" style="background:' + e.c + '">' + e.ab + '</span>' + esc(e.co) + ' · ' + esc(e.when) + '</div>' +
     '<p class="rel-sum">' + esc(e.sum || '') + '</p>' +
-    '<div class="rel-proj"><small>Projects</small>' + (e.proj || []).map(function(p){ return '<button type="button" class="pchip"' + (p[2] ? ' data-go="1"' : '') + '><i style="background:' + p[1] + '"></i>' + esc(p[0]) + '</button>'; }).join('') + '</div>' +
+    '<div class="rel-proj"><small>' + T('rel.proj') + '</small>' + (e.proj || []).map(function(p){ return '<button type="button" class="pchip"' + (p[2] ? ' data-go="1"' : '') + '><i style="background:' + p[1] + '"></i>' + esc(p[0]) + '</button>'; }).join('') + '</div>' +
     '<div class="rel-more" id="relm' + i + '"><div><div class="inner">' +
-      '<div class="full"><h5>Release notes</h5>' + e.notes.map(function(n){ return '<div class="note"><b class="k-' + n[0] + '">' + n[0] + '</b><span>' + esc(n[1]) + '</span></div>'; }).join('') + '</div>' +
-      '<div><h5>What I did</h5><ul>' + (e.resp || []).map(function(r){ return '<li>' + esc(r) + '</li>'; }).join('') + '</ul></div>' +
-      '<div><h5>Impact</h5><div class="rel-met" style="margin-top:0">' + (e.metrics || []).map(function(m){ return '<span><b>' + esc(m[0]) + '</b> ' + esc(m[1]) + '</span>'; }).join('') + '</div><h5 style="margin-top:18px">Team</h5><div style="font-size:14px">' + esc(e.team || '') + '</div></div>' +
-      '<div class="full"><h5>Stack</h5><div class="stk">' + (e.stack || []).map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('') + '</div></div>' +
+      '<div class="full"><h5>' + T('rel.notes') + '</h5>' + e.notes.map(function(n){ return '<div class="note"><b class="k-' + n[0] + '">' + n[0] + '</b><span>' + esc(n[1]) + '</span></div>'; }).join('') + '</div>' +
+      '<div><h5>' + T('rel.did') + '</h5><ul>' + (e.resp || []).map(function(r){ return '<li>' + esc(r) + '</li>'; }).join('') + '</ul></div>' +
+      '<div><h5>' + T('rel.impact') + '</h5><div class="rel-met" style="margin-top:0">' + (e.metrics || []).map(function(m){ return '<span><b>' + esc(m[0]) + '</b> ' + esc(m[1]) + '</span>'; }).join('') + '</div><h5 style="margin-top:18px">' + T('rel.team') + '</h5><div style="font-size:14px">' + esc(e.team || '') + '</div></div>' +
+      '<div class="full"><h5>' + T('rel.stack') + '</h5><div class="stk">' + (e.stack || []).map(function(t){ return '<span>' + esc(t) + '</span>'; }).join('') + '</div></div>' +
     '</div></div></div>' +
-    '<button type="button" class="rel-tog" aria-expanded="false" aria-controls="relm' + i + '">' + plus + '<span>Details</span></button>' +
+    '<button type="button" class="rel-tog" aria-expanded="false" aria-controls="relm' + i + '">' + plus + '<span>' + T('rel.more') + '</span></button>' +
   '</article>';
 }).join(''));
 
@@ -1335,23 +1563,16 @@ $('#projList').innerHTML = CONTENT.featured.map(function(p,i){
   '<div class="proj-top"><div class="proj-id"><div class="proj-ic">'+p.ab+'</div><div><div class="proj-name">'+esc(p.name)+'</div><div class="proj-cat">'+esc(p.cat)+'</div></div></div><span class="mono dimtxt">0'+(i+1)+' / 0'+CONTENT.featured.length+'</span></div>'+
   '<p class="proj-pitch">'+esc(p.pitch)+'</p>'+
   '<div class="metrics">'+p.metrics.map(function(m){ return '<div class="metric"><b>'+m[0]+'</b><span>'+esc(m[1])+'</span></div>'; }).join('')+'</div>'+
-  '<div class="proj-bot"><div class="tags">'+p.tags.map(function(t){ return '<span>'+esc(t)+'</span>'; }).join('')+'</div><a class="proj-cta" href="#case" data-magnetic data-soon="Case study pages come in phase 7.">Case study '+arrow+'</a></div>'+
+  '<div class="proj-bot"><div class="tags">'+p.tags.map(function(t){ return '<span>'+esc(t)+'</span>'; }).join('')+'</div><a class="proj-cta" href="#case" data-magnetic data-soon="case">'+T('work.case')+' '+arrow+'</a></div>'+
   '</article></div>';
 }).join('');
 
 $('#mgrid').innerHTML = CONTENT.more.map(function(g){
-  return '<a class="mcard" href="#case" data-cursor="View" data-soon="Case study pages come in phase 7."><div class="mvis" style="background:'+g.color+'"><div class="mphone-wrap" data-speed="0.88"><div class="mphone"><div style="background:'+g.screen+'">'+
+  return '<a class="mcard" href="#case" data-cursor="'+T('work.view')+'" data-soon="case"><div class="mvis" style="background:'+g.color+'"><div class="mphone-wrap" data-speed="0.88"><div class="mphone"><div style="background:'+g.screen+'">'+
   '<i style="height:10px;width:55%;background:'+g.color+'"></i><i class="sh" style="height:70px;border-radius:14px;background:'+g.color+';opacity:.55"></i><i class="sh" style="height:8px;width:80%;background:rgba(255,255,255,.2)"></i><i style="height:8px;width:50%;background:rgba(255,255,255,.12)"></i><i class="sh" style="height:46px;border-radius:12px;background:rgba(255,255,255,.08)"></i><i style="height:46px;border-radius:12px;background:rgba(255,255,255,.08)"></i>'+
   '</div></div></div></div><div class="minfo"><div><b>'+esc(g.name)+'</b><small>'+esc(g.cat)+'</small></div><span class="mono dimtxt">'+esc(g.plat).toUpperCase()+'</span></div></a>';
 }).join('');
 
-function fmt(n){ return '$' + n.toLocaleString('en-US'); }
-$('#tiers').innerHTML = CONTENT.tiers.map(function(t){
-  return '<div class="tier'+(t.hot?' hot':'')+'"><div class="tier-top"><div class="tier-name">'+esc(t.name)+'</div>'+(t.hot?'<span class="badge">MOST PICKED</span>':'')+'</div><p>'+esc(t.desc)+'</p>'+
-  '<div class="price"><small>from</small><b data-p0="'+t.p[0]+'" data-p1="'+t.p[1]+'">'+fmt(t.p[0])+'</b><small class="unit"></small></div>'+
-  '<div class="feats">'+t.feats.map(function(f){ return '<div>'+check+'<span>'+esc(f)+'</span></div>'; }).join('')+'</div>'+
-  '<a class="tier-cta" href="#contact">'+esc(t.cta)+'</a></div>';
-}).join('');
 
 var STEP_ICONS = {
   discover: '<circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/><path d="M8.5 11h5M11 8.5v5"/>',
@@ -1415,7 +1636,7 @@ $('#q2').innerHTML = qHTML(qb) + qHTML(qb);
 function applyTheme(light){
   H.classList.toggle('light', light);
   store('pf-theme', light ? 'light' : 'dark');
-  $('#themeBtn').setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+  $('#themeBtn').setAttribute('aria-label', light ? T('theme.toDark') : T('theme.toLight'));
   updateProjBg();
 }
 function toggleTheme(ev){
@@ -1429,16 +1650,7 @@ function toggleTheme(ev){
       { duration: 750, easing: 'cubic-bezier(.75,0,.2,1)', pseudoElement: '::view-transition-new(root)' });
   }).catch(function(){});
 }
-function setAccent(a){
-  if (['aurora','mint','acid'].indexOf(a) < 0) a = 'aurora';
-  if (a === 'aurora') H.removeAttribute('data-accent'); else H.setAttribute('data-accent', a);
-  store('pf-accent', a === 'aurora' ? '' : a);
-  $$('.sw').forEach(function(s){ s.setAttribute('aria-pressed', String(s.dataset.accent === a)); });
-}
-setAccent(H.getAttribute('data-accent') || 'aurora');
 $('#themeBtn').addEventListener('click', toggleTheme);
-$('#themeBtn2').addEventListener('click', toggleTheme);
-$$('.sw').forEach(function(s){ s.addEventListener('click', function(){ setAccent(s.dataset.accent); toast('Background: ' + s.getAttribute('aria-label').replace(' accent','')); }); });
 
 /* ================= smooth scroll ================= */
 var lenis = null;
@@ -1456,7 +1668,7 @@ D.addEventListener('click', function(e){
   var a = e.target.closest && e.target.closest('a[href^="#"]');
   if (!a) return;
   e.preventDefault();
-  if (a.dataset.soon){ toast(a.dataset.soon); return; }
+  if (a.dataset.soon){ toast(a.dataset.soon === 'case' ? T('soon.case') : T('soon')); return; }
   var id = a.getAttribute('href').slice(1);
   closeMenu();
   goTo(id);
@@ -1656,7 +1868,7 @@ function pickProj(){
 /* ================= release notes: year wheel + expandable cards ================= */
 (function(){
   var EX = CONTENT.experience, rels = $$('#timeline .rel'), curI = -1, Y0 = 2022, NOW = 2026.85, TOT = NOW - Y0;
-  function yrs(w){ var m = w.match(/(\d{4})\D+(\d{4}|now)/); return [+m[1], m[2] === 'now' ? NOW : +m[2]]; }
+  function yrs(w){ var m = w.match(/(\d{4})(?:\D+(\d{4}))?/); return [+m[1], m[2] ? +m[2] : NOW]; }
   function short(e){ return e.v.replace('-beta', 'β'); }
   /* 1 wheel */
   var wl = $('#wheelList');
@@ -1678,11 +1890,11 @@ function pickProj(){
   /* expand / collapse */
   rels.forEach(function(r){
     var t = $('.rel-tog', r);
-    t.addEventListener('click', function(){ var open = !r.classList.contains('open'); r.classList.toggle('open', open); t.setAttribute('aria-expanded', String(open)); $('span', t).textContent = open ? 'Less' : 'Details'; });
+    t.addEventListener('click', function(){ var open = !r.classList.contains('open'); r.classList.toggle('open', open); t.setAttribute('aria-expanded', String(open)); $('span', t).textContent = open ? T('rel.less') : T('rel.more'); });
   });
   D.addEventListener('click', function(e){
     var c = e.target.closest && e.target.closest('button.pchip'); if (!c) return;
-    if (c.dataset.go) goTo('work'); else toast(c.textContent.trim() + ': case study comes in phase 7.');
+    if (c.dataset.go) goTo('work'); else toast(c.textContent.trim() + ' · ' + T('soon.case'));
   });
 })();
 
@@ -1702,7 +1914,7 @@ if (io){
 }
 
 /* ================= skills: 4 layouts ================= */
-var LVL = ['Daily driver','Comfortable','Learning'];
+var LVL = [T('lvl0'), T('lvl1'), T('lvl2')];
 var CUSTOM = {
   swiftui:'<path d="M12 3l8 4.5-8 4.5-8-4.5z"/><path d="M4 12l8 4.5 8-4.5"/><path d="M4 16.5l8 4.5 8-4.5"/>',
   flow:'<path d="M3 8c3-3 6 3 9 0s6 3 9 0"/><path d="M3 16c3-3 6 3 9 0s6 3 9 0"/>',
@@ -1723,19 +1935,19 @@ function lvlChip(k){ return '<span class="lvl l' + k.lvl + '"><i></i>' + LVL[k.l
 
 /* -- view 1: home screen -- */
 function hsApp(idx, label){ var k = SK[idx]; return '<div class="hs-app" data-sk="' + idx + '" tabindex="0" role="button" aria-label="' + esc(k.n) + '">' + tile(k) + (label === false ? '' : '<em>' + esc(k.n) + '</em>') + '</div>'; }
-var FOLDERS = { arch: { t: 'Architecture', items: ['Coroutines & Flow','MVVM / MVI','Clean Arch','Hilt'] }, data: { t: 'Data', items: ['Room','Retrofit','Ktor','Firebase'] } };
+var FOLDERS = { arch: { t: T('cat.arch'), items: ['Coroutines & Flow','MVVM / MVI','Clean Arch','Hilt'] }, data: { t: T('cat.data'), items: ['Room','Retrofit','Ktor','Firebase'] } };
 function hsFolder(key){
   var f = FOLDERS[key];
-  return '<div class="hs-app" data-folder="' + key + '" tabindex="0" role="button" aria-label="Open ' + f.t + ' folder"><span class="ai folder" style="--c:transparent">' +
+  return '<div class="hs-app" data-folder="' + key + '" tabindex="0" role="button" aria-label="' + T('fold.open') + ': ' + f.t + '"><span class="ai folder" style="--c:transparent">' +
     f.items.map(function(n){ var k = SK[byName(n)]; return '<span class="ai" style="background:' + k.c + ';--f:' + (k.f || '#fff') + '">' + glyph(k.i) + '</span>'; }).join('') + '</span><em>' + f.t + '</em></div>';
 }
 $('#hsP1').innerHTML =
-  '<div class="hs-w"><div style="display:flex;justify-content:space-between;align-items:center">' + tile(SK[0], '--s:34px') + '<small>Android</small></div><div><b>3+ yrs</b><span>12 apps shipped</span></div></div>' +
-  '<div class="hs-w"><small>Now learning</small><div style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="5"/><circle cx="22" cy="22" r="18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="113" stroke-dashoffset="70" transform="rotate(-90 22 22)"/></svg><div><b style="font-size:20px">SwiftUI</b><span style="display:block">since 2026</span></div></div></div>' +
+  '<div class="hs-w"><div style="display:flex;justify-content:space-between;align-items:center">' + tile(SK[0], '--s:34px') + '<small>Android</small></div><div><b>' + T('w.yrs') + '</b><span>' + T('w.apps') + '</span></div></div>' +
+  '<div class="hs-w"><small>' + T('w.learn') + '</small><div style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="5"/><circle cx="22" cy="22" r="18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="113" stroke-dashoffset="70" transform="rotate(-90 22 22)"/></svg><div><b style="font-size:20px">SwiftUI</b><span style="display:block">' + T('w.since26') + '</span></div></div></div>' +
   ['Java','Multiplatform','Material 3','Figma'].map(function(n){ return hsApp(byName(n)); }).join('') +
   hsFolder('arch') + hsFolder('data') + hsApp(byName('Android Studio')) + hsApp(byName('Xcode'));
 $('#hsP2').innerHTML =
-  '<div class="hs-w wide"><div style="display:flex;justify-content:space-between"><small>Release cadence</small><small>last 8 weeks</small></div><div class="hs-bars"><i style="height:40%"></i><i style="height:65%"></i><i style="height:50%"></i><i style="height:85%"></i><i style="height:60%"></i><i style="height:95%"></i><i style="height:70%"></i><i style="height:100%"></i></div><span>A build on your phone every Friday · Fastlane + GitHub Actions</span></div>' +
+  '<div class="hs-w wide"><div style="display:flex;justify-content:space-between"><small>' + T('w.cad') + '</small><small>' + T('w.8w') + '</small></div><div class="hs-bars"><i style="height:40%"></i><i style="height:65%"></i><i style="height:50%"></i><i style="height:85%"></i><i style="height:60%"></i><i style="height:95%"></i><i style="height:70%"></i><i style="height:100%"></i></div><span>' + T('w.fri') + '</span></div>' +
   ['Gradle','Git','GitHub Actions','Fastlane','Coroutines & Flow','MVVM / MVI','Room','Retrofit'].map(function(n){ return hsApp(byName(n)); }).join('');
 $('#hsDock').innerHTML = ['Kotlin','Jetpack Compose','Swift','SwiftUI'].map(function(n){ return hsApp(byName(n), false); }).join('');
 
@@ -1786,7 +1998,7 @@ var skPop = D.createElement('div'); skPop.id = 'skPop'; skPop.setAttribute('role
 var popFor = null;
 function showPop(el){
   var k = SK[+el.dataset.sk]; if (!k) return; popFor = el;
-  skPop.innerHTML = '<small>Long-press · ' + k.cat + '</small><div class="pp-h">' + tile(k) + '<div><b>' + esc(k.n) + '</b><div class="pp-meta">Since ' + k.since + ' · ' + LVL[k.lvl] + '</div></div></div><p>' + esc(k.d) + '</p>';
+  skPop.innerHTML = '<small>' + T('pop.lp') + ' · ' + T('cat.' + k.cat) + '</small><div class="pp-h">' + tile(k) + '<div><b>' + esc(k.n) + '</b><div class="pp-meta">' + T('pop.since') + ' ' + k.since + ' · ' + LVL[k.lvl] + '</div></div></div><p>' + esc(k.d) + '</p>';
   var r = el.getBoundingClientRect(), pw = 260, ph = skPop.offsetHeight || 150;
   var x = clamp(r.left + r.width / 2 - pw / 2, 12, innerWidth - pw - 12);
   var yy = r.top - ph - 12; if (yy < 70) yy = r.bottom + 12;
@@ -1800,45 +2012,17 @@ addEventListener('scroll', function(){ if (popFor) hidePop(); }, { passive: true
 
 D.addEventListener('keydown', function(e){ if (e.key === 'Escape'){ hsFold.classList.remove('open'); hsScreen.classList.remove('jig'); } });
 
-/* ================= services toggle ================= */
-var seg = $('#seg'), pill = $('#segPill'), bill = 0;
-function placePill(){
-  var b = $('button[aria-pressed="true"]', seg);
-  pill.style.width = b.offsetWidth + 'px'; pill.style.transform = 'translateX(' + (b.offsetLeft - 5) + 'px)';
-}
-function tweenPrice(el, from, to){
-  if (reduce){ el.textContent = fmt(to); return; }
-  var t0 = performance.now();
-  (function step(t){ var p = clamp((t-t0)/700,0,1), e = 1 - Math.pow(1-p,3); el.textContent = fmt(Math.round(from + (to-from)*e)); if (p<1) requestAnimationFrame(step); })(t0);
-}
-$$('button', seg).forEach(function(b){
-  b.addEventListener('click', function(){
-    var nb = +b.dataset.bill; if (nb === bill) return;
-    $$('button', seg).forEach(function(x){ x.setAttribute('aria-pressed', String(x === b)); });
-    placePill();
-    $$('.price b').forEach(function(p){ tweenPrice(p, +p.dataset['p'+bill], +p.dataset['p'+nb]); });
-    $$('.price .unit').forEach(function(u){ u.textContent = nb ? '/ month' : ''; });
-    bill = nb;
-  });
-});
-$$('.tier').forEach(function(t){
-  t.addEventListener('mousemove', function(e){ var r = t.getBoundingClientRect(); t.style.setProperty('--mx', (e.clientX - r.left) + 'px'); t.style.setProperty('--my', (e.clientY - r.top) + 'px'); });
-});
-
 /* ================= copy email ================= */
 $('#copyMail').addEventListener('click', function(){
-  var done = function(){ toast('Email copied: ' + CONTENT.email); };
+  var done = function(){ toast(T('mail.ok') + CONTENT.email); };
   try{
-    navigator.clipboard.writeText(CONTENT.email).then(done, function(){ toast('Copy blocked here. Email: ' + CONTENT.email); });
-  }catch(e){ toast('Email: ' + CONTENT.email); }
-});
-D.addEventListener('click', function(e){
-  var b = e.target.closest && e.target.closest('button[data-soon]');
-  if (b) toast(b.dataset.soon);
+    navigator.clipboard.writeText(CONTENT.email).then(done, function(){ toast(T('mail.no') + CONTENT.email); });
+  }catch(e){ toast(T('mail.no') + CONTENT.email); }
 });
 
-/* ================= brief form ================= */
-var form = $('#brief'), bSteps = $$('.bstep', form), bi = 0, data = { budget: 8 };
+
+/* ================= brief form → Telegram ================= */
+var form = $('#brief'), bSteps = $$('.bstep', form), bi = 0, data = { budget: 8 }, sending = false;
 var bErr = $('#bErr');
 $$('.opts', form).forEach(function(g){
   $$('.opt', g).forEach(function(o){
@@ -1849,68 +2033,122 @@ $$('.opts', form).forEach(function(g){
   });
 });
 var fb = $('#fBudget');
-fb.addEventListener('input', function(){ data.budget = +fb.value; $('#budgetOut').textContent = fb.value >= 20 ? '$20k+' : '~ $' + fb.value + 'k'; });
-$('#fFile').addEventListener('change', function(e){ var f = e.target.files && e.target.files[0]; $('#fileLbl').textContent = f ? f.name : 'Attach a brief or sketch (optional)'; data.file = f ? f.name : ''; });
+function budgetTxt(v){ return v >= 20 ? '$20k+' : '~ $' + v + 'k'; }
+fb.addEventListener('input', function(){ data.budget = +fb.value; $('#budgetOut').textContent = budgetTxt(+fb.value); });
 function showStep(n, back){
   bSteps.forEach(function(s,i){ s.classList.toggle('on', i === n); s.classList.toggle('back', !!back && i === n); });
   $$('#bProg span').forEach(function(s,i){ s.classList.toggle('on', i <= n); });
-  $('#bStepLbl').textContent = 'Step ' + (n+1) + ' of 5';
+  $('#bStepLbl').textContent = T('f.step', { n: n + 1 });
   $('#bBack').disabled = n === 0;
-  $('#bNext').textContent = n === 4 ? 'Send brief →' : 'Continue →';
+  $('#bNext').textContent = n === 4 ? T('f.send') : T('f.next');
   bErr.textContent = '';
-  var first = $('.opt, input[type="text"], textarea', bSteps[n]);
+  var first = $('.opt, input[type="text"], input[type="url"], textarea', bSteps[n]);
   if (first && fine) setTimeout(function(){ try{ first.focus({ preventScroll: true }); }catch(e){} }, 50);
 }
 function validate(n){
-  if (n === 0 && !data.type) return 'Pick what we are building.';
-  if (n === 1 && !data.plat) return 'Pick a platform.';
-  if (n === 2 && !data.time) return 'Pick a timeline.';
-  if (n === 3){ var v = $('#fIdea').value.trim(); if (v.length < 10) return 'Write at least a sentence about the idea.'; data.idea = v; }
+  if (n === 0 && !data.type) return T('f.e1');
+  if (n === 1 && !data.plat) return T('f.e2');
+  if (n === 2 && !data.time) return T('f.e3');
+  if (n === 3){
+    var v = $('#fIdea').value.trim(); if (v.length < 10) return T('f.e4'); data.idea = v;
+    var l = $('#fLink').value.trim(); if (l && !/^https?:\/\/\S+\.\S+/i.test(l)) return T('f.eLink'); data.link = l;
+  }
   if (n === 4){
     var nm = $('#fName').value.trim(), ct = $('#fContact').value.trim();
-    if (!nm) return 'Add your name.';
-    if (!/^@\w{3,}$/.test(ct) && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ct)) return 'Add a Telegram @username or an email address.';
-    data.name = nm; data.contact = ct;
+    if (!nm) return T('f.e5');
+    var tg = /^@?[A-Za-z]\w{3,31}$/.test(ct), mail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(ct), tel = /^\+?[\d\s()-]{9,18}$/.test(ct);
+    if (!tg && !mail && !tel) return T('f.e6');
+    data.name = nm; data.contact = (tg && ct.charAt(0) !== '@') ? '@' + ct : ct;
   }
   return '';
 }
+function briefText(){
+  return ['Brief — bekdiyor.dev', '', 'Type: ' + data.type, 'Platform: ' + data.plat, 'Budget: ' + budgetTxt(data.budget), 'Timeline: ' + data.time, '', data.idea, data.link ? '\nLink: ' + data.link : '', '', 'Name: ' + data.name, 'Contact: ' + data.contact].join('\n').replace(/\n{3,}/g, '\n\n');
+}
+function sendBrief(){
+  var ep = CONTENT.formEndpoint;
+  if (!ep || !window.fetch) return Promise.reject(new Error('no endpoint'));
+  var ctrl = window.AbortController ? new AbortController() : null, to = setTimeout(function(){ if (ctrl) ctrl.abort(); }, 12000);
+  return fetch(ep, { method: 'POST', headers: { 'Content-Type': 'application/json' }, signal: ctrl ? ctrl.signal : undefined,
+    body: JSON.stringify({ type: data.type, plat: data.plat, budget: budgetTxt(data.budget), time: data.time, idea: data.idea, link: data.link || '', name: data.name, contact: data.contact, lang: LANG, page: location.href, hp: $('#fHp').value })
+  }).then(function(r){ clearTimeout(to); if (!r.ok) throw new Error('HTTP ' + r.status); return r; }, function(e){ clearTimeout(to); throw e; });
+}
 form.addEventListener('submit', function(e){
   e.preventDefault();
+  if (sending) return;
   var msg = validate(bi);
   if (msg){ bErr.textContent = msg; form.animate && form.animate([{transform:'translateX(0)'},{transform:'translateX(-8px)'},{transform:'translateX(8px)'},{transform:'translateX(0)'}],{duration:300}); return; }
   if (bi < 4){ bi++; showStep(bi); return; }
-  finish();
+  sending = true; var nb = $('#bNext'); nb.disabled = true; nb.textContent = T('f.sending');
+  sendBrief().then(function(){ finish(true); }, function(){ finish(false); }).then(function(){ sending = false; nb.disabled = false; nb.textContent = T('f.send'); });
 });
-$('#bBack').addEventListener('click', function(){ if (bi > 0){ bi--; showStep(bi, true); } });
-function finish(){
+$('#bBack').addEventListener('click', function(){ if (bi > 0 && !sending){ bi--; showStep(bi, true); } });
+function finish(ok){
   form.classList.add('finished');
-  $('#doneTitle').textContent = 'Thanks, ' + data.name.split(' ')[0] + '!';
-  $('#summary').innerHTML = [data.type, data.plat, data.budget >= 20 ? '$20k+' : '~$' + data.budget + 'k', data.time].map(function(s){ return '<span>' + esc(s) + '</span>'; }).join('');
-  var c = $('#confetti'), cols = ['#3DFF9A','#A259FF','#2EF2C8','#D946EF','#B8FF3C','#8B5CF6'], html = '';
-  for (var i = 0; i < 40; i++){
+  $('#doneTitle').textContent = T('f.thanks', { n: data.name.split(' ')[0] });
+  $('#summary').innerHTML = [data.type, data.plat, budgetTxt(data.budget), data.time].map(function(s){ return '<span>' + esc(s) + '</span>'; }).join('');
+  $('#doneMsg').textContent = ok ? T('f.ok') : T('f.fail');
+  $('#doneTg').hidden = ok;
+  if (!ok){ try{ navigator.clipboard.writeText(briefText()).catch(function(){}); }catch(e){} }
+  var c = $('#confetti'), cols = ['#3DFF9A','#A259FF','#0B7A4B','#3CCB86','#C4B5FD','#8B5CF6'], html = '';
+  if (ok) for (var i = 0; i < 40; i++){
     var ang = Math.random()*Math.PI*2, dist = 120 + Math.random()*260;
     html += '<i style="background:'+cols[i%cols.length]+';--x:'+Math.round(Math.cos(ang)*dist)+'px;--y:'+Math.round(Math.sin(ang)*dist - 80)+'px;--r:'+Math.round(Math.random()*720)+'deg;animation-delay:'+(Math.random()*.15).toFixed(2)+'s"></i>';
   }
   c.innerHTML = html;
-  var isl = $('#island'); isl.classList.add('activity'); $('#islandWrap').classList.remove('hide');
-  setTimeout(function(){ isl.classList.remove('activity'); }, 4800);
+  if (ok){
+    var isl = $('#island'); isl.classList.add('activity'); $('#islandWrap').classList.remove('hide');
+    setTimeout(function(){ isl.classList.remove('activity'); }, 4800);
+  }
 }
 $('#bAgain').addEventListener('click', function(){
-  form.classList.remove('finished'); bi = 0; data = { budget: 8 }; form.reset(); $('#budgetOut').textContent = '~ $8k'; $('#fileLbl').textContent = 'Attach a brief or sketch (optional)';
+  form.classList.remove('finished'); bi = 0; data = { budget: 8 }; form.reset(); $('#budgetOut').textContent = budgetTxt(8);
   $$('.opt', form).forEach(function(o){ o.setAttribute('aria-pressed','false'); }); $('#confetti').innerHTML = ''; showStep(0);
 });
+$('#bStepLbl').textContent = T('f.step', { n: 1 }); $('#bNext').textContent = T('f.next');
+
+/* ================= language switcher ================= */
+(function(){
+  var btn = $('#langBtn'), pop = $('#langPop');
+  $('#langCur').textContent = LANG.toUpperCase();
+  $$('[data-lang]').forEach(function(b){ b.setAttribute('aria-checked', String(b.dataset.lang === LANG)); b.classList.toggle('on', b.dataset.lang === LANG); b.addEventListener('click', function(){ setLang(b.dataset.lang); }); });
+  function place(){ var r = btn.getBoundingClientRect(); pop.style.top = (r.bottom + 10) + 'px'; pop.style.left = Math.min(innerWidth - 190, Math.max(10, r.left + r.width / 2 - 90)) + 'px'; }
+  function close(){ pop.classList.remove('open'); btn.setAttribute('aria-expanded', 'false'); }
+  btn.addEventListener('click', function(e){ e.stopPropagation(); var o = !pop.classList.contains('open'); if (o) place(); pop.classList.toggle('open', o); btn.setAttribute('aria-expanded', String(o)); });
+  D.addEventListener('click', function(e){ if (!pop.contains(e.target)) close(); });
+  D.addEventListener('keydown', function(e){ if (e.key === 'Escape') close(); });
+  addEventListener('scroll', close, { passive: true });
+})();
+
+/* ================= contacts + visitor counter ================= */
+(function(){
+  var C = CONTENT, map = { tg: 'https://t.me/' + C.telegram, mail: 'mailto:' + C.email, tel: 'tel:' + C.phone, gh: C.github, li: C.linkedin };
+  $$('a[data-c]').forEach(function(a){ if (map[a.dataset.c]) a.href = map[a.dataset.c]; });
+  $$('[data-c="mailtxt"]').forEach(function(el){ el.textContent = C.email; });
+  $('#doneTg').href = map.tg;
+  /* counts page visits (once per browser session). Needs real hosting: blocked inside sandboxes. */
+  if (!C.counter || !C.counter.ns || !window.fetch) return;
+  var base = 'https://api.counterapi.dev/v1/' + encodeURIComponent(C.counter.ns) + '/' + encodeURIComponent(C.counter.name) + '/', seen = false;
+  try{ seen = sessionStorage.getItem('pf-counted') === '1'; }catch(e){}
+  fetch(base + (seen ? '' : 'up'), { cache: 'no-store' }).then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(j){
+    var n = +(j && (j.count != null ? j.count : j.value)); if (!isFinite(n) || n <= 0) return;
+    try{ sessionStorage.setItem('pf-counted', '1'); }catch(e){}
+    var loc = LANG === 'en' ? 'en-US' : LANG === 'ru' ? 'ru-RU' : 'uz-UZ';
+    var txt; try{ txt = n.toLocaleString(loc).replace(/,/g, ' '); }catch(e){ txt = String(n); }
+    $('#visitsN').textContent = T('ft.visits', { n: txt }); $('#visits').hidden = false;
+  }).catch(function(){});
+})();
 
 /* ================= command palette ================= */
 var pal = $('#pal'), palInput = $('#palInput'), palList = $('#palList'), palSel = 0, palItems = [];
 var CMDS = [
-  ['Navigate','Go to Work','work'],['Navigate','Go to About','about'],['Navigate','Go to Stack','stack'],['Navigate','Go to Experience','experience'],
-  ['Navigate','Go to Services','services'],['Navigate','Go to Process','process'],['Navigate','Go to Contact','contact'],
-  ['Actions','Start a project', function(){ goTo('contact'); }],
-  ['Actions','Copy email address', function(){ $('#copyMail').click(); }],
-  ['Appearance','Toggle dark / light mode', function(){ toggleTheme(); }],
-  ['Appearance','Background: Neon Aurora', function(){ setAccent('aurora'); }],
-  ['Appearance','Background: Mint Ultraviolet', function(){ setAccent('mint'); }],
-  ['Appearance','Background: Acid Orchid', function(){ setAccent('acid'); }]
+  [T('pal.nav'), T('pal.go', { s: T('nav.work') }), 'work'], [T('pal.nav'), T('pal.go', { s: T('nav.about') }), 'about'], [T('pal.nav'), T('pal.go', { s: T('nav.stack') }), 'stack'], [T('pal.nav'), T('pal.go', { s: T('sec.exp') }), 'experience'],
+  [T('pal.nav'), T('pal.go', { s: T('nav.process') }), 'process'], [T('pal.nav'), T('pal.go', { s: T('nav.contact') }), 'contact'],
+  [T('pal.act'), T('cta.start'), function(){ goTo('contact'); }],
+  [T('pal.act'), T('pal.mail'), function(){ $('#copyMail').click(); }],
+  [T('pal.act'), T('pal.tg'), function(){ window.open('https://t.me/' + CONTENT.telegram, '_blank', 'noopener'); }],
+  [T('pal.app'), T('pal.theme'), function(){ toggleTheme(); }],
+  [T('pal.lang'), 'O‘zbekcha', function(){ setLang('uz'); }], [T('pal.lang'), 'Русский', function(){ setLang('ru'); }], [T('pal.lang'), 'English', function(){ setLang('en'); }]
 ];
 function renderPal(){
   var q = palInput.value.toLowerCase().trim(), last = '', html = '';
@@ -1920,7 +2158,7 @@ function renderPal(){
     if (c[0] !== last){ html += '<div class="pal-group">' + c[0] + '</div>'; last = c[0]; }
     html += '<button type="button" class="pal-item' + (i === palSel ? ' sel' : '') + '" role="option" aria-selected="' + (i === palSel) + '" data-i="' + i + '"><span>' + esc(c[1]) + '</span><small>' + (typeof c[2] === 'string' ? '↵' : 'run') + '</small></button>';
   });
-  palList.innerHTML = html || '<div class="pal-group">No matches</div>';
+  palList.innerHTML = html || '<div class="pal-group">' + T('pal.none') + '</div>';
 }
 function openPal(){ pal.classList.add('open'); palInput.value = ''; palSel = 0; renderPal(); setTimeout(function(){ palInput.focus(); }, 30); if (lenis) lenis.stop(); }
 function closePal(){ pal.classList.remove('open'); if (lenis) lenis.start(); }
@@ -1929,7 +2167,6 @@ palInput.addEventListener('input', function(){ palSel = 0; renderPal(); });
 palList.addEventListener('click', function(e){ var b = e.target.closest('.pal-item'); if (b) runPal(+b.dataset.i); });
 palList.addEventListener('mousemove', function(e){ var b = e.target.closest('.pal-item'); if (b && +b.dataset.i !== palSel){ palSel = +b.dataset.i; renderPal(); } });
 $('#palBack').addEventListener('click', closePal);
-$('#kBtn2').addEventListener('click', openPal);
 D.addEventListener('keydown', function(e){
   if ((e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')){ e.preventDefault(); pal.classList.contains('open') ? closePal() : openPal(); return; }
   if (!pal.classList.contains('open')){ if (e.key === 'Escape') closeMenu(); return; }
@@ -1953,8 +2190,8 @@ if (fine){
   D.addEventListener('mouseover', function(e){
     var t = e.target;
     var lab = t.closest && t.closest('[data-cursor]');
-    var hov = t.closest && t.closest('a, button, [data-hover], .app, .opt, .sw, input[type="range"], label.file');
-    var txt = t.closest && t.closest('input[type="text"], textarea');
+    var hov = t.closest && t.closest('a, button, [data-hover], .app, .opt, input[type="range"]');
+    var txt = t.closest && t.closest('input[type="text"], input[type="url"], textarea');
     cur.classList.toggle('label', !!lab);
     cLabel.textContent = lab ? lab.dataset.cursor + (lab.dataset.cursor === 'View' ? ' ↗' : '') : '';
     cur.classList.toggle('hover', !lab && !!hov && !txt);
@@ -2018,7 +2255,6 @@ function measure(){
     prSec.style.height = (vh + prDist + 200) + 'px';
   } else { prSec.style.height = ''; prDist = 0; }
   prSteps = $$('.step', prTrack);
-  placePill();
 }
 addEventListener('resize', function(){ clearTimeout(measure._t); measure._t = setTimeout(measure, 120); });
 measure();

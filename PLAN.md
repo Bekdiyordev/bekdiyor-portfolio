@@ -243,7 +243,7 @@ Bu "mavzu" sayt bo'ylab izchil — shuning uchun shablon emas, **muallif qo'li**
 | **Chorsu** | E-commerce marketplace | Android | Ko'k `#3B82F6` |
 | **Yo'lda** | Taksi / ride-hailing | Android + iOS | Qora/Lime |
 
-### 07 · Services — "Nima bera olaman"
+### 07 · Services — ❌ OLIB TASHLANDI (2026-11-09, mijoz: tarif kartalar yoqmadi; o'rniga hech narsa)
 - Pricing-page uslubidagi paket kartalar (pricingpages.design ilhomi):
   1. **MVP Launch** — g'oyadan Store'gacha
   2. **Full Product** — to'liq ilova, backend integratsiya, analytics
@@ -271,17 +271,17 @@ Bu "mavzu" sayt bo'ylab izchil — shuning uchun shablon emas, **muallif qo'li**
   1. Loyiha turi (chip tanlash): Yangi ilova / Mavjudni yaxshilash / Konsultatsiya / Boshqa
   2. Platforma: Android / iOS / Ikkalasi
   3. Byudjet (slider) + muddat
-  4. G'oya tavsifi (+ fayl biriktirish ixtiyoriy)
-  5. Ism + aloqa (Telegram / email)
+  4. G'oya tavsifi (+ ixtiyoriy havola: brif / Figma)
+  5. Ism + aloqa (Telegram @username / telefon / email)
   6. ✅ Muvaffaqiyat ekrani (konfetti/animatsiya)
-- Yonida tezkor yo'llar: Telegram · Email (bosganda copy + toast) · "Book a call" (Cal.com)
-- Forma natijasi → **Telegram bot** + email (qaror kerak).
+- Yonida tezkor yo'llar: Telegram @bekdiyor04 · Email abekdiyor@gmail.com (bosganda copy) · Telefon +998 99 500 61 23
+- Forma natijasi → **Telegram bot** (`api/telegram.js`): honeypot, rate limit, HTML-escape.
 
 ### 11 · Footer
 - Juda katta ism tipografiyasi (ekran kengligida), harflar cursor'ga reaksiya qiladi.
 - Jonli mahalliy vaqt: `Samarkand · 22:07 GMT+5`
-- Ijtimoiy tarmoqlar (GitHub, LinkedIn, Telegram, X), `Back to top ↑`
-- "Built with care by …" · © yil
+- Ijtimoiy tarmoqlar (GitHub, LinkedIn, Telegram) + Aloqa ustuni (email, telefon, `Back to top ↑`)
+- © yil · **sayt tashriflari soni** (CounterAPI, bepul; faqat haqiqiy hostingda ko'rinadi)
 
 ---
 
@@ -350,13 +350,13 @@ content/
 ## 9. Ochiq savollar (javob kutilmoqda)
 
 - [x] **S1.** Ism: **Bekdiyor** (logo: `bekdiyor.`) — 2026-11-07
-- [ ] **S2.** Til(lar): faqat English? yoki EN + UZ + RU?
-- [~] **S3.** Accent: yashil→binafsha neon gradient ✅ — 3 variantdan qaysi biri? (Neon Aurora / Mint Ultraviolet / Acid Orchid)
+- [x] **S2.** Tillar: **uz (default) · ru · en** — 2026-11-09
+- [x] **S3.** Accent: yashil→binafsha **Neon Aurora** (boshqa variantlar va Theme lab olib tashlandi) — 2026-11-09
 - [ ] **S4.** Default mode: Dark yoki Light (yoki tizim sozlamasiga qarab)?
-- [ ] **S5.** Xizmatlar narxi: aniq ko'rsatilsinmi, "from $X" bo'lsinmi, yoki narxsiz?
-- [ ] **S6.** Buyurtmalar qayerga kelsin: Telegram bot / email / ikkalasi?
+- [x] **S5.** Narxlar ko'rsatilmaydi — Services bo'limi butunlay olib tashlandi, o'rniga hech narsa yo'q — 2026-11-09
+- [x] **S6.** Buyurtmalar → **Telegram bot** (`api/telegram.js`, Vercel). Yuborilmasa: ariza nusxalanadi + t.me/bekdiyor04 ochiladi — 2026-11-09
 - [ ] **S7.** Asosiy mijozlar kim: xorijiy (Upwork, ish beruvchilar) yoki mahalliy biznes? (Til va ohangga ta'sir qiladi)
-- [ ] **S8.** Tech stack (Next.js + Vercel) ma'qulmi? Domeningiz bormi?
+- [~] **S8.** Domen — oxirida hal qilinadi. Hosting: Vercel (Telegram funksiyasi uchun)
 - [ ] **S9.** Blog / maqolalar bo'limi kerakmi?
 - [ ] **S10.** Resume PDF yuklab olish kerakmi?
 - [x] **S11.** O'z rasmi (foni olib tashlangan cutout) — avatar va About portret sifatida ishlatildi
@@ -377,7 +377,7 @@ content/
 | 2026-11-07 | Mijoz "yakuniy holatdagi UI'ni ishlatib ko'rish"ni so'radi → jonli prototip v0.2 qurildi | Mijoz/Claude |
 | 2026-11-07 | Prototipga kirgan G-g'oyalar: G2 ⌘K palette, G5 spotlight cursor, G9 spring bosish; theme lab (footer'da accent almashtirish) | Claude |
 | 2026-11-07 | v0.2 "voshshe zor" — mijozga juda yoqdi | Mijoz |
-| 2026-11-07 | Ism hamma joyda **Bekdiyor** (`bekdiyor.`), email `hello@bekdiyor.dev` (placeholder) | Mijoz |
+| 2026-11-07 | Ism hamma joyda **Bekdiyor** (`bekdiyor.`), email `hello@bekdiyor.dev` (placeholder → 2026-11-09 da abekdiyor@gmail.com) | Mijoz |
 | 2026-11-07 | Mijoz rasmi: navbar avatar, About'da ramkadan "chiqib turuvchi" parallax portret (fon: accent glow + grid + outline "BEK DIYOR"), Contact'da avatar chip | Mijoz/Claude |
 | 2026-11-07 | Hero telefoni yoniga **Android** va **iOS** glass kartalar (blur, sheen, parallax). Rasmiy Apple/Android logolari ishlatilmadi — o'ziga xos ikonkalar (punch-hole va Dynamic Island'li telefon). "New brief" kartasi joy bo'shatish uchun olib tashlandi | Mijoz/Claude |
 | 2026-11-07 | Glass kartalar **yoqmadi**. O'rniga: telefon **orqasida** turadigan 2 ta **kvadrat karta**, ichida **katta ikonka**, pastida `Since 2023` (Android) va `Since 2026` (iOS). Odatda yarmi telefon ortida, scroll'da yon tomonga chiqib, biroz buriladi; kirishda telefon ortidan sirpanib chiqadi. Ikonkalar `CONTENT.platformIcons`da — rasmiy ikonka fayllari berilsa `assets/…` yo'li bilan almashtiriladi | Mijoz |
@@ -401,30 +401,10 @@ content/
 | 2026-11-07 | Kod GitHub'ga yuklandi: Bekdiyordev/bekdiyor-portfolio (`main`, 08b4d88) — index.html, assets, README, PLAN.md | Mijoz |
 | 2026-11-07 | Release notes chap tomoni: **Year wheel** (v2.1) | Mijoz |
 | 2026-11-07 | Phone lift-off moslashtirildi: Hero va Projects orasida 3 bo'lim bor (tasdiqlangan tartib), shuning uchun telefon Hero'dan ko'tarilib ketadi va Projects'da aylanib "qo'nadi". To'liq uchish uchun Projects'ni Hero'dan keyinga ko'chirish kerak bo'ladi — mijoz qarori kutilmoqda | Claude |
-
----
-
-## 11. "Shablon bo'lmasligi" uchun qoidalar (o'zim uchun)
-1. Hech qanday tayyor template/UI kit'ni to'g'ridan-to'g'ri ishlatmayman.
-2. Har bir bo'limda **bitta "signature" interaksiya** bo'lsin — lekin ortiqcha emas.
-3. Animatsiyalar mazmunga xizmat qiladi; har biri 60fps, easing'lar qo'lda sozlangan (`cubic-bezier`), bir xil "fade-up" hamma joyda takrorlanmaydi.
-4. Mikro-detallar: hover holatlari, focus ring, loading/empty/error holatlari, toast'lar, tanlangan matn rangi (`::selection`), scrollbar, favicon, OG rasm.
-5. Dark va Light — alohida dizayn qilinadi, shunchaki invert emas.
-6. Klishelar yo'q: progress-bar skilllar, stock rasmlar, "Hi, I'm…👋" banal hero.
-
----
-
-## 12. Qo'shimcha "wow" g'oyalar (mijoz tanlashi kutilmoqda)
-
-| # | G'oya | Nima beradi | Murakkablik |
-|---|-------|-------------|-------------|
-| G1 | ⭐ **Phone lift-off** — bitta telefon Hero'dan Projects'gacha scroll bilan uchib boradi (3.4'da) | Saytning "signature" momenti | Yuqori |
-| G2 | **⌘K Command palette** — klaviatura bilan navigatsiya, email nusxalash, theme, til almashtirish | Dasturchi ekanligingizni ko'rsatadi | O'rta |
-| G3 | **App Store uslubidagi case study** — "Get" tugmasi, reyting, screenshot karusel, "What's new" | Mijoz loyihani haqiqiy ilova kabi his qiladi | O'rta |
-| G4 | **Jonli mini-prototip** — case study'dagi telefon ichida ilovani bosib ko'rish mumkin | Juda kuchli taassurot | Yuqori |
-| G5 | **Spotlight cursor** — dark fonda cursor atrofida yashirin grid/naqsh ko'rinadi | Premium his | Past |
-| G6 | **Text scramble** — til/theme almashganda harflar "dekodlanib" o'zgaradi | Texnik kayfiyat | Past |
-| G7 | **Kreativ 404** — Android'ning "App isn't responding" dialogi: `Wait` / `Close app` | Esda qoladi, kulgili | Past |
-| G8 | **Jonli status** — navbarda "Hozir: kod yozyapman · oxirgi commit 2 soat oldin" (GitHub API) | Saytni "tirik" qiladi | O'rta |
-| G9 | **Haptic-style mikro-animatsiyalar** — tugmalar bosilganda iOS'dagidek "spring" siqilish | Mobil his | Past |
-| G10 | **Sound design (ixtiyoriy)** — juda past ovozli click/whoosh, standart o'chiq | Immersiv | Past |
+| 2026-11-09 | **Services / tarif kartalar butunlay olib tashlandi**, o'rniga hech narsa | Mijoz |
+| 2026-11-09 | **Til: uz (default) · ru · en.** Navbar'da til tugmasi (popover), mobil menyuda uchta tugma, ⌘K'da ham. Tanlov `localStorage pf-lang`da, `?lang=ru` havolasi ham ishlaydi | Mijoz |
+| 2026-11-09 | **Forma → Telegram** (Vercel funksiyasi `api/telegram.js`, env: TELEGRAM_BOT_TOKEN, TELEGRAM_CHAT_ID, ALLOWED_ORIGIN). Fayl biriktirish o'rniga havola maydoni | Mijoz |
+| 2026-11-09 | Haqiqiy kontaktlar: tel +998995006123, Telegram @bekdiyor04, GitHub Bekdiyordev, LinkedIn bekdiyor-abdusharipov, email abekdiyor@gmail.com | Mijoz |
+| 2026-11-09 | Ortiqchalar olib tashlandi: footer Theme lab (3 rang), Mint/Acid variantlari, "Book a call", "Prototype · sample data" yozuvi; bo'limlar qayta raqamlandi (Process 06, Fikrlar 07, Aloqa 08) | Mijoz |
+| 2026-11-09 | Footer'da **tashriflar soni** (CounterAPI, har brauzer sessiyasida 1 marta sanaladi — noyob odamlar emas, tashriflar) | Mijoz |
+| 2026-11-09 | Domen — oxirida | Mijoz |

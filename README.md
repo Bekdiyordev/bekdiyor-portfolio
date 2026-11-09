@@ -1,12 +1,12 @@
 # bekdiyor. — Mobile Engineer portfolio
 
-Personal portfolio of **Bekdiyor**, a mobile engineer (Android first, now iOS).
+Personal portfolio of **Bekdiyor**, a mobile engineer (Android first, now iOS). Three languages: **Uzbek (default)**, Russian, English.
 
-> Status: **interactive prototype** with sample data. The design is being finalised section by section; the production build (Next.js + TypeScript) comes next.
+> Status: interactive build with sample projects and quotes. Contacts are real.
 
 ## Run locally
 
-No build step. Open `index.html` in a browser, or serve the folder:
+No build step. Serve the folder:
 
 ```bash
 npx serve .
@@ -14,29 +14,49 @@ npx serve .
 python3 -m http.server 8080
 ```
 
-An internet connection is needed for Google Fonts and the Lenis smooth-scroll library (loaded from a CDN).
+Open `http://localhost:8080/?lang=ru` (or `uz`, `en`) to force a language. An internet connection is needed for Google Fonts and Lenis (CDN).
 
 ## Structure
 
 ```
 index.html            the whole site: HTML, CSS and JavaScript
+api/telegram.js       serverless function (Vercel): forwards the brief form to Telegram
 assets/               portrait cut-out and avatar (WebP)
 PLAN.md               master plan: requirements, design system, decisions log
 ```
 
-All text and data live in the `CONTENT` object near the top of the main script in `index.html` (profile, stats, skills, experience, projects, services, process, testimonials). Edit it there to replace the sample data.
+- **Content:** the `CONTENT` object at the top of the main script. Text fields are either a plain string or `{en, uz, ru}`.
+- **Interface text:** the `I18N` dictionary right below it (`key: [en, uz, ru]`). Static markup uses `data-t="key"` (inner HTML) and `data-ta="attr:key"` (attributes).
+- **Contacts:** `CONTENT.email`, `phone`, `telegram`, `github`, `linkedin`.
+
+## Brief form → Telegram
+
+1. In Telegram, open **@BotFather** → `/newbot` → copy the **token**.
+2. Send any message to your new bot, then open `https://api.telegram.org/bot<TOKEN>/getUpdates` and copy `message.chat.id`.
+3. Deploy this repo on **Vercel** (import from GitHub, no build settings needed).
+4. In Vercel → Project → Settings → Environment Variables add:
+   - `TELEGRAM_BOT_TOKEN` = the token
+   - `TELEGRAM_CHAT_ID` = the chat id
+   - `ALLOWED_ORIGIN` = your site URL, e.g. `https://bekdiyor.dev` (optional, set it once the domain is known)
+5. Redeploy. The form posts to `/api/telegram` (`CONTENT.formEndpoint`).
+
+If sending fails, the site copies the brief to the clipboard and shows an “Open Telegram” button to `t.me/bekdiyor04`. The function has a honeypot field, a basic rate limit and escapes all user text.
+
+## Visitor counter
+
+The footer shows a visit count from [CounterAPI](https://counterapi.dev) (free, no key). Each browser session counts once, so it counts visits, not unique people. It only appears on a real host; sandboxed previews block the request. Change or disable it in `CONTENT.counter`.
 
 ## What is inside
 
-- Dynamic Island style navbar, preloader, custom cursor, magnetic buttons, dark / light theme with circular reveal
-- Hero with a realistic 3D-tilting phone, Android / iOS platform tiles and a spotlight-stage canvas background
+- Dynamic Island navbar with language switcher, preloader, custom cursor, magnetic buttons, dark / light theme with circular reveal
+- Hero with a 3D-tilting phone, Android / iOS platform tiles and a spotlight-stage canvas background
 - Parallax throughout (scroll and mouse), Lenis smooth scrolling
-- About with a pop-out arched portrait and a manifesto that lights up word by word
+- About with an arched pop-out portrait and a manifesto that lights up word by word
 - Stack as a working phone home screen (pages, folders, dock, jiggle mode)
-- Release notes with expandable cards and a side visual
+- Release notes with a year wheel and expandable cards
 - Selected work with two sticky devices (splash + app screen) that follow the active project
-- Services pricing cards, a pinned horizontal process with animated stage illustrations
-- Five-step project brief form (prototype: not sent anywhere yet), curtain-reveal footer, ⌘K / Ctrl K command menu
+- Pinned horizontal process with animated stage illustrations, testimonials marquee
+- Five-step brief form sent to Telegram, curtain-reveal footer, ⌘K / Ctrl K command menu
 
 ## Credits
 
