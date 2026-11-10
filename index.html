@@ -2091,7 +2091,7 @@ $('#bStepLbl').textContent = T('f.step', { n: 1 }); $('#bNext').textContent = T(
   if (!C.counter || !C.counter.ns || !window.fetch) return;
   var base = 'https://api.counterapi.dev/v1/' + encodeURIComponent(C.counter.ns) + '/' + encodeURIComponent(C.counter.name) + '/', seen = false;
   try{ seen = sessionStorage.getItem('pf-counted') === '1'; }catch(e){}
-  if (/^(localhost|127\.0\.0\.1|\[::1\]|)$/.test(location.hostname)) seen = true; /* local preview: show the count, don't add to it */
+  if (/^(localhost|127\.0\.0\.1|\[::1\]|raw\.githack\.com)$/.test(location.hostname)) seen = true; /* previews: show the count, don't add to it */
   fetch(base + (seen ? '' : 'up'), { cache: 'no-store' }).then(function(r){ if (!r.ok) throw 0; return r.json(); }).then(function(j){
     var n = +(j && (j.count != null ? j.count : j.value)); if (!isFinite(n) || n <= 0) return;
     try{ sessionStorage.setItem('pf-counted', '1'); }catch(e){}
