@@ -32,7 +32,9 @@ Hero (Spotlight stage) → About (arch portrait) → Stack (phone home screen) �
 - Contacts: phone +998995006123, Telegram @bekdiyor04, github.com/Bekdiyordev, linkedin.com/in/bekdiyor-abdusharipov, abekdiyor@gmail.com.
 
 ## Status and next steps
-- Projects, experience and quotes are **sample data** for now and will be replaced with real ones.
+- Experience, projects, skills and stats come from the owner's résumé (`assets/Bekdiyor_Abdusharipov_Resume.pdf`). Don't invent metrics; only use facts the owner gave.
+- Phone screens (`scrMegaGO`, `scrFoodly`, `scrHashtagram`) and project brand colours are **illustrative guesses**: replace them when the owner sends real screenshots, logos or colours.
+- `CONTENT.quotes` is empty, so the Kind words section is hidden until real testimonials arrive.
 - Next:
   1. Deploy to Vercel, with the owner creating the bot via @BotFather and supplying the chat id.
   2. Domain (decided last).
