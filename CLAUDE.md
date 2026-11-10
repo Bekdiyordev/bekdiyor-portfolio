@@ -10,7 +10,7 @@ Portfolio site for **Bekdiyor**, a mobile engineer (Android since 2022/23, iOS s
 - Things the owner rejected: glass cards, "childish" busy backgrounds, too many phone mockups, pricing/tier cards, the ⌘K command menu, theme-lab colour swatches, showing a city name (no "Samarkand" anywhere).
 
 ## Stack and structure
-- No build step. A single file, `index.html`, holds the HTML, CSS and vanilla JS. `api/telegram.js` is a Vercel serverless function. Images are in `assets/`.
+- No build step. A single file, `index.html`, holds the HTML, CSS and vanilla JS. `404.html` is a standalone Android-style "page isn't responding" dialog (Vercel serves it for missing paths). `api/telegram.js` is a Vercel serverless function. Images are in `assets/` (portrait, icons, `og.jpg` 1200×630). Plus `favicon.ico`, `manifest.webmanifest`, `robots.txt`.
 - CDN: Lenis 1.1.13 (jsdelivr) for smooth scrolling. Fonts from Google: Bricolage Grotesque, Geist, Geist Mono, Instrument Serif. Brand icons are Simple Icons (CC0), inlined in `ICONS`.
 - Run locally: `python3 -m http.server 8080`, then open http://localhost:8080 (`?lang=ru|en|uz` forces a language).
 
@@ -37,5 +37,5 @@ Hero (Spotlight stage) → About (arch portrait) → Stack (phone home screen) �
   1. Deploy to Vercel, with the owner creating the bot via @BotFather and supplying the chat id.
   2. Domain (decided last).
   3. Case-study pages, the résumé PDF and real project data.
-  4. SEO, OG image and favicon.
+  4. Once the domain is known: make `og:image` absolute and add `og:url`, a canonical link, hreflang and a sitemap (see the comment in `<head>`).
 - Testing: after changes, load the page in all three languages and check the console for errors. Playwright with Chrome works well for this.

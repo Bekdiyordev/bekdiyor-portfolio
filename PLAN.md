@@ -410,6 +410,9 @@ content/
 | 2026-11-09 | Domen — oxirida | Mijoz |
 | 2026-11-10 | **⌘K buyruqlar menyusi olib tashlandi** (oddiy tashrifchiga kerakmas). Til — navbar va mobil menyuda | Mijoz |
 | 2026-11-10 | **"Samarkand" hamma joydan olib tashlandi** (loader, hero, About, footer vaqti). Footer'da faqat mahalliy vaqt + GMT+5 qoldi | Mijoz |
+| 2026-11-11 | **Mobil tekshiruv (390 / 768px):** hero platforma kartalari ekrandan chiqmaydi; mobil loyiha kartalarida bo'sh telefon o'rniga haqiqiy ilova ekrani; forma "Davom etish" tugmasi bir qatorda; "Barcha loyihalar" bir qatorda; footer'dagi ortiqcha yashil nuqta (yashirin hisoblagich) tuzatildi | Claude |
+| 2026-11-11 | **Favicon + OG + SEO:** `b.` ikonka (favicon.ico, 32px, apple-touch 180, manifest 192/512), OG rasm 1200×630 (`assets/og.jpg`), meta description, Open Graph/Twitter, JSON-LD Person, manifest, robots.txt; sarlavha va description tilga qarab o'zgaradi. Domen kelganda og:image/og:url/canonical absolyut qilinadi, sitemap qo'shiladi | Claude |
+| 2026-11-11 | **Kreativ 404** (`404.html`): Android "sahifa javob bermayapti" dialogi — *Kutish* (yuklanadi → "kutish yordam bermadi") va *Ilovani yopish* (bosh sahifa); 3 til, dark/light saytdagi tanlovga mos | Claude |
 
 ---
 
@@ -433,7 +436,7 @@ content/
 | G4 | **Jonli mini-prototip** — case study'dagi telefon ichida ilovani bosib ko'rish mumkin | Juda kuchli taassurot | Yuqori |
 | G5 | **Spotlight cursor** — dark fonda cursor atrofida yashirin grid/naqsh ko'rinadi | Premium his | Past |
 | G6 | **Text scramble** — til/theme almashganda harflar "dekodlanib" o'zgaradi | Texnik kayfiyat | Past |
-| G7 | **Kreativ 404** — Android'ning "App isn't responding" dialogi: `Wait` / `Close app` | Esda qoladi, kulgili | Past |
+| G7 | ✅ **Kreativ 404** (2026-11-11) — Android'ning "App isn't responding" dialogi: `Wait` / `Close app` | Esda qoladi, kulgili | Past |
 | G8 | **Jonli status** — navbarda "Hozir: kod yozyapman · oxirgi commit 2 soat oldin" (GitHub API) | Saytni "tirik" qiladi | O'rta |
 | G9 | **Haptic-style mikro-animatsiyalar** — tugmalar bosilganda iOS'dagidek "spring" siqilish | Mobil his | Past |
 | G10 | **Sound design (ixtiyoriy)** — juda past ovozli click/whoosh, standart o'chiq | Immersiv | Past |

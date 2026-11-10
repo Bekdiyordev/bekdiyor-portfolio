@@ -20,8 +20,10 @@ Open `http://localhost:8080/?lang=ru` (or `uz`, `en`) to force a language. An in
 
 ```
 index.html            the whole site: HTML, CSS and JavaScript
+404.html              Android-style "page isn't responding" page (served by Vercel for missing paths)
 api/telegram.js       serverless function (Vercel): forwards the brief form to Telegram
-assets/               portrait cut-out and avatar (WebP)
+assets/               portrait, icons, og.jpg (link preview 1200×630)
+favicon.ico, manifest.webmanifest, robots.txt
 PLAN.md               master plan: requirements, design system, decisions log
 ```
 

@@ -1,9 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uz">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Bekdiyor — Mobile Engineer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Bekdiyor — Mobil dasturchi · Android va iOS</title>
+<meta name="description" content="Bekdiyor — Kotlin, Jetpack Compose va SwiftUI’da native Android va iOS ilovalar yaratadigan mobil dasturchi. Loyihalar, tajriba va hamkorlik uchun ariza.">
+<meta name="author" content="Bekdiyor">
+<meta name="theme-color" content="#0A0A0C" media="(prefers-color-scheme: dark)">
+<meta name="theme-color" content="#F3F1EC" media="(prefers-color-scheme: light)">
+<meta name="color-scheme" content="dark light">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon-32.png">
+<link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+<link rel="manifest" href="manifest.webmanifest">
+<!-- Open Graph / Twitter. When the domain is known, make og:image absolute (https://<domain>/assets/og.jpg) and add og:url + canonical. -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="bekdiyor.">
+<meta property="og:title" content="Bekdiyor — Mobil dasturchi · Android va iOS">
+<meta property="og:description" content="Odamlar har kuni sevib ochadigan ilovalar. Kotlin, Jetpack Compose, Swift, SwiftUI.">
+<meta property="og:image" content="assets/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="bekdiyor. — Mobile Engineer, Android · iOS">
+<meta property="og:locale" content="uz_UZ">
+<meta property="og:locale:alternate" content="ru_RU">
+<meta property="og:locale:alternate" content="en_US">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="assets/og.jpg">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Person","name":"Bekdiyor Abdusharipov","alternateName":"Bekdiyor","jobTitle":"Mobile Engineer (Android, iOS)","knowsAbout":["Kotlin","Jetpack Compose","Android","Swift","SwiftUI","iOS","Kotlin Multiplatform"],"sameAs":["https://github.com/Bekdiyordev","https://www.linkedin.com/in/bekdiyor-abdusharipov/","https://t.me/bekdiyor04"]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
@@ -172,6 +196,7 @@ html.light .isl-icon-moon{display:block}
 #langPop button.on{background:rgba(255,255,255,.12);color:#fff}
 #langPop button.on b{color:var(--accent-bright)}
 .visits{display:inline-flex;align-items:center;gap:8px}
+.visits[hidden]{display:none}
 .visits i{width:6px;height:6px;border-radius:50%;background:#34D399;animation:pulse 2s infinite}
 #mmenu nav a small{font-family:var(--f-mono);font-size:12px;color:#8E8E98;font-weight:400;letter-spacing:0}
 #mmenu.open nav a{opacity:1;transform:none}
@@ -543,6 +568,7 @@ html.light .work::before{background-image:radial-gradient(rgba(14,14,16,.09) 1px
 
 .more{padding:20px 0 150px;background:var(--proj-bg);transition:background 1s var(--ease)}
 .more-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;gap:12px}
+.more-head a{white-space:nowrap}
 .more-head h3{margin:0;font-family:var(--f-display);font-weight:700;font-size:30px;letter-spacing:-.035em}
 .mgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px}
 .mcard{display:flex;flex-direction:column;border-radius:30px;overflow:hidden;background:var(--surface);border:1px solid var(--line);transition:translate .6s var(--ease),border-color .3s}
@@ -687,7 +713,8 @@ html.light .c-box{background:linear-gradient(140deg,#0B1D15 0%,#0E0E10 48%,#1A10
 .b-nav button:active{scale:.95}
 #bBack{border:1px solid #D4D4D8}
 #bBack[disabled]{opacity:.35;pointer-events:none}
-#bNext{flex:1;background:#0E0E10;color:#fff;font-weight:600}
+#bNext{flex:1;background:#0E0E10;color:#fff;font-weight:600;white-space:nowrap}
+#bBack{flex:none;white-space:nowrap}
 .b-foot{font-family:var(--f-mono);font-size:11px;color:#5E5E66;text-align:center}
 .done{display:none;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:16px;flex:1}
 .brief.finished .b-steps,.brief.finished .b-nav,.brief.finished .b-prog,.brief.finished .b-top{display:none}
@@ -746,9 +773,8 @@ html.curtain #footer{position:fixed;left:0;right:0;bottom:0}
   .sp{display:none}
   .proj{min-height:auto;padding:12px 0}
   .proj-card{opacity:1;scale:1}
-  .proj-mob{display:flex;justify-content:center;border-radius:24px;height:220px;overflow:hidden;background:var(--pc);align-items:flex-end}
-  .proj-mob div{width:150px;height:190px;border-radius:26px 26px 0 0;background:#0A0A0C;padding:8px 8px 0}
-  .proj-mob div i{display:block;height:100%;border-radius:20px 20px 0 0;background:var(--pd)}
+  .proj-mob{display:flex;justify-content:center;align-items:flex-start;border-radius:24px;height:270px;overflow:hidden;padding-top:30px;background:radial-gradient(120% 90% at 50% 0%,color-mix(in srgb,var(--pc) 55%,transparent),transparent 70%),color-mix(in srgb,var(--pc) 14%,#0A0A0C)}
+  .proj-mob .pm-phone{flex:none;scale:.62;transform-origin:top center;box-shadow:inset 0 0 0 1px rgba(255,255,255,.22),inset 0 0 0 2.5px #0a0a0c,inset 0 0 0 4px rgba(255,255,255,.07),inset 0 0 0 9px #050506,0 30px 60px rgba(0,0,0,.5)}
   .hero-stage{height:560px;scale:.82;margin:-50px 0}
 }
 @media (max-width:760px){
@@ -766,6 +792,8 @@ html.curtain #footer{position:fixed;left:0;right:0;bottom:0}
 }
 @media (max-width:420px){
   .isl-sec,.isl-lang{display:none}
+  .plat-and{left:calc(50% - 250px)}
+  .plat-ios{left:calc(50% + 66px)}
   .hero-stage{scale:.7;margin:-100px 0 -90px}
 }
 html.reduce *,html.reduce *::before,html.reduce *::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -1215,6 +1243,8 @@ var LANG = (function(){
 })();
 var LI = LANGS.indexOf(LANG) === 2 ? 0 : LANGS.indexOf(LANG) + 1; /* index into [en, uz, ru] */
 var I18N = {
+  'meta.title': ['Bekdiyor — Mobile Engineer · Android & iOS','Bekdiyor — Mobil dasturchi · Android va iOS','Бекдиёр — мобильный разработчик · Android и iOS'],
+  'meta.desc': ['Bekdiyor is a mobile engineer building native Android and iOS apps with Kotlin, Jetpack Compose and SwiftUI. Projects, experience and a project brief.','Bekdiyor — Kotlin, Jetpack Compose va SwiftUI’da native Android va iOS ilovalar yaratadigan mobil dasturchi. Loyihalar, tajriba va hamkorlik uchun ariza.','Бекдиёр — мобильный разработчик нативных Android- и iOS-приложений на Kotlin, Jetpack Compose и SwiftUI. Проекты, опыт и заявка на проект.'],
   /* loader */
   'ld.top': ['Mobile Engineer — Portfolio','Mobil dasturchi — Portfolio','Мобильный разработчик — Портфолио'],
   'ld.bot': ['Compiling the good stuff','Eng yaxshilari yig‘ilmoqda','Собираю самое лучшее'],
@@ -1403,6 +1433,8 @@ function localize(o){
 }
 CONTENT = localize(CONTENT);
 document.documentElement.lang = LANG;
+document.title = T('meta.title');
+(function(m){ if (m) m.setAttribute('content', T('meta.desc')); })(document.querySelector('meta[name="description"]'));
 /* static markup: data-t → innerHTML, data-ta="attr:key;attr:key" → attributes */
 if (LANG !== 'en'){
   Array.prototype.forEach.call(document.querySelectorAll('[data-t]'), function(el){ if (I18N[el.dataset.t]) el.innerHTML = T(el.dataset.t); });
@@ -1520,7 +1552,7 @@ $('#timeline').insertAdjacentHTML('beforeend', CONTENT.experience.map(function(e
 
 $('#projList').innerHTML = CONTENT.featured.map(function(p,i){
   return '<div class="proj" data-id="'+p.id+'" style="--pc:'+p.color+';--pi:'+p.ink+';--pd:'+(p.id==='wallet'?'#06140F':p.id==='pulse'?'#0D0D10':'#120D1F')+'"><article class="proj-card">'+
-  '<div class="proj-mob"><div><i></i></div></div>'+
+  '<div class="proj-mob" aria-hidden="true"><div class="phone pm-phone"><span class="ph-btns"></span><div class="ph-screen"><div class="ph-notch"></div><div class="ph-status"><span>9:41</span><span>●●● ▮</span></div>'+({wallet:scrWallet,pulse:scrPulse,navo:scrNavo}[p.id] || scrPulse)().replace('class="scr"','class="scr on"')+'</div></div></div>'+
   '<div class="proj-top"><div class="proj-id"><div class="proj-ic">'+p.ab+'</div><div><div class="proj-name">'+esc(p.name)+'</div><div class="proj-cat">'+esc(p.cat)+'</div></div></div><span class="mono dimtxt">0'+(i+1)+' / 0'+CONTENT.featured.length+'</span></div>'+
   '<p class="proj-pitch">'+esc(p.pitch)+'</p>'+
   '<div class="metrics">'+p.metrics.map(function(m){ return '<div class="metric"><b>'+m[0]+'</b><span>'+esc(m[1])+'</span></div>'; }).join('')+'</div>'+
@@ -1903,7 +1935,7 @@ function hsFolder(key){
     f.items.map(function(n){ var k = SK[byName(n)]; return '<span class="ai" style="background:' + k.c + ';--f:' + (k.f || '#fff') + '">' + glyph(k.i) + '</span>'; }).join('') + '</span><em>' + f.t + '</em></div>';
 }
 $('#hsP1').innerHTML =
-  '<div class="hs-w"><div style="display:flex;justify-content:space-between;align-items:center">' + tile(SK[0], '--s:34px') + '<small>Android</small></div><div><b>' + T('w.yrs') + '</b><span>' + T('w.apps') + '</span></div></div>' +
+  '<div class="hs-w"><div style="display:flex;justify-content:space-between;align-items:center">' + tile(SK[0], '--s:34px') + '<small>Android</small></div><div><b>' + T('w.yrs') + '</b><span style="display:block;margin-top:4px">' + T('w.apps') + '</span></div></div>' +
   '<div class="hs-w"><small>' + T('w.learn') + '</small><div style="display:flex;align-items:center;gap:10px"><svg aria-hidden="true" width="44" height="44" viewBox="0 0 44 44"><circle cx="22" cy="22" r="18" fill="none" stroke="rgba(255,255,255,.2)" stroke-width="5"/><circle cx="22" cy="22" r="18" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-dasharray="113" stroke-dashoffset="70" transform="rotate(-90 22 22)"/></svg><div><b style="font-size:20px">SwiftUI</b><span style="display:block">' + T('w.since26') + '</span></div></div></div>' +
   ['Java','Multiplatform','Material 3','Figma'].map(function(n){ return hsApp(byName(n)); }).join('') +
   hsFolder('arch') + hsFolder('data') + hsApp(byName('Android Studio')) + hsApp(byName('Xcode'));

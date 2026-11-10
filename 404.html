@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>404 — bekdiyor.</title>
+<meta name="robots" content="noindex">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,600..800&family=Geist:wght@400;500;600&family=Geist+Mono:wght@400;500&display=swap" rel="stylesheet">
+<script>
+(function(){ try{ if (localStorage.getItem('pf-theme') === 'light') document.documentElement.classList.add('light'); }catch(e){} })();
+</script>
+<style>
+:root{--bg:#0A0A0C;--text:#EDEDEF;--dim:#8A8A93;--surface:#1C1B20;--line:rgba(255,255,255,.08);--accent:#0B7A4B;--accent-text:#3CCB86;--scrim:rgba(5,5,6,.55);
+  --f-display:'Bricolage Grotesque',system-ui,sans-serif;--f-body:'Geist',system-ui,sans-serif;--f-mono:'Geist Mono',ui-monospace,monospace;--ease:cubic-bezier(.22,1,.36,1);--spring:cubic-bezier(.34,1.56,.64,1)}
+html.light{--bg:#F3F1EC;--text:#0E0E10;--dim:#5E5E66;--surface:#FFFFFF;--line:rgba(0,0,0,.08);--accent-text:#046C42;--scrim:rgba(243,241,236,.55)}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%}
+body{background:var(--bg);color:var(--text);font-family:var(--f-body);-webkit-font-smoothing:antialiased;overflow:hidden}
+a,button{font:inherit;color:inherit}
+button{background:none;border:0;cursor:pointer}
+.glow{position:fixed;inset:-20%;pointer-events:none;background:radial-gradient(40% 40% at 25% 20%,rgba(61,255,154,.16),transparent 70%),radial-gradient(40% 40% at 80% 85%,rgba(162,89,255,.2),transparent 70%);animation:drift 18s var(--ease) infinite alternate}
+@keyframes drift{to{transform:translate(4%,-3%) scale(1.06)}}
+.big{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;font-family:var(--f-display);font-weight:800;font-size:min(48vw,620px);letter-spacing:-.08em;line-height:1;color:transparent;-webkit-text-stroke:1.5px rgba(127,127,140,.18);user-select:none}
+.top{position:fixed;left:0;right:0;top:0;display:flex;justify-content:space-between;align-items:center;padding:22px 28px;font-family:var(--f-mono);font-size:12px;color:var(--dim);z-index:2}
+.logo{font-family:var(--f-display);font-weight:800;font-size:22px;letter-spacing:-.05em;color:var(--text);text-decoration:none}
+.logo i{font-style:normal;color:var(--accent-text)}
+.stage{position:relative;z-index:1;height:100%;display:flex;align-items:center;justify-content:center;padding:24px;background:var(--scrim);backdrop-filter:blur(3px)}
+.dlg{width:min(360px,100%);background:var(--surface);border-radius:28px;padding:24px 24px 18px;box-shadow:0 30px 80px rgba(0,0,0,.35),inset 0 0 0 1px var(--line);animation:pop .6s var(--spring) both .15s}
+@keyframes pop{from{opacity:0;transform:scale(.86) translateY(12px)}}
+.ic{width:40px;height:40px;border-radius:12px;background:var(--accent);display:flex;align-items:center;justify-content:center;margin-bottom:16px}
+.ic svg{width:22px;height:22px;fill:#fff}
+h1{margin:0 0 10px;font-family:var(--f-display);font-weight:700;font-size:24px;letter-spacing:-.03em;line-height:1.15}
+p{margin:0;color:var(--dim);font-size:14.5px;line-height:1.5}
+.code{display:inline-block;margin-top:14px;font-family:var(--f-mono);font-size:11px;color:var(--dim);padding:5px 9px;border-radius:8px;background:var(--line)}
+.acts{display:flex;justify-content:flex-end;flex-wrap:wrap;gap:4px;margin-top:22px}
+.acts a,.acts button{padding:10px 14px;border-radius:999px;font-size:14px;font-weight:600;color:var(--accent-text);text-decoration:none;white-space:nowrap;transition:background .2s,scale .25s var(--spring)}
+.acts a:focus-visible,.acts button:focus-visible{outline:2px solid var(--accent-text);outline-offset:2px}
+.dlg.done .spin{display:none}
+.acts a:hover,.acts button:hover{background:var(--line)}
+.acts a:active,.acts button:active{scale:.94}
+.acts button[disabled]{opacity:.45;cursor:default}
+.wait{display:none;align-items:center;gap:12px;margin-top:18px;font-size:13.5px;color:var(--dim)}
+.dlg.waiting .wait{display:flex}
+.spin{width:22px;height:22px;border-radius:50%;border:2.5px solid var(--line);border-top-color:var(--accent-text);animation:sp .8s linear infinite}
+@keyframes sp{to{transform:rotate(360deg)}}
+.bar{height:3px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:14px;display:none}
+.dlg.waiting .bar{display:block}
+.bar i{display:block;height:100%;width:0;background:var(--accent-text);transition:width 2.6s linear}
+.dlg.waiting .bar i{width:92%}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<div class="glow" aria-hidden="true"></div>
+<div class="big" aria-hidden="true">404</div>
+<div class="top"><a class="logo" href="/">bekdiyor<i>.</i></a><span id="clock">--:--</span></div>
+<main class="stage">
+  <div class="dlg" id="dlg" role="alertdialog" aria-labelledby="t" aria-describedby="d">
+    <div class="ic" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.22a11.4 11.4 0 0 0-9.84 0L5.22 5.92a.38.38 0 1 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg></div>
+    <h1 id="t"></h1>
+    <p id="d"></p>
+    <span class="code" id="path"></span>
+    <div class="wait" aria-live="polite"><span class="spin"></span><span id="waitTxt"></span></div>
+    <div class="bar"><i></i></div>
+    <div class="acts"><button type="button" id="wait"></button><a href="/" id="close"></a></div>
+  </div>
+</main>
+<script>
+(function(){
+  var L = {
+    uz: { t: 'Sahifa javob bermayapti', d: 'Siz qidirgan sahifa topilmadi yoki ko‘chirilgan. Kutib turasizmi yoki bosh sahifaga qaytamizmi?', wait: 'Kutish', close: 'Ilovani yopish', w1: 'Qidiryapman…', w2: 'Kutish yordam bermadi — bu sahifa haqiqatan yo‘q.', again: 'Yana kutish' },
+    ru: { t: 'Страница не отвечает', d: 'Страница, которую вы ищете, не найдена или переехала. Подождать или вернуться на главную?', wait: 'Подождать', close: 'Закрыть приложение', w1: 'Ищу…', w2: 'Ожидание не помогло — этой страницы правда нет.', again: 'Ещё подождать' },
+    en: { t: 'Page isn’t responding', d: 'The page you’re looking for doesn’t exist or has moved. Do you want to wait, or go back home?', wait: 'Wait', close: 'Close app', w1: 'Looking…', w2: 'Waiting didn’t help — this page really isn’t here.', again: 'Wait again' }
+  };
+  var q = (location.search.match(/[?&]lang=(uz|ru|en)\b/) || [])[1], s = null;
+  try{ s = localStorage.getItem('pf-lang'); }catch(e){}
+  var lang = q || (L[s] ? s : 'uz'), T = L[lang];
+  document.documentElement.lang = lang;
+  var $ = function(id){ return document.getElementById(id); };
+  $('t').textContent = T.t; $('d').textContent = T.d; $('wait').textContent = T.wait; $('close').textContent = T.close;
+  $('path').textContent = '404 · ' + (location.pathname || '/');
+  var dlg = $('dlg'), btn = $('wait');
+  btn.addEventListener('click', function(){
+    dlg.classList.remove('waiting','done'); void dlg.offsetWidth;
+    dlg.classList.add('waiting'); btn.disabled = true; $('waitTxt').textContent = T.w1;
+    setTimeout(function(){ dlg.classList.add('done'); $('waitTxt').textContent = T.w2; btn.disabled = false; btn.textContent = T.again; $('close').focus(); }, 2700);
+  });
+  function tick(){ try{ $('clock').textContent = new Date().toLocaleTimeString('en-GB', { timeZone: 'Asia/Tashkent', hour: '2-digit', minute: '2-digit' }) + ' GMT+5'; }catch(e){} }
+  tick(); setInterval(tick, 15000);
+  $('close').focus({ preventScroll: true });
+})();
+</script>
+</body>
+</html>
